@@ -1,0 +1,25 @@
+.container {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.star {
+  display: inline-flex;
+  align-items: center;
+}
+
+.filled {
+  color: var(--accent);
+}
+
+.empty {
+  color: var(--border);
+}
+
+.value {
+  margin-left: var(--space-xs);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-primary);
+}

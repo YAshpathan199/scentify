@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none">
+  <defs>
+    <!-- Bottle glass gradient -->
+    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="0.7">
+      <stop offset="0%" stop-color="#eef2e8" stop-opacity="0.55"/>
+      <stop offset="50%" stop-color="#dde6d5" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#d0dcc5" stop-opacity="0.45"/>
+    </linearGradient>
+    <!-- Olive to sage liquid gradient -->
+    <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8aaa40" stop-opacity="0.7"/>
+      <stop offset="30%" stop-color="#6B8E23"/>
+      <stop offset="65%" stop-color="#56721c"/>
+      <stop offset="100%" stop-color="#3e5214"/>
+    </linearGradient>
+    <!-- Sage accent gradient -->
+    <linearGradient id="sageGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a0c050" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#6B8E23" stop-opacity="0.08"/>
+    </linearGradient>
+    <!-- Glass highlight -->
+    <linearGradient id="highlightGrad" x1="0" y1="0" x2="1" y2="0.5">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Brushed gold cap gradient -->
+    <linearGradient id="capGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4b870"/>
+      <stop offset="20%" stop-color="#c0a050"/>
+      <stop offset="45%" stop-color="#d8c070"/>
+      <stop offset="65%" stop-color="#b89840"/>
+      <stop offset="85%" stop-color="#c8a858"/>
+      <stop offset="100%" stop-color="#b09038"/>
+    </linearGradient>
+    <!-- Dome cap top gradient -->
+    <radialGradient id="domeGrad" cx="0.45" cy="0.35" r="0.55">
+      <stop offset="0%" stop-color="#e0cc80"/>
+      <stop offset="60%" stop-color="#c0a050"/>
+      <stop offset="100%" stop-color="#a08838"/>
+    </radialGradient>
+    <!-- Drop shadow filter -->
+    <filter id="shadow" x="-10%" y="-5%" width="120%" height="115%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur"/>
+      <feOffset in="blur" dx="0" dy="6" result="offsetBlur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.13" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Reflection -->
+    <radialGradient id="reflectionGrad" cx="0.3" cy="0.3" r="0.45">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Shadow beneath bottle -->
+  <ellipse cx="200" cy="462" rx="70" ry="11" fill="#000" opacity="0.1"/>
+
+  <g filter="url(#shadow)">
+    <!-- Elegant cylindrical bottle with subtle taper -->
+    <path d="
+      M 148 148
+      Q 140 158 138 180
+      Q 135 220 135 260
+      L 137 430
+      Q 138 450 155 450
+      L 245 450
+      Q 262 450 263 430
+      L 265 260
+      Q 265 220 262 180
+      Q 260 158 252 148
+      Z
+    " fill="url(#glassGrad)" stroke="#c0d0b0" stroke-width="1"/>
+
+    <!-- Liquid fill -->
+    <path d="
+      M 140 225
+      Q 139 250 139 280
+      L 139 430
+      Q 140 448 155 448
+      L 245 448
+      Q 260 448 261 430
+      L 261 280
+      Q 261 250 260 225
+      Z
+    " fill="url(#liquidGrad)"/>
+
+    <!-- Sage accent inside liquid -->
+    <ellipse cx="180" cy="340" rx="15" ry="80" fill="url(#sageGrad)" transform="rotate(-1 180 340)"/>
+
+    <!-- Glass highlight strip -->
+    <path d="
+      M 153 155
+      Q 150 175 149 220
+      L 148 370
+      L 157 370
+      L 158 220
+      Q 159 175 160 155
+      Z
+    " fill="url(#highlightGrad)"/>
+
+    <!-- Large reflection -->
+    <ellipse cx="168" cy="310" rx="16" ry="85" fill="url(#reflectionGrad)" transform="rotate(-2 168 310)"/>
+
+    <!-- Bottle neck -->
+    <rect x="177" y="105" width="46" height="47" rx="4" fill="url(#glassGrad)" stroke="#c0d0b0" stroke-width="1"/>
+
+    <!-- Neck highlight -->
+    <rect x="182" y="110" width="4" height="38" rx="2" fill="#ffffff" opacity="0.22"/>
+
+    <!-- Brushed gold dome-shaped cap -->
+    <!-- Cap base cylinder -->
+    <rect x="168" y="75" width="64" height="34" rx="5" fill="url(#capGrad)" stroke="#a08838" stroke-width="0.8"/>
+
+    <!-- Dome top -->
+    <ellipse cx="200" cy="75" rx="32" ry="18" fill="url(#domeGrad)" stroke="#a08838" stroke-width="0.8"/>
+
+    <!-- Dome highlight -->
+    <ellipse cx="192" cy="68" rx="12" ry="8" fill="#ffffff" opacity="0.2"/>
+
+    <!-- Cap highlight line -->
+    <rect x="174" y="80" width="4" height="24" rx="2" fill="#ffffff" opacity="0.25"/>
+
+    <!-- Cap brushed texture lines -->
+    <line x1="178" y1="82" x2="178" y2="104" stroke="#b89840" stroke-width="0.3" opacity="0.5"/>
+    <line x1="184" y1="82" x2="184" y2="104" stroke="#b89840" stroke-width="0.3" opacity="0.4"/>
+    <line x1="190" y1="82" x2="190" y2="104" stroke="#b89840" stroke-width="0.3" opacity="0.4"/>
+    <line x1="196" y1="82" x2="196" y2="104" stroke="#b89840" stroke-width="0.3" opacity="0.4"/>
+    <line x1="202" y1="82" x2="202" y2="104" stroke="#b89840" stroke-width="0.3" opacity="0.4"/>
+    <line x1="208" y1="82" x2="208" y2="104" stroke="#b89840" stroke-width="0.3" opacity="0.4"/>
+    <line x1="214" y1="82" x2="214" y2="104" stroke="#b89840" stroke-width="0.3" opacity="0.4"/>
+    <line x1="220" y1="82" x2="220" y2="104" stroke="#b89840" stroke-width="0.3" opacity="0.5"/>
+  </g>
+</svg>

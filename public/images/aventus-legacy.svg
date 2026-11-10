@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none">
+  <defs>
+    <!-- Bottle glass gradient -->
+    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="0.5">
+      <stop offset="0%" stop-color="#f0e8de" stop-opacity="0.55"/>
+      <stop offset="50%" stop-color="#e8ddd0" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ddd0c0" stop-opacity="0.5"/>
+    </linearGradient>
+    <!-- Rich brown liquid gradient -->
+    <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a0622a" stop-opacity="0.75"/>
+      <stop offset="35%" stop-color="#8B4513"/>
+      <stop offset="70%" stop-color="#6d340e"/>
+      <stop offset="100%" stop-color="#4a2308"/>
+    </linearGradient>
+    <!-- Glass highlight -->
+    <linearGradient id="highlightGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Gold cap gradient -->
+    <linearGradient id="capGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8d48c"/>
+      <stop offset="25%" stop-color="#d4a840"/>
+      <stop offset="50%" stop-color="#e8c860"/>
+      <stop offset="75%" stop-color="#c89830"/>
+      <stop offset="100%" stop-color="#d4a840"/>
+    </linearGradient>
+    <!-- Beveled edge highlight -->
+    <linearGradient id="bevelGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.2"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.08"/>
+    </linearGradient>
+    <!-- Drop shadow filter -->
+    <filter id="shadow" x="-10%" y="-5%" width="120%" height="115%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur"/>
+      <feOffset in="blur" dx="0" dy="6" result="offsetBlur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.15" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Reflection -->
+    <radialGradient id="reflectionGrad" cx="0.25" cy="0.35" r="0.4">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Shadow beneath bottle -->
+  <ellipse cx="200" cy="460" rx="85" ry="12" fill="#000" opacity="0.1"/>
+
+  <g filter="url(#shadow)">
+    <!-- Classic square bottle with beveled edges -->
+    <path d="
+      M 125 155
+      L 120 150
+      L 120 440
+      L 125 445
+      L 275 445
+      L 280 440
+      L 280 150
+      L 275 155
+      Z
+    " fill="url(#glassGrad)" stroke="#d4c8b8" stroke-width="1"/>
+
+    <!-- Bevel left edge -->
+    <path d="
+      M 120 150 L 125 155 L 125 445 L 120 440 Z
+    " fill="url(#bevelGrad)"/>
+
+    <!-- Bevel right edge -->
+    <path d="
+      M 280 150 L 275 155 L 275 445 L 280 440 Z
+    " fill="#000" opacity="0.06"/>
+
+    <!-- Liquid fill -->
+    <rect x="127" y="200" width="146" height="243" rx="2" fill="url(#liquidGrad)"/>
+
+    <!-- Liquid surface line -->
+    <line x1="127" y1="200" x2="273" y2="200" stroke="#a0622a" stroke-width="1" opacity="0.4"/>
+
+    <!-- Glass highlight strip -->
+    <rect x="135" y="160" width="12" height="280" rx="6" fill="url(#highlightGrad)"/>
+
+    <!-- Large reflection -->
+    <ellipse cx="160" cy="310" rx="22" ry="90" fill="url(#reflectionGrad)" transform="rotate(-2 160 310)"/>
+
+    <!-- Bottom bevel -->
+    <path d="
+      M 120 440 L 125 445 L 275 445 L 280 440 Z
+    " fill="#c0b0a0" opacity="0.3"/>
+
+    <!-- Bottle neck -->
+    <rect x="170" y="105" width="60" height="50" rx="2" fill="url(#glassGrad)" stroke="#d4c8b8" stroke-width="1"/>
+
+    <!-- Neck highlight -->
+    <rect x="176" y="110" width="5" height="42" rx="2.5" fill="#ffffff" opacity="0.2"/>
+
+    <!-- Gold cylindrical cap -->
+    <rect x="163" y="55" width="74" height="54" rx="6" fill="url(#capGrad)" stroke="#b89828" stroke-width="0.8"/>
+
+    <!-- Cap highlight -->
+    <rect x="170" y="60" width="5" height="44" rx="2.5" fill="#ffffff" opacity="0.3"/>
+
+    <!-- Cap top shine -->
+    <rect x="163" y="55" width="74" height="4" rx="3" fill="#e8d48c" opacity="0.7"/>
+
+    <!-- Cap ring detail -->
+    <rect x="163" y="100" width="74" height="3" rx="1" fill="#c89830" opacity="0.5"/>
+  </g>
+</svg>

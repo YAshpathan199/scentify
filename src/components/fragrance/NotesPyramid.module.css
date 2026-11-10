@@ -1,0 +1,60 @@
+.pyramid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.pyramid.sm {
+  gap: var(--space-sm);
+}
+
+.layer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.label {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.sm .label {
+  font-size: 0.65rem;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.pill {
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-caption);
+  font-weight: 500;
+}
+
+.sm .pill {
+  padding: 2px 8px;
+  font-size: 0.65rem;
+}
+
+.top .pill {
+  background: rgba(184, 149, 106, 0.12);
+  color: var(--accent);
+}
+
+.heart .pill {
+  background: rgba(219, 112, 147, 0.1);
+  color: #B85070;
+}
+
+.base .pill {
+  background: rgba(139, 69, 19, 0.1);
+  color: #8B6914;
+}

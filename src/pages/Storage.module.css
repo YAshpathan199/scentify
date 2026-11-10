@@ -1,0 +1,396 @@
+/* ==========================================================================
+   Storage & Care Page
+   ========================================================================== */
+
+.page {
+  padding-top: calc(100px + var(--space-xl));
+  padding-bottom: var(--space-3xl);
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.container {
+  max-width: var(--container-lg);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* ---- Header ---- */
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm);
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ---- Section ---- */
+
+.section {
+  margin-bottom: var(--space-2xl);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 2px solid var(--border-strong);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.sectionIcon {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ---- Enemy Grid ---- */
+
+.enemyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.enemyCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.enemyCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--error);
+}
+
+.enemyIconWrap {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(179, 74, 69, 0.08);
+  color: var(--error);
+  margin: 0 auto;
+}
+
+.enemyTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  color: var(--text-primary);
+  margin: 0;
+  font-weight: 600;
+}
+
+.enemyText {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ---- Do's & Don'ts ---- */
+
+.dosdonts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.doCol,
+.dontCol {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.doCol {
+  border-top: 4px solid var(--success);
+}
+
+.dontCol {
+  border-top: 4px solid var(--error);
+}
+
+.colTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 600;
+}
+
+.ddList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.doItem,
+.dontItem {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.doItem svg,
+.dontItem svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.doIcon {
+  color: var(--success);
+}
+
+.dontIcon {
+  color: var(--error);
+}
+
+/* ---- Season Grid ---- */
+
+.seasonGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.seasonCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.seasonHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.seasonEmoji {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.seasonName {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  color: var(--text-primary);
+  margin: 0;
+  font-weight: 600;
+}
+
+.seasonMonths {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.seasonText {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ---- Longevity Grid ---- */
+
+.longevityGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
+
+.longevityCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  text-align: center;
+}
+
+.longevityType {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.longevityLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--space-xs);
+}
+
+.longevityBar {
+  height: 6px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+}
+
+.longevityBarFill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+}
+
+.longevityRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--space-xs) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.longevityRow:last-child {
+  border-bottom: none;
+}
+
+.longevityKey {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.longevityVal {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ---- Warning Section ---- */
+
+.warningSection {
+  background: rgba(179, 74, 69, 0.05);
+  border: 1px solid rgba(179, 74, 69, 0.2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.warningItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+}
+
+.warningIcon {
+  color: var(--error);
+  flex-shrink: 0;
+}
+
+/* ---- CTA ---- */
+
+.cta {
+  text-align: center;
+  padding: var(--space-2xl) 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.ctaText {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 480px;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 900px) {
+  .longevityGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .enemyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .dosdonts {
+    grid-template-columns: 1fr;
+  }
+
+  .seasonGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .longevityGrid {
+    grid-template-columns: 1fr;
+  }
+}

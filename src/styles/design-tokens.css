@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Scentify Design Tokens
+   Luxury fragrance recommendation PWA - CSS Custom Properties
+   ========================================================================== */
+
+:root {
+  /* ---- Colors ---- */
+  --bg-primary: #F5F0E8;
+  --bg-secondary: #EBE4D8;
+  --bg-surface: #FFFDF9;
+  --bg-elevated: #E2D9CB;
+
+  --text-primary: #141210;
+  --text-secondary: #4A4239;
+  --text-muted: #7A6F63;
+  --text-inverse: #FDFBF7;
+
+  --accent: #A67C4E;
+  --accent-hover: #8D6638;
+  --accent-light: #DBBF9A;
+  --accent-glow: rgba(166, 124, 78, 0.14);
+
+  --border: #D4CABC;
+  --border-strong: #BFB3A1;
+
+  --success: #5A7E60;
+  --error: #B34A45;
+  --info: #6A859A;
+
+  --dark-bg: #151210;
+  --dark-surface: #221E1A;
+  --dark-text: #F2EBE0;
+
+  --highlight-warm: rgba(166, 124, 78, 0.08);
+  --highlight-gold: rgba(166, 124, 78, 0.18);
+
+  /* ---- Typography ---- */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --text-hero: clamp(2.5rem, 5vw, 4.5rem);
+  --text-h1: clamp(2rem, 4vw, 3.5rem);
+  --text-h2: clamp(1.5rem, 3vw, 2.5rem);
+  --text-h3: clamp(1.2rem, 2vw, 1.75rem);
+  --text-body: clamp(0.95rem, 1.2vw, 1.1rem);
+  --text-small: clamp(0.8rem, 1vw, 0.875rem);
+  --text-caption: 0.75rem;
+
+  /* ---- Spacing ---- */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 96px;
+
+  /* ---- Layout ---- */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 44px rgba(0, 0, 0, 0.13), 0 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.16), 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  /* ---- Transitions ---- */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+
+  /* ---- Fragrance Family Colors ---- */
+  --family-woody: #8B6914;
+  --family-floral: #B85070;
+  --family-oriental: #9A7520;
+  --family-fresh: #1A8A7A;
+  --family-citrus: #D08A10;
+  --family-gourmand: #A05020;
+  --family-aromatic: #5A7A1A;
+  --family-aquatic: #3070A0;
+}

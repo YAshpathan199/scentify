@@ -1,0 +1,45 @@
+.section {
+  padding: var(--space-3xl) 0;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.subtitle {
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* Dark variant */
+
+.dark {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+.dark .title {
+  color: var(--dark-text);
+}
+
+.dark .subtitle {
+  color: var(--dark-text);
+  opacity: 0.8;
+}

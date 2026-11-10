@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <!-- Geometric glass gradient -->
+    <linearGradient id="mc-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e8eee0" stop-opacity="0.7"/>
+      <stop offset="40%" stop-color="#f0f4ea" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#d0d8c0" stop-opacity="0.5"/>
+    </linearGradient>
+    <!-- Olive green liquid -->
+    <linearGradient id="mc-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8aaa3a" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#6B8E23" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#4a6610" stop-opacity="0.9"/>
+    </linearGradient>
+    <!-- Chrome/metallic cap -->
+    <linearGradient id="mc-chrome" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a0a0a0"/>
+      <stop offset="20%" stop-color="#d8d8d8"/>
+      <stop offset="40%" stop-color="#f0f0f0"/>
+      <stop offset="60%" stop-color="#c0c0c0"/>
+      <stop offset="80%" stop-color="#e0e0e0"/>
+      <stop offset="100%" stop-color="#909090"/>
+    </linearGradient>
+    <!-- Cap top chrome -->
+    <linearGradient id="mc-chrome-top" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e0e0e0"/>
+      <stop offset="50%" stop-color="#f8f8f8"/>
+      <stop offset="100%" stop-color="#b0b0b0"/>
+    </linearGradient>
+    <!-- Left facet highlight -->
+    <linearGradient id="mc-facet" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Shadow -->
+    <filter id="mc-shadow" x="-20%" y="-10%" width="140%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#mc-shadow)">
+    <!-- Main bottle - hexagonal shape -->
+    <path d="M155,150 L130,290 L145,420 L255,420 L270,290 L245,150 Z" fill="url(#mc-glass)" stroke="#b0b8a0" stroke-width="1"/>
+
+    <!-- Center facet division -->
+    <path d="M200,150 L200,420" stroke="#c0c8b0" stroke-width="0.5" opacity="0.4"/>
+
+    <!-- Left angled facet -->
+    <path d="M155,150 L130,290 L145,420 L200,420 L200,150 Z" fill="url(#mc-facet)" opacity="0.4"/>
+
+    <!-- Liquid fill -->
+    <clipPath id="mc-clip">
+      <path d="M157,153 L132,290 L147,418 L253,418 L268,290 L243,153 Z"/>
+    </clipPath>
+    <rect x="130" y="210" width="140" height="210" fill="url(#mc-liquid)" clip-path="url(#mc-clip)"/>
+
+    <!-- Facet edge highlights -->
+    <line x1="155" y1="152" x2="130" y2="290" stroke="#ffffff" stroke-width="0.8" opacity="0.2"/>
+    <line x1="130" y1="290" x2="145" y2="420" stroke="#ffffff" stroke-width="0.5" opacity="0.15"/>
+
+    <!-- Right facet shadow edge -->
+    <line x1="245" y1="152" x2="270" y2="290" stroke="#000000" stroke-width="0.5" opacity="0.1"/>
+
+    <!-- Liquid surface -->
+    <path d="M156,210 L244,210" stroke="#6B8E23" stroke-width="0.8" opacity="0.3"/>
+
+    <!-- Left side bright reflection -->
+    <path d="M157,165 L140,280 L143,310 L157,310 Z" fill="#ffffff" opacity="0.1"/>
+    <path d="M158,175 L148,260 L150,280 L158,280 Z" fill="#ffffff" opacity="0.08"/>
+
+    <!-- Neck - angular -->
+    <path d="M178,125 L175,150 L225,150 L222,125 Z" fill="url(#mc-glass)" stroke="#b0b8a0" stroke-width="0.8"/>
+
+    <!-- Cap - chrome/metallic angular -->
+    <path d="M170,65 L165,125 L235,125 L230,65 Z" fill="url(#mc-chrome)" stroke="#a0a0a0" stroke-width="0.8"/>
+
+    <!-- Cap top -->
+    <path d="M170,65 L230,65" stroke="#d0d0d0" stroke-width="2"/>
+
+    <!-- Cap angular top plate -->
+    <path d="M172,65 L175,55 L225,55 L228,65 Z" fill="url(#mc-chrome-top)" stroke="#b0b0b0" stroke-width="0.5"/>
+
+    <!-- Cap center ridge -->
+    <line x1="200" y1="58" x2="200" y2="123" stroke="#c8c8c8" stroke-width="0.5" opacity="0.5"/>
+
+    <!-- Cap highlight -->
+    <path d="M175,70 L173,115 L180,115 L182,70 Z" fill="#ffffff" opacity="0.15"/>
+
+    <!-- Bottom base line -->
+    <line x1="145" y1="420" x2="255" y2="420" stroke="#a0a890" stroke-width="1.5" opacity="0.5"/>
+
+    <!-- Ground reflection -->
+    <ellipse cx="200" cy="432" rx="58" ry="5" fill="#6B8E23" opacity="0.08"/>
+  </g>
+</svg>

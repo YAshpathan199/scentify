@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <!-- Atomizer tube gradient -->
+    <linearGradient id="tp-tube" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b8e8e4" stop-opacity="0.6"/>
+      <stop offset="25%" stop-color="#e8faf8" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#d0f0ed" stop-opacity="0.7"/>
+      <stop offset="75%" stop-color="#a0ddd8" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#80ccc6" stop-opacity="0.5"/>
+    </linearGradient>
+    <!-- Liquid gradient -->
+    <linearGradient id="tp-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#20B2AA" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#20B2AA" stop-opacity="0.7"/>
+    </linearGradient>
+    <!-- Silver cap -->
+    <linearGradient id="tp-cap" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c0c0c0"/>
+      <stop offset="30%" stop-color="#e8e8e8"/>
+      <stop offset="50%" stop-color="#f5f5f5"/>
+      <stop offset="70%" stop-color="#d0d0d0"/>
+      <stop offset="100%" stop-color="#a0a0a0"/>
+    </linearGradient>
+    <!-- Cap top -->
+    <radialGradient id="tp-cap-top" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f0f0f0"/>
+      <stop offset="100%" stop-color="#c0c0c0"/>
+    </radialGradient>
+    <!-- Highlight -->
+    <linearGradient id="tp-highlight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Shadow -->
+    <filter id="tp-shadow" x="-20%" y="-10%" width="140%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#tp-shadow)">
+    <!-- Main tube body - tall thin cylinder -->
+    <rect x="165" y="130" width="70" height="300" rx="35" fill="url(#tp-tube)" stroke="#a0d8d3" stroke-width="1"/>
+
+    <!-- Liquid fill inside tube -->
+    <clipPath id="tp-clip">
+      <rect x="168" y="133" width="64" height="294" rx="32"/>
+    </clipPath>
+    <rect x="168" y="200" width="64" height="227" fill="url(#tp-liquid)" clip-path="url(#tp-clip)"/>
+
+    <!-- Glass highlight - left reflection strip -->
+    <rect x="172" y="145" width="12" height="270" rx="6" fill="url(#tp-highlight)" opacity="0.6"/>
+
+    <!-- Small bright highlight spot -->
+    <rect x="175" y="170" width="5" height="40" rx="2.5" fill="#ffffff" opacity="0.4"/>
+
+    <!-- Liquid surface meniscus -->
+    <ellipse cx="200" cy="200" rx="30" ry="4" fill="#20B2AA" opacity="0.2"/>
+
+    <!-- Nozzle/spray area at top -->
+    <rect x="190" y="118" width="20" height="15" rx="3" fill="#d0d0d0" stroke="#b0b0b0" stroke-width="0.5"/>
+
+    <!-- Spray nozzle hole -->
+    <circle cx="200" cy="120" r="3" fill="#a0a0a0"/>
+    <circle cx="200" cy="120" r="1.5" fill="#808080"/>
+
+    <!-- Cap - silver twist cap -->
+    <rect x="175" y="60" width="50" height="62" rx="25" fill="url(#tp-cap)" stroke="#b0b0b0" stroke-width="0.8"/>
+
+    <!-- Cap top -->
+    <ellipse cx="200" cy="62" rx="25" ry="8" fill="url(#tp-cap-top)" stroke="#b0b0b0" stroke-width="0.5"/>
+
+    <!-- Cap ridges for grip -->
+    <line x1="178" y1="78" x2="178" y2="115" stroke="#b8b8b8" stroke-width="0.5" opacity="0.6"/>
+    <line x1="183" y1="72" x2="183" y2="118" stroke="#c5c5c5" stroke-width="0.3" opacity="0.4"/>
+    <line x1="217" y1="72" x2="217" y2="118" stroke="#a0a0a0" stroke-width="0.3" opacity="0.4"/>
+    <line x1="222" y1="78" x2="222" y2="115" stroke="#999999" stroke-width="0.5" opacity="0.6"/>
+
+    <!-- Cap highlight -->
+    <rect x="183" y="68" width="8" height="42" rx="4" fill="#ffffff" opacity="0.25"/>
+
+    <!-- Bottom of tube -->
+    <ellipse cx="200" cy="430" rx="35" ry="5" fill="#a0d8d3" opacity="0.3"/>
+
+    <!-- Ground reflection -->
+    <ellipse cx="200" cy="438" rx="30" ry="4" fill="#20B2AA" opacity="0.08"/>
+  </g>
+</svg>

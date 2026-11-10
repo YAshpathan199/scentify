@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <!-- Curved glass gradient -->
+    <radialGradient id="wc-glass" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+      <stop offset="40%" stop-color="#f8e8e0" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#e8d0c0" stop-opacity="0.4"/>
+    </radialGradient>
+    <!-- Cherry to warm brown liquid -->
+    <linearGradient id="wc-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e04040" stop-opacity="0.5"/>
+      <stop offset="40%" stop-color="#c83020" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#D2691E" stop-opacity="0.9"/>
+    </linearGradient>
+    <!-- Rose gold cap -->
+    <linearGradient id="wc-cap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0c8b0"/>
+      <stop offset="30%" stop-color="#e8a888"/>
+      <stop offset="60%" stop-color="#d4907a"/>
+      <stop offset="100%" stop-color="#c08068"/>
+    </linearGradient>
+    <!-- Rose gold cap top -->
+    <radialGradient id="wc-cap-top" cx="40%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#f8dac8"/>
+      <stop offset="100%" stop-color="#d4907a"/>
+    </radialGradient>
+    <!-- Highlight -->
+    <linearGradient id="wc-highlight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Shadow -->
+    <filter id="wc-shadow" x="-20%" y="-10%" width="140%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#wc-shadow)">
+    <!-- Main bottle body - curved feminine shape, wider bottom tapering up -->
+    <path d="M200,160
+             C230,160 260,180 270,220
+             C285,270 290,320 285,360
+             C280,400 260,430 200,435
+             C140,430 120,400 115,360
+             C110,320 115,270 130,220
+             C140,180 170,160 200,160 Z"
+          fill="url(#wc-glass)" stroke="#d4b8a8" stroke-width="1"/>
+
+    <!-- Liquid fill -->
+    <clipPath id="wc-clip">
+      <path d="M200,163
+               C228,163 258,182 268,222
+               C283,272 288,318 283,358
+               C278,398 258,428 200,433
+               C142,428 122,398 117,358
+               C112,318 117,272 132,222
+               C142,182 172,163 200,163 Z"/>
+    </clipPath>
+    <rect x="112" y="220" width="178" height="215" fill="url(#wc-liquid)" clip-path="url(#wc-clip)"/>
+
+    <!-- Glass highlight - left side curve -->
+    <path d="M160,180 C145,210 138,260 140,310 C140,320 142,318 145,270 C148,230 155,195 160,180 Z"
+          fill="#ffffff" opacity="0.35"/>
+
+    <!-- Small bright spot -->
+    <ellipse cx="152" cy="230" rx="5" ry="18" fill="#ffffff" opacity="0.3"/>
+
+    <!-- Right side subtle reflection -->
+    <path d="M250,220 C258,250 260,290 258,320" stroke="#ffffff" stroke-width="1.5" opacity="0.1" fill="none"/>
+
+    <!-- Liquid surface subtle line -->
+    <path d="M140,225 Q200,215 260,225" stroke="#c83020" stroke-width="0.8" opacity="0.2" fill="none"/>
+
+    <!-- Neck area - narrow -->
+    <path d="M188,135 L186,160 C186,160 193,158 200,158 C207,158 214,160 214,160 L212,135 Z"
+          fill="url(#wc-glass)" stroke="#d4b8a8" stroke-width="0.8"/>
+
+    <!-- Neck ring -->
+    <ellipse cx="200" cy="158" rx="16" ry="4" fill="#d4907a" opacity="0.5"/>
+
+    <!-- Shoulder curves connecting neck to body -->
+    <path d="M186,160 C180,162 170,163 165,168" stroke="#d4b8a8" stroke-width="0.5" fill="none" opacity="0.6"/>
+    <path d="M214,160 C220,162 230,163 235,168" stroke="#d4b8a8" stroke-width="0.5" fill="none" opacity="0.6"/>
+
+    <!-- Cap base ring - rose gold -->
+    <ellipse cx="200" cy="135" rx="18" ry="5" fill="#d4907a" stroke="#c08068" stroke-width="0.5"/>
+
+    <!-- Cap body - rounded bulbous rose gold -->
+    <path d="M184,135 Q184,100 192,88 Q200,82 208,88 Q216,100 216,135 Z"
+          fill="url(#wc-cap)" stroke="#c08068" stroke-width="0.5"/>
+
+    <!-- Cap top dome -->
+    <ellipse cx="200" cy="88" rx="12" ry="8" fill="url(#wc-cap-top)" stroke="#c08068" stroke-width="0.5"/>
+
+    <!-- Cap highlight -->
+    <path d="M190,130 Q190,108 196,94 Q198,106 198,125" fill="#ffffff" opacity="0.2"/>
+
+    <!-- Cap small bright spot -->
+    <ellipse cx="193" cy="105" rx="3" ry="8" fill="#ffffff" opacity="0.15"/>
+
+    <!-- Ground shadow -->
+    <ellipse cx="200" cy="442" rx="65" ry="5" fill="#D2691E" opacity="0.1"/>
+  </g>
+</svg>

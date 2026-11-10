@@ -1,0 +1,372 @@
+/* ==========================================================================
+   Fragrance Families Page
+   ========================================================================== */
+
+.page {
+  padding-top: calc(100px + var(--space-xl));
+  padding-bottom: var(--space-3xl);
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.container {
+  max-width: var(--container-xl);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* ---- Header ---- */
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm);
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ---- Family Wheel Grid ---- */
+
+.wheelSection {
+  margin-bottom: var(--space-3xl);
+}
+
+.wheelGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+@media (min-width: 480px) {
+  .wheelGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 768px) {
+  .wheelGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.wheelCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-left: 4px solid;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  box-shadow: var(--shadow-sm);
+}
+
+.wheelCard:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.wheelIcon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.wheelInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.wheelName {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.wheelDesc {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- Detail Sections ---- */
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+}
+
+.familySection {
+  scroll-margin-top: 120px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.familyHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  border-left: 5px solid;
+  padding-left: var(--space-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.familyIcon {
+  font-size: 2.25rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.familyName {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-xs);
+  line-height: 1.2;
+}
+
+.familyTag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 500;
+  padding: 2px var(--space-sm);
+  border-radius: var(--radius-full);
+}
+
+.familyDesc {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0 0 var(--space-xl);
+}
+
+/* ---- Subsections ---- */
+
+.subsection {
+  margin-top: var(--space-lg);
+}
+
+.subTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-md);
+  font-weight: 600;
+}
+
+/* ---- Note Tags ---- */
+
+.noteTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.noteTag {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  padding: var(--space-xs) var(--space-md);
+  border: 1px solid;
+  border-radius: var(--radius-full);
+  background: var(--bg-primary);
+}
+
+/* ---- Season Tags ---- */
+
+.seasonTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.seasonTag {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+}
+
+/* ---- Collection Row ---- */
+
+.collectionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.miniCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  text-decoration: none;
+  width: 100px;
+  transition: transform var(--transition-fast);
+}
+
+.miniCard:hover {
+  transform: translateY(-3px);
+}
+
+.miniImage {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.miniImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.miniPlaceholder {
+  font-size: 1.75rem;
+}
+
+.miniName {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.miniBrand {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ---- Pairing Row ---- */
+
+.pairingRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.pairingCard {
+  flex: 1;
+  min-width: 200px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.pairingHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.pairingIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.pairingName {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pairingDesc {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.pairingBest {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ---- Bottom CTA ---- */
+
+.ctaWrap {
+  margin-top: var(--space-3xl);
+  text-align: center;
+  padding: var(--space-2xl);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.ctaIcon {
+  color: var(--accent);
+}
+
+.ctaTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ctaDesc {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 480px;
+}

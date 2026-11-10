@@ -1,0 +1,390 @@
+/* ==========================================================================
+   Results Page
+   ========================================================================== */
+
+.page {
+  padding-top: calc(100px + var(--space-xl));
+  padding-bottom: var(--space-3xl);
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* ---- Header ---- */
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm);
+  line-height: 1.2;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ---- Result Cards Stack ---- */
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.cardFirst {
+  border-top: 3px solid var(--accent);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ---- Rank Row ---- */
+
+.rankRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rankBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: 1.5rem;
+}
+
+.rankNumber {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.matchPercent {
+  font-family: var(--font-body);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.matchPercentFirst {
+  font-size: 2.5rem;
+}
+
+/* ---- Card Body (image + info) ---- */
+
+.cardBody {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.imageWrap {
+  width: 100px;
+  height: 130px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+}
+
+.bottleImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ---- Fragrance Info ---- */
+
+.fragranceInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+  min-width: 0;
+}
+
+.brand {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.fragranceName {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.familyRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.concentration {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* ---- Notes Section ---- */
+
+.notesSection {
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border);
+}
+
+/* ---- Reasons Section ---- */
+
+.reasonsSection {
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border);
+}
+
+.reasonsTitle {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm);
+}
+
+.reasonsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.reasonItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+}
+
+.checkIcon {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ---- View Details Link ---- */
+
+.viewLink {
+  text-decoration: none;
+  align-self: flex-start;
+}
+
+/* ---- Bottom Actions ---- */
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* ---- Home Spray Results ---- */
+
+.homeGuideCard {
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  margin-bottom: var(--space-2xl);
+  border-top: 3px solid var(--accent);
+}
+
+.homeGuideHeader {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: flex-start;
+  margin-bottom: var(--space-lg);
+}
+
+.homeSprayCount {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.homeSprayIcon {
+  color: var(--accent);
+}
+
+.homeSprayNum {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  color: var(--accent);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.homeSprayLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.homeGuideInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  flex: 1;
+}
+
+.homeWhereRow,
+.homeFamilyRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+}
+
+.homeWhereRow strong,
+.homeFamilyRow strong {
+  font-size: var(--text-caption);
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.homeTagGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.homeTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: var(--bg-elevated);
+  font-size: var(--text-caption);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.homeFamilyTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.homeTip {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(184, 149, 106, 0.08);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+}
+
+.homeTip svg {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.homeRecTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-lg);
+  text-align: center;
+}
+
+.homeEmpty {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: var(--text-body);
+  padding: var(--space-2xl) 0;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 599px) {
+  .imageWrap {
+    width: 80px;
+    height: 100px;
+  }
+
+  .homeGuideHeader {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .card {
+    padding: var(--space-lg);
+  }
+
+  .matchPercent {
+    font-size: 1.5rem;
+  }
+
+  .matchPercentFirst {
+    font-size: 2rem;
+  }
+
+  .fragranceName {
+    font-size: var(--text-h3);
+  }
+}

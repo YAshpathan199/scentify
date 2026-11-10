@@ -1,0 +1,406 @@
+.analytics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* Summary Row */
+.summaryRow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+}
+
+.summaryTile {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.summaryValue {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  color: var(--accent);
+  margin: 0 0 var(--space-xs);
+}
+
+.summaryLabel {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.card {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  margin: 0 0 var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--text-primary);
+}
+
+.cardTitle svg {
+  color: var(--accent);
+}
+
+/* Bar Charts */
+.barList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: 120px 1fr 32px 40px;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.barLabel {
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.barTrack {
+  height: 8px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.6s ease;
+  min-width: 2px;
+}
+
+.barCount {
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+.barPct {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  text-align: right;
+}
+
+/* Donut Charts */
+.donutRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+.donut {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.donutCenter {
+  position: absolute;
+  inset: 20px;
+  background: var(--bg-surface);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.donutCenter small {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  flex: 1;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-small);
+}
+
+.legendDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legendLabel {
+  flex: 1;
+  color: var(--text-secondary);
+}
+
+.legendCount {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Season Coverage */
+.seasonCols {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-sm);
+}
+
+.seasonCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.seasonHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-caption);
+  text-align: center;
+}
+
+.seasonHeader strong {
+  font-size: var(--text-body);
+}
+
+.seasonGreen { background: rgba(107, 143, 113, 0.1); color: var(--success); }
+.seasonYellow { background: rgba(184, 149, 106, 0.1); color: var(--accent); }
+.seasonRed { background: rgba(194, 91, 86, 0.1); color: var(--error); }
+
+.seasonNames {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.seasonName {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  padding: 2px 4px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.familyDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Price Distribution */
+.priceStats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+}
+
+.priceScale {
+  position: relative;
+  height: 40px;
+  margin: var(--space-md) 0;
+}
+
+.priceBar {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+  transform: translateY(-50%);
+}
+
+.priceDot {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: help;
+  border: 2px solid var(--bg-surface);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast);
+}
+
+.priceDot:hover {
+  transform: translate(-50%, -50%) scale(1.4);
+  z-index: 2;
+}
+
+.priceNote {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  margin: var(--space-sm) 0 0;
+}
+
+/* Performance Matrix */
+.perfTable {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.perfRow {
+  display: grid;
+  grid-template-columns: 120px 1fr 1fr;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.perfName {
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.perfBars {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.perfBarWrap {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.perfBarFill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 0.6s ease;
+}
+
+.perfVal {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  width: 48px;
+  text-align: right;
+}
+
+/* Occasion Heatmap */
+.heatmapGroups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.heatmapGroup {}
+
+.heatmapCatTitle {
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-sm);
+}
+
+.heatmapGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+.heatCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  transition: transform var(--transition-fast);
+  cursor: help;
+}
+
+.heatCell:hover {
+  transform: scale(1.1);
+  z-index: 2;
+}
+
+.heatIcon {
+  font-size: 1rem;
+}
+
+.heatCount {
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: 1fr; }
+  .seasonCols { grid-template-columns: repeat(3, 1fr); }
+  .perfRow { grid-template-columns: 100px 1fr 1fr; }
+}
+
+@media (max-width: 767px) {
+  .summaryRow { grid-template-columns: 1fr 1fr; }
+  .donutRow { flex-direction: column; align-items: center; }
+  .donut { width: 120px; height: 120px; }
+  .seasonCols { grid-template-columns: repeat(2, 1fr); }
+  .perfRow { grid-template-columns: 80px 1fr; }
+  .perfBars:last-child { display: none; }
+  .barRow { grid-template-columns: 90px 1fr 24px; }
+  .barPct { display: none; }
+  .heatCell { width: 44px; height: 44px; }
+}

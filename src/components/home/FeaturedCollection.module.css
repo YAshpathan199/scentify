@@ -1,0 +1,60 @@
+.scrollContainer {
+  display: flex;
+  gap: var(--space-lg);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding: var(--space-lg);
+  padding: var(--space-sm) var(--space-lg) var(--space-md);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.cardWrapper {
+  flex: 0 0 calc(25% - var(--space-lg) * 3 / 4);
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.viewAll {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-lg);
+}
+
+.viewAllLink {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  transition: color var(--transition-fast);
+}
+
+.viewAllLink:hover {
+  color: var(--accent-hover);
+}
+
+@media (max-width: 1024px) {
+  .cardWrapper {
+    flex: 0 0 calc(40% - var(--space-lg) / 2);
+  }
+}
+
+@media (max-width: 640px) {
+  .scrollContainer {
+    gap: var(--space-md);
+    scroll-padding: var(--space-md);
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+  }
+
+  .cardWrapper {
+    flex: 0 0 82%;
+  }
+}

@@ -1,0 +1,48 @@
+.container {
+  width: 100%;
+}
+
+.labelRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-xs);
+}
+
+.label {
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.valueText {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.track {
+  background-color: var(--bg-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.fill {
+  border-radius: var(--radius-full);
+  transition: width 0.5s ease;
+  height: 100%;
+}
+
+/* Height variants */
+
+.sm {
+  height: 4px;
+}
+
+.md {
+  height: 8px;
+}
+
+.lg {
+  height: 12px;
+}

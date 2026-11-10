@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <!-- Bottle glass gradient -->
+    <radialGradient id="wo-glass" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#f5efe6" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#e8dcc8" stop-opacity="0.5"/>
+    </radialGradient>
+    <!-- Liquid gradient -->
+    <linearGradient id="wo-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f5efe6"/>
+      <stop offset="30%" stop-color="#d4b896"/>
+      <stop offset="100%" stop-color="#8B4513"/>
+    </linearGradient>
+    <!-- Highlight -->
+    <linearGradient id="wo-highlight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Cap gradient -->
+    <linearGradient id="wo-cap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fff8e7"/>
+      <stop offset="40%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#b8941e"/>
+    </linearGradient>
+    <!-- Cap top ornament -->
+    <radialGradient id="wo-cap-top" cx="50%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#fff8e7"/>
+      <stop offset="100%" stop-color="#d4af37"/>
+    </radialGradient>
+    <!-- Shadow -->
+    <filter id="wo-shadow" x="-20%" y="-10%" width="140%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
+    </filter>
+    <!-- Soft glow on glass -->
+    <filter id="wo-glow">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#wo-shadow)">
+    <!-- Bottle body - round/bulbous classic attar shape -->
+    <ellipse cx="200" cy="310" rx="95" ry="120" fill="url(#wo-glass)" stroke="#d4c5a9" stroke-width="1"/>
+
+    <!-- Liquid fill inside bottle -->
+    <clipPath id="wo-bottle-clip">
+      <ellipse cx="200" cy="310" rx="90" ry="115"/>
+    </clipPath>
+    <rect x="110" y="240" width="180" height="200" fill="url(#wo-liquid)" clip-path="url(#wo-bottle-clip)" opacity="0.6"/>
+
+    <!-- Glass highlight - left side reflection -->
+    <ellipse cx="165" cy="290" rx="30" ry="70" fill="url(#wo-highlight)" opacity="0.6"/>
+
+    <!-- Small secondary highlight -->
+    <ellipse cx="150" cy="270" rx="8" ry="25" fill="#ffffff" opacity="0.35"/>
+
+    <!-- Neck -->
+    <rect x="185" y="175" width="30" height="30" rx="2" fill="url(#wo-glass)" stroke="#d4c5a9" stroke-width="1"/>
+
+    <!-- Neck ring - gold band -->
+    <rect x="180" y="190" width="40" height="6" rx="3" fill="#d4af37" opacity="0.8"/>
+
+    <!-- Transition from neck to body -->
+    <path d="M185,205 Q185,195 170,220 Q140,260 115,310" fill="none" stroke="#d4c5a9" stroke-width="0.5" opacity="0.5"/>
+    <path d="M215,205 Q215,195 230,220 Q260,260 285,310" fill="none" stroke="#d4c5a9" stroke-width="0.5" opacity="0.5"/>
+
+    <!-- Shoulder curves connecting neck to body -->
+    <path d="M185,200 C175,200 145,230 120,290" fill="url(#wo-glass)" stroke="#d4c5a9" stroke-width="0.8" fill-opacity="0.3"/>
+    <path d="M215,200 C225,200 255,230 280,290" fill="url(#wo-glass)" stroke="#d4c5a9" stroke-width="0.8" fill-opacity="0.3"/>
+
+    <!-- Cap base - ornamental ring -->
+    <ellipse cx="200" cy="175" rx="25" ry="6" fill="#d4af37" opacity="0.9"/>
+
+    <!-- Cap body - rounded dome -->
+    <path d="M178,175 Q178,130 200,120 Q222,130 222,175 Z" fill="url(#wo-cap)" stroke="#c9a42f" stroke-width="0.5"/>
+
+    <!-- Cap top ornament - small golden sphere -->
+    <circle cx="200" cy="120" r="10" fill="url(#wo-cap-top)" stroke="#c9a42f" stroke-width="0.5"/>
+
+    <!-- Cap highlight -->
+    <path d="M188,165 Q188,140 200,132 Q204,140 204,155" fill="#ffffff" opacity="0.25"/>
+
+    <!-- Decorative gold ring on cap -->
+    <ellipse cx="200" cy="150" rx="20" ry="4" fill="none" stroke="#d4af37" stroke-width="1" opacity="0.5"/>
+
+    <!-- Bottom reflection/base -->
+    <ellipse cx="200" cy="428" rx="70" ry="6" fill="#d4c5a9" opacity="0.15"/>
+  </g>
+</svg>

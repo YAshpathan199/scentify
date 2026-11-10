@@ -1,0 +1,289 @@
+/* ==========================================================================
+   Discover (Quiz) Page
+   ========================================================================== */
+
+.page {
+  padding-top: calc(100px + var(--space-xl));
+  padding-bottom: var(--space-3xl);
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* ---- Progress Indicator ---- */
+
+.progress {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: var(--space-2xl);
+  position: relative;
+}
+
+.progressStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+}
+
+.progressLine {
+  position: absolute;
+  top: 6px;
+  right: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+  transition: background-color var(--transition-base);
+}
+
+.progressLineFilled {
+  background: var(--accent);
+}
+
+.progressDot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--border);
+  border: 2px solid var(--border);
+  position: relative;
+  z-index: 1;
+  transition: all var(--transition-base);
+}
+
+.progressDotActive {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-light);
+}
+
+.progressDotCompleted {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.progressLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+  text-align: center;
+  transition: color var(--transition-fast);
+}
+
+.progressLabelActive {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---- Back Button ---- */
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  cursor: pointer;
+  padding: var(--space-xs) 0;
+  margin-bottom: var(--space-md);
+  transition: color var(--transition-fast);
+}
+
+.backButton:hover {
+  color: var(--accent);
+}
+
+/* ---- Step Content ---- */
+
+.stepContent {
+  text-align: center;
+}
+
+.stepTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  color: var(--text-primary);
+  margin: 0 0 var(--space-xs);
+  line-height: 1.2;
+}
+
+.stepSubtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-xl);
+}
+
+/* ---- Option Cards Grid ---- */
+
+.gridCategories {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.gridOptions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+@media (min-width: 600px) {
+  .gridCategories {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .gridOptions {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---- Option Card ---- */
+
+.optionCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.optionCard:hover {
+  border-color: var(--accent-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.optionCardSelected {
+  border-color: var(--accent);
+  background: var(--highlight-gold);
+  box-shadow: 0 0 0 3px var(--accent-glow), var(--shadow-md);
+}
+
+.optionCardWide {
+  padding: var(--space-md) var(--space-sm);
+}
+
+.optionIcon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.optionLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.optionDesc {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+/* ---- Mode Selection ---- */
+
+.modeGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  max-width: 520px;
+  margin: 0 auto;
+  perspective: 1000px;
+}
+
+.modeCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-xl) var(--space-lg);
+  background: var(--bg-surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(.03,.98,.52,.99);
+  text-align: center;
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+}
+
+.modeCard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(184,149,106,0) 0%, rgba(184,149,106,0.06) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.modeCard:hover {
+  border-color: var(--accent);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 0 0 1px rgba(184,149,106,0.2);
+  transform: translateY(-6px) rotateX(4deg) scale(1.02);
+}
+
+.modeCard:hover::after {
+  opacity: 1;
+}
+
+.modeCard:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.modeIcon {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.modeLabel {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.modeDesc {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 399px) {
+  .progressLabel {
+    font-size: 0.625rem;
+  }
+
+  .stepTitle {
+    font-size: var(--text-h2);
+  }
+}

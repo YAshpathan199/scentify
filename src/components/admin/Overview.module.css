@@ -1,0 +1,574 @@
+/* ==========================================================================
+   Admin Overview Dashboard
+   ========================================================================== */
+
+.overview {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+/* ---- Stats Grid ---- */
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.statTile {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  cursor: default;
+}
+
+.statTile:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statIconAccent {
+  background: rgba(184, 149, 106, 0.12);
+  color: var(--accent);
+}
+
+.statIconSuccess {
+  background: rgba(107, 143, 113, 0.12);
+  color: var(--success);
+}
+
+.statIconInfo {
+  background: rgba(123, 150, 170, 0.12);
+  color: var(--info);
+}
+
+.statIconSecondary {
+  background: var(--bg-elevated);
+  color: var(--text-secondary);
+}
+
+.statContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin: 0 0 var(--space-xs);
+}
+
+.statLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ---- Section Card ---- */
+
+.section {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.sectionIcon {
+  color: var(--accent);
+}
+
+/* ---- Quick Actions ---- */
+
+.quickActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.actionPrimary {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.actionPrimary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.actionSecondary {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.actionSecondary:hover {
+  background: var(--border);
+}
+
+.actionOutline {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.actionOutline:hover {
+  background: var(--bg-elevated);
+}
+
+.actionGhost {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: transparent;
+}
+
+.actionGhost:hover {
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+}
+
+/* ---- Family Distribution ---- */
+
+.barChartList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.barRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.barLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-primary);
+  width: 80px;
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.barTrack {
+  flex: 1;
+  height: 28px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.barFill {
+  height: 100%;
+  border-radius: var(--radius-sm);
+  transition: width var(--transition-slow);
+  min-width: 4px;
+}
+
+.barCount {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-secondary);
+  width: 32px;
+  flex-shrink: 0;
+}
+
+/* ---- Recent Activity ---- */
+
+.activityList {
+  display: flex;
+  flex-direction: column;
+}
+
+.activityRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+}
+
+.activityRowAlt {
+  background: var(--bg-secondary);
+}
+
+.activityDate {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  width: 90px;
+  flex-shrink: 0;
+}
+
+.activityName {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-primary);
+  font-weight: 500;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.activityOccasion {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.emptyMessage {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--text-muted);
+  text-align: center;
+  padding: var(--space-xl) 0;
+}
+
+/* ---- Season Coverage ---- */
+
+.seasonGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-md);
+}
+
+.seasonCard {
+  text-align: center;
+  padding: var(--space-lg) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-strong);
+  position: relative;
+  transition: transform var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.seasonCard:hover {
+  transform: translateY(-2px);
+}
+
+.seasonWeak {
+  background: rgba(194, 91, 86, 0.06);
+  border-color: rgba(194, 91, 86, 0.2);
+}
+
+.seasonOk {
+  background: rgba(184, 149, 106, 0.06);
+  border-color: rgba(184, 149, 106, 0.2);
+}
+
+.seasonStrong {
+  background: rgba(107, 143, 113, 0.06);
+  border-color: rgba(107, 143, 113, 0.2);
+}
+
+.seasonIcon {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-xs);
+}
+
+.seasonName {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-xs);
+}
+
+.seasonCount {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.warningBadge {
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  background: var(--error);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+}
+
+/* ---- Top Rated ---- */
+
+.topRatedList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.topRatedCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  transition: background var(--transition-fast);
+}
+
+.topRatedCard:hover {
+  background: var(--bg-elevated);
+}
+
+.rankBadge {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-small);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.topRatedInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.topRatedName {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.topRatedBrand {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.topRatedMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.starsRow {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.starFilled {
+  color: var(--accent);
+}
+
+.starEmpty {
+  color: var(--border);
+}
+
+.familyDot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+/* ---- Collection Gaps ---- */
+
+.gapsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.gapCard {
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-strong);
+  background: var(--bg-secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.gapCardWarn {
+  border-color: rgba(194, 91, 86, 0.25);
+  background: rgba(194, 91, 86, 0.04);
+}
+
+.gapCardInfo {
+  border-color: rgba(123, 150, 170, 0.25);
+  background: rgba(123, 150, 170, 0.04);
+}
+
+.gapHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.gapIcon {
+  color: var(--text-secondary);
+}
+
+.gapIconWarn {
+  color: var(--error);
+}
+
+.gapIconInfo {
+  color: var(--info);
+}
+
+.gapTitle {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.gapBody {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.gapList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+}
+
+.gapChip {
+  padding: 2px 8px;
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  background: var(--bg-elevated);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+}
+
+/* ---- Two-Column Layout for Bottom Sections ---- */
+
+.twoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+
+  .gapsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 899px) {
+  .seasonGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 599px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .seasonGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .quickActions {
+    flex-direction: column;
+  }
+
+  .actionBtn {
+    justify-content: center;
+  }
+
+  .barLabel {
+    width: 60px;
+    font-size: var(--text-caption);
+  }
+}
