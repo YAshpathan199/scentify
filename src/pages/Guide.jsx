@@ -251,10 +251,12 @@ export default function Guide() {
                 <button
                   key={level.id}
                   className={`${styles.intensityBtn} ${isActive ? styles.intensityBtnActive : ''}`}
-                  style={isActive ? { '--level-color': level.color } : {}}
+                  style={{ '--level-color': level.color }}
                   onClick={() => setSelectedIntensity(level.id)}
                 >
-                  <span className={styles.intensityBtnIcon}>{level.icon}</span>
+                  <span className={styles.intensityBtnIconWrap}>
+                    <span className={styles.intensityBtnIcon}>{level.icon}</span>
+                  </span>
                   <span className={styles.intensityBtnLabel}>{level.label}</span>
                   <span className={styles.intensityBtnDesc}>{level.desc}</span>
                 </button>
