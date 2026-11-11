@@ -205,9 +205,6 @@ export default function Explore() {
                     ))}
                   </div>
 
-                  <div className={styles.wishlistFooter}>
-                    <span className={styles.wishlistGap}>Suggested: {gap.concentration}</span>
-                  </div>
                 </motion.div>
               );
             })}
