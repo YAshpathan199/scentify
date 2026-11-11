@@ -325,6 +325,44 @@
   margin-top: 2px;
 }
 
+/* ---- Pairing ---- */
+
+.pairingBlock {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--border);
+}
+
+.pairingHeading {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 var(--space-sm);
+}
+
+.pairingChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.pairingChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid color-mix(in srgb, var(--fam-color) 35%, transparent);
+  background: color-mix(in srgb, var(--fam-color) 10%, var(--bg-primary));
+  color: var(--fam-color);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 500;
+}
+
 /* ---- Tags ---- */
 
 .tagGroup {

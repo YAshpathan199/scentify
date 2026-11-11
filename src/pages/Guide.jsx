@@ -308,6 +308,26 @@ export default function Guide() {
                     <Lightbulb size={16} />
                     <span>{sprayGuide.tip}</span>
                   </div>
+
+                  {sprayGuide.pairing?.length > 0 && (
+                    <div className={styles.pairingBlock}>
+                      <p className={styles.pairingHeading}>Pairs well with</p>
+                      <div className={styles.pairingChips}>
+                        {sprayGuide.pairing.map((fId) => {
+                          const fam = FRAGRANCE_FAMILIES.find(f => f.id === fId);
+                          return fam ? (
+                            <span
+                              key={fId}
+                              className={styles.pairingChip}
+                              style={{ '--fam-color': fam.color }}
+                            >
+                              {fam.icon} {fam.label}
+                            </span>
+                          ) : null;
+                        })}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 

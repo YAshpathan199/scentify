@@ -41,6 +41,7 @@ export function getSprayGuideByIntensity(season, internalIntensity, concentratio
     where: guide.where,
     skinOrClothes: guide.skinOrClothes,
     tip: guide.tip,
+    pairing: guide.pairing || [],
     intensity: internalIntensity,
   };
 }
