@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
-import { Search, SearchX } from 'lucide-react';
+import { Search, SearchX, ShoppingBag } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../components/ui';
 import { FragranceCard } from '../components/fragrance';
-import { SAMPLE_FRAGRANCES } from '../data/fragrances';
+import { SAMPLE_FRAGRANCES, COLLECTION_GAPS } from '../data/fragrances';
 import { FRAGRANCE_FAMILIES } from '../data/constants';
 import styles from './Explore.module.css';
 
@@ -150,6 +150,69 @@ export default function Explore() {
             </Button>
           </div>
         )}
+      </div>
+
+      {/* ── Missing in Collection ── */}
+      <div className={styles.wishlistSection}>
+        <div className={styles.container}>
+          <div className={styles.wishlistHeader}>
+            <ShoppingBag size={22} className={styles.wishlistIcon} />
+            <div>
+              <h2 className={styles.wishlistTitle}>Missing in Collection</h2>
+              <p className={styles.wishlistSub}>
+                Popular fragrances worth adding — filling the gaps in your lineup
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.wishlistGrid}>
+            {COLLECTION_GAPS.map((gap, i) => {
+              const fam = FRAGRANCE_FAMILIES.find(f => f.id === gap.family);
+              const priorityColor = gap.priority === 'High' ? '#B34A45' : gap.priority === 'Medium' ? '#B8956A' : '#6A859A';
+              return (
+                <motion.div
+                  key={gap.id}
+                  className={styles.wishlistCard}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: i * 0.06 }}
+                >
+                  <div className={styles.wishlistCardTop}>
+                    <span className={styles.wishlistEmoji}>{gap.icon}</span>
+                    <div className={styles.wishlistCardTopRight}>
+                      <span
+                        className={styles.wishlistFamilyChip}
+                        style={{ '--fam-color': fam?.color }}
+                      >
+                        {fam?.icon} {fam?.label}
+                      </span>
+                      <span
+                        className={styles.wishlistPriority}
+                        style={{ '--p-color': priorityColor }}
+                      >
+                        {gap.priority}
+                      </span>
+                    </div>
+                  </div>
+
+                  <h3 className={styles.wishlistName}>{gap.title}</h3>
+                  <p className={styles.wishlistWhy}>{gap.description}</p>
+
+                  <div className={styles.wishlistOccasions}>
+                    {gap.occasions.map(o => (
+                      <span key={o} className={styles.wishlistOccasionTag}>{o}</span>
+                    ))}
+                  </div>
+
+                  <div className={styles.wishlistFooter}>
+                    <span className={styles.wishlistGap}>Suggested: {gap.concentration}</span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
