@@ -117,6 +117,82 @@
   box-shadow: 0 0 0 3px var(--accent-glow);
 }
 
+/* ---- Intensity Selector ---- */
+
+.intensityHeading {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-sm);
+}
+
+.intensityGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+@media (min-width: 500px) {
+  .intensityGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.intensityBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-sm) var(--space-xs);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  cursor: pointer;
+  text-align: center;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  min-height: 90px;
+}
+
+.intensityBtn:hover {
+  border-color: var(--accent-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+  background: var(--highlight-warm);
+}
+
+.intensityBtnActive {
+  border-color: var(--level-color, var(--accent));
+  background: color-mix(in srgb, var(--level-color, var(--accent)) 10%, var(--bg-surface));
+  box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--level-color, var(--accent)) 25%, transparent), var(--shadow-md);
+}
+
+.intensityBtnActive:hover {
+  transform: translateY(-2px);
+}
+
+.intensityBtnIcon {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.intensityBtnLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.intensityBtnDesc {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
 /* ---- Spray Result ---- */
 
 .sprayResult {

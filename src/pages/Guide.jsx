@@ -14,8 +14,8 @@ import {
 } from 'lucide-react';
 import { Badge } from '../components/ui';
 import { SAMPLE_FRAGRANCES } from '../data/fragrances';
-import { OCCASIONS, SEASONS, CONCENTRATIONS, HOME_ROOMS, HOME_SPRAY_GUIDE, FRAGRANCE_FAMILIES } from '../data/constants';
-import { getSprayGuide } from '../utils/sprayGuide';
+import { SEASONS, CONCENTRATIONS, HOME_ROOMS, HOME_SPRAY_GUIDE, FRAGRANCE_FAMILIES } from '../data/constants';
+import { getSprayGuideByIntensity } from '../utils/sprayGuide';
 import { getCurrentSeason } from '../utils/helpers';
 import styles from './Guide.module.css';
 
@@ -137,9 +137,48 @@ const INTENSITY_TABLE = [
   { label: 'Wedding / Party', range: '5–7', level: 'Strong' },
 ];
 
+const INTENSITY_LEVELS = [
+  {
+    id: 'subtle',
+    label: 'Subtle',
+    icon: '🌱',
+    desc: 'Office · Religious · Daily',
+    internal: 'light',
+    bonus: 0,
+    color: '#5A7E60',
+  },
+  {
+    id: 'moderate',
+    label: 'Moderate',
+    icon: '🌿',
+    desc: 'Casual · Brunch · Travel',
+    internal: 'moderate',
+    bonus: -1,
+    color: '#6A859A',
+  },
+  {
+    id: 'noticeable',
+    label: 'Noticeable',
+    icon: '✨',
+    desc: 'Dates · Social · Evening',
+    internal: 'moderate',
+    bonus: 0,
+    color: '#B8956A',
+  },
+  {
+    id: 'strong',
+    label: 'Strong',
+    icon: '🔥',
+    desc: 'Parties · Weddings · Night',
+    internal: 'heavy',
+    bonus: 0,
+    color: '#B34A45',
+  },
+];
+
 export default function Guide() {
   const [selectedFragrance, setSelectedFragrance] = useState('');
-  const [selectedOccasion, setSelectedOccasion] = useState('');
+  const [selectedIntensity, setSelectedIntensity] = useState('');
   const [openAccordion, setOpenAccordion] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
@@ -150,9 +189,11 @@ export default function Guide() {
   const fragrance = SAMPLE_FRAGRANCES.find((f) => f.id === selectedFragrance);
 
   const sprayGuide = useMemo(() => {
-    if (!fragrance || !selectedOccasion) return null;
-    return getSprayGuide(currentSeasonId, selectedOccasion, fragrance.concentration);
-  }, [fragrance, selectedOccasion, currentSeasonId]);
+    if (!fragrance || !selectedIntensity) return null;
+    const level = INTENSITY_LEVELS.find(l => l.id === selectedIntensity);
+    if (!level) return null;
+    return getSprayGuideByIntensity(currentSeasonId, level.internal, fragrance.concentration, level.bonus);
+  }, [fragrance, selectedIntensity, currentSeasonId]);
 
   const homeSpray = useMemo(() => {
     if (!selectedRoom || !selectedTime) return null;
@@ -183,41 +224,42 @@ export default function Guide() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Spray Calculator</h2>
 
-          <div className={styles.calculatorGrid}>
-            <label className={styles.selectLabel}>
-              Fragrance
-              <select
-                className={styles.select}
-                value={selectedFragrance}
-                onChange={(e) => {
-                  setSelectedFragrance(e.target.value);
-                  setSelectedOccasion('');
-                }}
-              >
-                <option value="">Select a fragrance...</option>
-                {SAMPLE_FRAGRANCES.map((f) => (
-                  <option key={f.id} value={f.id}>
-                    {f.name} — {f.brand}
-                  </option>
-                ))}
-              </select>
-            </label>
+          <label className={styles.selectLabel}>
+            Fragrance
+            <select
+              className={styles.select}
+              value={selectedFragrance}
+              onChange={(e) => {
+                setSelectedFragrance(e.target.value);
+                setSelectedIntensity('');
+              }}
+            >
+              <option value="">Select a fragrance...</option>
+              {SAMPLE_FRAGRANCES.map((f) => (
+                <option key={f.id} value={f.id}>
+                  {f.name} — {f.brand}
+                </option>
+              ))}
+            </select>
+          </label>
 
-            <label className={styles.selectLabel}>
-              Occasion
-              <select
-                className={styles.select}
-                value={selectedOccasion}
-                onChange={(e) => setSelectedOccasion(e.target.value)}
-              >
-                <option value="">Select an occasion...</option>
-                {OCCASIONS.map((o) => (
-                  <option key={o.id} value={o.id}>
-                    {o.icon} {o.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+          <p className={styles.intensityHeading}>How intense?</p>
+          <div className={styles.intensityGrid}>
+            {INTENSITY_LEVELS.map((level) => {
+              const isActive = selectedIntensity === level.id;
+              return (
+                <button
+                  key={level.id}
+                  className={`${styles.intensityBtn} ${isActive ? styles.intensityBtnActive : ''}`}
+                  style={isActive ? { '--level-color': level.color } : {}}
+                  onClick={() => setSelectedIntensity(level.id)}
+                >
+                  <span className={styles.intensityBtnIcon}>{level.icon}</span>
+                  <span className={styles.intensityBtnLabel}>{level.label}</span>
+                  <span className={styles.intensityBtnDesc}>{level.desc}</span>
+                </button>
+              );
+            })}
           </div>
 
           {sprayGuide && (
