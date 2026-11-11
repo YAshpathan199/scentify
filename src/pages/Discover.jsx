@@ -1,428 +1,291 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { ArrowLeft, ArrowRight, RotateCcw, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FragranceCard } from '../components/fragrance';
+import { useFragrances } from '../context/FragranceContext';
 import {
-  OCCASIONS,
-  OCCASION_CATEGORIES,
-  SEASONS,
-  TIME_OF_DAY,
-  DRESS_CODES,
-  MOODS,
-  HOME_ROOMS,
+  SEASONS, TIME_OF_DAY, DRESS_CODES,
+  OCCASION_CATEGORIES, OCCASIONS,
 } from '../data/constants';
-import { getCurrentSeason } from '../utils/helpers';
 import styles from './Discover.module.css';
 
-const MODE_OPTIONS = [
-  { id: 'personal', label: 'Personal Wear', icon: '🧑', desc: 'Find the perfect fragrance to wear' },
-  { id: 'home', label: 'Home Spray', icon: '🏠', desc: 'Scent your rooms beautifully' },
-];
+function buildOccasionMap() {
+  const map = {};
+  for (const occ of OCCASIONS) {
+    if (!map[occ.category]) map[occ.category] = [];
+    map[occ.category].push(occ.id);
+  }
+  return map;
+}
+const OCCASION_BY_CATEGORY = buildOccasionMap();
 
-const HOME_TIMES = [
-  { id: 'morning', label: 'Morning', icon: '🌅', description: '6 AM – 12 PM' },
-  { id: 'afternoon', label: 'Afternoon', icon: '☀️', description: '12 PM – 5 PM' },
-  { id: 'evening', label: 'Evening', icon: '🌆', description: '5 PM – 9 PM' },
-  { id: 'night', label: 'Night', icon: '🌙', description: '9 PM – 6 AM' },
+const STEPS = [
+  {
+    key: 'season',
+    question: 'What season is it?',
+    subtitle: 'Fragrances are made for every season',
+    options: SEASONS.map(s => ({ id: s.id, label: s.label, icon: s.icon, desc: s.description })),
+  },
+  {
+    key: 'occasionCategory',
+    question: "What's the occasion?",
+    subtitle: 'Pick the type of event or setting',
+    options: OCCASION_CATEGORIES.map(c => ({ id: c.id, label: c.label, icon: c.icon })),
+  },
+  {
+    key: 'timeOfDay',
+    question: 'What time of day?',
+    subtitle: 'When will you be wearing it?',
+    options: TIME_OF_DAY.map(t => ({ id: t.id, label: t.label, icon: t.icon, desc: t.description })),
+  },
+  {
+    key: 'dressCode',
+    question: 'What are you wearing?',
+    subtitle: 'Your outfit guides the fragrance choice',
+    options: DRESS_CODES.map(d => ({ id: d.id, label: d.label, icon: d.icon, desc: d.description })),
+  },
 ];
-
-const PERSONAL_LABELS = ['Occasion', 'Season', 'Time', 'Dress Code', 'Mood'];
-const HOME_LABELS = ['Room', 'Time of Day'];
 
 const slideVariants = {
-  enter: (direction) => ({
-    x: direction > 0 ? 80 : -80,
-    opacity: 0,
-  }),
-  center: {
-    x: 0,
-    opacity: 1,
-  },
-  exit: (direction) => ({
-    x: direction > 0 ? -80 : 80,
-    opacity: 0,
-  }),
+  enter: d => ({ x: d > 0 ? 60 : -60, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: d => ({ x: d > 0 ? -60 : 60, opacity: 0 }),
+};
+
+const EMPTY_FILTERS = {
+  season: [], occasionCategory: [],
+  timeOfDay: [], dressCode: [],
 };
 
 export default function Discover() {
-  const navigate = useNavigate();
-  const [mode, setMode] = useState(null);
-  const [step, setStep] = useState(0);
+  const { fragrances } = useFragrances();
+  const [currentStep, setCurrentStep] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [answers, setAnswers] = useState({
-    occasion: null,
-    season: getCurrentSeason(),
-    timeOfDay: null,
-    dressCode: null,
-    mood: null,
-  });
-  const [homeAnswers, setHomeAnswers] = useState({
-    room: null,
-    time: null,
-  });
-  const [occasionCategory, setOccasionCategory] = useState(null);
+  const [filters, setFilters] = useState(EMPTY_FILTERS);
+  const [done, setDone] = useState(false);
 
-  const isHome = mode === 'home';
-  const stepLabels = isHome ? HOME_LABELS : PERSONAL_LABELS;
+  const step = STEPS[currentStep];
+  const currentSelections = done ? [] : (filters[step?.key] || []);
+  const activeFilterCount = Object.values(filters).reduce((s, a) => s + a.length, 0);
 
-  function personalStepToVisual(s) {
-    if (s <= 1) return 0;
-    return s - 1;
+  function toggleOption(id) {
+    const key = step.key;
+    setFilters(prev => {
+      const arr = prev[key];
+      return { ...prev, [key]: arr.includes(id) ? arr.filter(v => v !== id) : [...arr, id] };
+    });
   }
 
-  function personalCompletedVisual(index) {
-    if (index === 0) return step >= 2;
-    return step >= index + 2;
-  }
+  function scrollTop() { window.scrollTo({ top: 0, behavior: 'instant' }); }
 
-  function goForward(nextStep) {
-    setDirection(1);
-    setStep(nextStep);
-  }
-
-  function goBack() {
-    setDirection(-1);
-    if (isHome) {
-      if (step === 0) { setMode(null); }
-      else { setStep(step - 1); }
+  function goNext() {
+    scrollTop();
+    if (currentStep < STEPS.length - 1) {
+      setDirection(1);
+      setCurrentStep(s => s + 1);
     } else {
-      if (step === 0) { setMode(null); }
-      else if (step === 1) { setStep(0); }
-      else { setStep(step - 1); }
+      setDone(true);
     }
   }
 
-  function selectMode(m) {
-    setMode(m);
-    setStep(0);
+  function goBack() {
+    scrollTop();
+    if (done) { setDone(false); return; }
+    if (currentStep > 0) { setDirection(-1); setCurrentStep(s => s - 1); }
+  }
+
+  function goToStep(i) {
+    scrollTop();
+    if (done) setDone(false);
+    setDirection(i > currentStep ? 1 : -1);
+    setCurrentStep(i);
+  }
+
+  function restart() {
+    scrollTop();
+    setFilters(EMPTY_FILTERS);
+    setCurrentStep(0);
+    setDone(false);
     setDirection(1);
   }
 
-  // Personal flow
-  function selectOccasionCategory(catId) {
-    setOccasionCategory(catId);
-    goForward(1);
-  }
-
-  function selectOccasion(occasionId) {
-    setAnswers((prev) => ({ ...prev, occasion: occasionId }));
-    goForward(2);
-  }
-
-  function selectSeason(seasonId) {
-    setAnswers((prev) => ({ ...prev, season: seasonId }));
-    goForward(3);
-  }
-
-  function selectTime(timeId) {
-    setAnswers((prev) => ({ ...prev, timeOfDay: timeId }));
-    goForward(4);
-  }
-
-  function selectDressCode(dressId) {
-    setAnswers((prev) => ({ ...prev, dressCode: dressId }));
-    goForward(5);
-  }
-
-  function selectMood(moodId) {
-    const finalAnswers = { ...answers, mood: moodId };
-    navigate('/results', { state: { answers: finalAnswers, mode: 'personal' } });
-  }
-
-  // Home flow
-  function selectRoom(roomId) {
-    setHomeAnswers((prev) => ({ ...prev, room: roomId }));
-    goForward(1);
-  }
-
-  function selectHomeTime(timeId) {
-    const final = { ...homeAnswers, time: timeId };
-    navigate('/results', { state: { homeAnswers: final, mode: 'home' } });
-  }
-
-  const filteredOccasions = OCCASIONS.filter(
-    (o) => o.category === occasionCategory
-  );
-
-  // Mode selection screen
-  if (!mode) {
-    return (
-      <div className={styles.page}>
-        <div className={styles.container}>
-          <AnimatePresence mode="wait" custom={1}>
-            <motion.div
-              key="mode"
-              custom={1}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
-              className={styles.stepContent}
-            >
-              <h1 className={styles.stepTitle}>What are you looking for?</h1>
-              <p className={styles.stepSubtitle}>Choose your fragrance journey</p>
-              <div className={styles.modeGrid}>
-                {MODE_OPTIONS.map((opt) => (
-                  <button
-                    key={opt.id}
-                    className={styles.modeCard}
-                    onClick={() => selectMode(opt.id)}
-                  >
-                    <span className={styles.modeIcon}>{opt.icon}</span>
-                    <span className={styles.modeLabel}>{opt.label}</span>
-                    <span className={styles.modeDesc}>{opt.desc}</span>
-                  </button>
-                ))}
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-    );
-  }
+  const results = useMemo(() => {
+    const hasAny = activeFilterCount > 0;
+    const scored = fragrances.map(f => {
+      if (!hasAny) return { fragrance: f, score: 0, total: 0, matchPercent: 100 };
+      let matched = 0, total = 0;
+      if (filters.season.length) { total++; if (filters.season.some(s => f.seasons?.includes(s))) matched++; }
+      if (filters.timeOfDay.length) { total++; if (filters.timeOfDay.some(t => f.timeOfDay?.includes(t))) matched++; }
+      if (filters.dressCode.length) { total++; if (filters.dressCode.some(d => f.dressCodes?.includes(d))) matched++; }
+      if (filters.occasionCategory.length) {
+        total++;
+        const occIds = filters.occasionCategory.flatMap(cat => OCCASION_BY_CATEGORY[cat] || []);
+        if (occIds.some(o => f.occasions?.includes(o))) matched++;
+      }
+      const matchPercent = total > 0 ? Math.round((matched / total) * 100) : 100;
+      return { fragrance: f, score: matched, total, matchPercent };
+    });
+    if (hasAny) {
+      scored.sort((a, b) => b.score !== a.score ? b.score - a.score : b.matchPercent - a.matchPercent);
+      return scored.filter(s => s.score > 0);
+    }
+    return scored;
+  }, [fragrances, filters, activeFilterCount]);
 
   return (
     <div className={styles.page}>
-      <div className={styles.container}>
-        {/* Progress Indicator */}
-        <div className={styles.progress}>
-          {stepLabels.map((label, i) => {
-            const isActive = isHome ? step === i : personalStepToVisual(step) === i;
-            const isCompleted = isHome ? step > i : personalCompletedVisual(i);
+
+      {/* ── Step area ── */}
+      <div className={styles.stepContainer}>
+
+        {/* Stepper */}
+        <div className={styles.stepper}>
+          <div className={styles.stepperLine} />
+          {STEPS.map((s, i) => {
+            const isActive = !done && i === currentStep;
+            const isPast = done || i < currentStep;
+            const hasSelection = filters[s.key]?.length > 0;
             return (
-              <div key={label} className={styles.progressStep}>
-                {i > 0 && (
-                  <div
-                    className={`${styles.progressLine} ${
-                      isCompleted || isActive ? styles.progressLineFilled : ''
-                    }`}
-                  />
-                )}
-                <div
-                  className={`${styles.progressDot} ${
-                    isActive ? styles.progressDotActive : ''
-                  } ${isCompleted ? styles.progressDotCompleted : ''}`}
-                />
-                <span
-                  className={`${styles.progressLabel} ${
-                    isActive ? styles.progressLabelActive : ''
-                  }`}
-                >
-                  {label}
-                </span>
-              </div>
+              <button
+                key={s.key}
+                className={`${styles.stepDot}
+                  ${isActive ? styles.stepDotActive : ''}
+                  ${isPast && hasSelection ? styles.stepDotDone : ''}
+                  ${isPast && !hasSelection ? styles.stepDotSkipped : ''}`}
+                onClick={() => goToStep(i)}
+                aria-label={s.question}
+              >
+                {isPast && hasSelection
+                  ? <Check size={11} strokeWidth={3} />
+                  : <span>{i + 1}</span>}
+              </button>
             );
           })}
         </div>
 
-        {/* Back Button */}
-        <button className={styles.backButton} onClick={goBack}>
-          <ArrowLeft size={18} />
-          <span>Back</span>
-        </button>
+        {!done ? (
+          <>
+            {/* Animated step content */}
+            <AnimatePresence mode="wait" custom={direction}>
+              <motion.div
+                key={currentStep}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.22, ease: 'easeInOut' }}
+                className={styles.stepContent}
+              >
+                <p className={styles.stepCounter}>Step {currentStep + 1} of {STEPS.length}</p>
+                <h2 className={styles.stepQuestion}>{step.question}</h2>
+                <p className={styles.stepSubtitle}>{step.subtitle}</p>
 
-        {/* Step Content */}
-        <AnimatePresence mode="wait" custom={direction}>
-          <motion.div
-            key={`${mode}-${step}`}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className={styles.stepContent}
-          >
-            {/* ===== HOME SPRAY FLOW ===== */}
-            {isHome && step === 0 && (
-              <>
-                <h1 className={styles.stepTitle}>Which room?</h1>
-                <p className={styles.stepSubtitle}>Pick the space you want to scent</p>
-                <div className={styles.gridCategories}>
-                  {HOME_ROOMS.map((room) => (
-                    <button
-                      key={room.id}
-                      className={styles.optionCard}
-                      onClick={() => selectRoom(room.id)}
-                    >
-                      <span className={styles.optionIcon}>{room.icon}</span>
-                      <span className={styles.optionLabel}>{room.label}</span>
-                    </button>
-                  ))}
+                <div className={styles.optionsGrid}>
+                  {step.options.map(opt => {
+                    const isSelected = currentSelections.includes(opt.id);
+                    return (
+                      <button
+                        key={opt.id}
+                        className={`${styles.optionCard} ${isSelected ? styles.optionCardSelected : ''}`}
+                        onClick={() => toggleOption(opt.id)}
+                      >
+                        {isSelected && (
+                          <span className={styles.optionCheckmark}>
+                            <Check size={11} strokeWidth={3} />
+                          </span>
+                        )}
+                        <span className={styles.optionIcon}>{opt.icon}</span>
+                        <span className={styles.optionLabel}>{opt.label}</span>
+                        {opt.desc && <span className={styles.optionDesc}>{opt.desc}</span>}
+                      </button>
+                    );
+                  })}
                 </div>
-              </>
-            )}
+              </motion.div>
+            </AnimatePresence>
 
-            {isHome && step === 1 && (
-              <>
-                <h1 className={styles.stepTitle}>What time of day?</h1>
-                <p className={styles.stepSubtitle}>
-                  Scent preferences change throughout the day
-                </p>
-                <div className={styles.gridOptions}>
-                  {HOME_TIMES.map((t) => (
-                    <button
-                      key={t.id}
-                      className={`${styles.optionCard} ${styles.optionCardWide}`}
-                      onClick={() => selectHomeTime(t.id)}
-                    >
-                      <span className={styles.optionIcon}>{t.icon}</span>
-                      <span className={styles.optionLabel}>{t.label}</span>
-                      <span className={styles.optionDesc}>{t.description}</span>
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {/* ===== PERSONAL WEAR FLOW ===== */}
-            {!isHome && step === 0 && (
-              <>
-                <h1 className={styles.stepTitle}>What's the occasion?</h1>
-                <p className={styles.stepSubtitle}>First, pick a category</p>
-                <div className={styles.gridCategories}>
-                  {OCCASION_CATEGORIES.map((cat) => (
-                    <button
-                      key={cat.id}
-                      className={styles.optionCard}
-                      onClick={() => selectOccasionCategory(cat.id)}
-                    >
-                      <span className={styles.optionIcon}>{cat.icon}</span>
-                      <span className={styles.optionLabel}>{cat.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {!isHome && step === 1 && (
-              <>
-                <h1 className={styles.stepTitle}>What's the occasion?</h1>
-                <p className={styles.stepSubtitle}>
-                  Pick the specific event
-                </p>
-                <div className={styles.gridOptions}>
-                  {filteredOccasions.map((occ) => (
-                    <button
-                      key={occ.id}
-                      className={styles.optionCard}
-                      onClick={() => selectOccasion(occ.id)}
-                    >
-                      <span className={styles.optionIcon}>{occ.icon}</span>
-                      <span className={styles.optionLabel}>{occ.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {!isHome && step === 2 && (
-              <>
-                <h1 className={styles.stepTitle}>What season is it?</h1>
-                <p className={styles.stepSubtitle}>
-                  We've auto-selected the current season
-                </p>
-                <div className={styles.gridOptions}>
-                  {SEASONS.map((season) => (
-                    <button
-                      key={season.id}
-                      className={`${styles.optionCard} ${styles.optionCardWide} ${
-                        answers.season === season.id
-                          ? styles.optionCardSelected
-                          : ''
-                      }`}
-                      onClick={() => selectSeason(season.id)}
-                    >
-                      <span className={styles.optionIcon}>{season.icon}</span>
-                      <span className={styles.optionLabel}>
-                        {season.label}
-                      </span>
-                      <span className={styles.optionDesc}>
-                        {season.description}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {!isHome && step === 3 && (
-              <>
-                <h1 className={styles.stepTitle}>What time of day?</h1>
-                <p className={styles.stepSubtitle}>
-                  Choose when you'll be wearing it
-                </p>
-                <div className={styles.gridOptions}>
-                  {TIME_OF_DAY.map((time) => (
-                    <button
-                      key={time.id}
-                      className={`${styles.optionCard} ${styles.optionCardWide}`}
-                      onClick={() => selectTime(time.id)}
-                    >
-                      <span className={styles.optionIcon}>{time.icon}</span>
-                      <span className={styles.optionLabel}>{time.label}</span>
-                      <span className={styles.optionDesc}>
-                        {time.description}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {!isHome && step === 4 && (
-              <>
-                <h1 className={styles.stepTitle}>What are you wearing?</h1>
-                <p className={styles.stepSubtitle}>
-                  Your outfit affects fragrance choice
-                </p>
-                <div className={styles.gridOptions}>
-                  {DRESS_CODES.map((dress) => (
-                    <button
-                      key={dress.id}
-                      className={`${styles.optionCard} ${styles.optionCardWide}`}
-                      onClick={() => selectDressCode(dress.id)}
-                    >
-                      <span className={styles.optionIcon}>{dress.icon}</span>
-                      <span className={styles.optionLabel}>
-                        {dress.label}
-                      </span>
-                      <span className={styles.optionDesc}>
-                        {dress.description}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-
-            {!isHome && step === 5 && (
-              <>
-                <h1 className={styles.stepTitle}>What's your mood?</h1>
-                <p className={styles.stepSubtitle}>
-                  How do you want to feel?
-                </p>
-                <div className={styles.gridOptions}>
-                  {MOODS.map((mood) => (
-                    <button
-                      key={mood.id}
-                      className={`${styles.optionCard} ${styles.optionCardWide}`}
-                      onClick={() => selectMood(mood.id)}
-                    >
-                      <span className={styles.optionIcon}>{mood.icon}</span>
-                      <span className={styles.optionLabel}>{mood.label}</span>
-                      <span className={styles.optionDesc}>
-                        {mood.description}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-          </motion.div>
-        </AnimatePresence>
+            {/* Navigation */}
+            <div className={styles.navRow}>
+              <button className={styles.navBack} onClick={goBack} disabled={currentStep === 0}>
+                <ArrowLeft size={15} />
+                Back
+              </button>
+              <div className={styles.navRight}>
+                <button className={styles.navSkip} onClick={goNext}>Skip</button>
+                <button
+                  className={`${styles.navNext} ${currentSelections.length > 0 ? styles.navNextActive : ''}`}
+                  onClick={goNext}
+                >
+                  {currentStep === STEPS.length - 1 ? 'See Results' : 'Next'}
+                  <ArrowRight size={15} />
+                </button>
+              </div>
+            </div>
+          </>
+        ) : (
+          /* ── Done state ── */
+          <div className={styles.doneState}>
+            <span className={styles.doneEmoji}>✨</span>
+            <h2 className={styles.doneTitle}>
+              {results.length} fragrance{results.length !== 1 ? 's' : ''} matched
+            </h2>
+            <p className={styles.doneSubtitle}>
+              Based on {activeFilterCount} preference{activeFilterCount !== 1 ? 's' : ''}
+            </p>
+            <div className={styles.doneActions}>
+              <button className={styles.navBack} onClick={goBack}>
+                <ArrowLeft size={15} />
+                Edit Preferences
+              </button>
+              <button className={styles.restartBtn} onClick={restart}>
+                <RotateCcw size={13} />
+                Start over
+              </button>
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* ── Live results ── */}
+      <div className={styles.resultsSection}>
+        <div className={styles.resultsInner}>
+          {activeFilterCount === 0 ? (
+            <div className={styles.resultsHint}>
+              <span className={styles.resultsHintIcon}>🌸</span>
+              <p>Your matches will appear here as you answer</p>
+            </div>
+          ) : results.length > 0 ? (
+            <>
+              <p className={styles.resultsCount}>
+                {results.length} {results.length === 1 ? 'match' : 'matches'}
+              </p>
+              <div className={styles.grid}>
+                <AnimatePresence mode="popLayout">
+                  {results.map(({ fragrance, matchPercent }, i) => (
+                    <motion.div
+                      key={fragrance.id}
+                      layout
+                      initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.94 }}
+                      transition={{ duration: 0.26, delay: i * 0.03 }}
+                    >
+                      <FragranceCard fragrance={fragrance} matchPercent={matchPercent} />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </div>
+            </>
+          ) : (
+            <div className={styles.resultsHint}>
+              <span className={styles.resultsHintIcon}>🔍</span>
+              <p>No fragrances match this combination — try different options or skip a step</p>
+            </div>
+          )}
+        </div>
+      </div>
+
     </div>
   );
 }
