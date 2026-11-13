@@ -7,6 +7,7 @@ import {
   SEASONS, TIME_OF_DAY, DRESS_CODES,
   OCCASION_CATEGORIES, OCCASIONS,
 } from '../data/constants';
+import { discoverScore } from '../utils/engine';
 import styles from './Discover.module.css';
 
 function buildOccasionMap() {
@@ -22,24 +23,28 @@ const OCCASION_BY_CATEGORY = buildOccasionMap();
 const STEPS = [
   {
     key: 'season',
+    label: 'Season',
     question: 'What season is it?',
     subtitle: 'Fragrances are made for every season',
     options: SEASONS.map(s => ({ id: s.id, label: s.label, icon: s.icon, desc: s.description })),
   },
   {
     key: 'occasionCategory',
+    label: 'Occasion',
     question: "What's the occasion?",
     subtitle: 'Pick the type of event or setting',
     options: OCCASION_CATEGORIES.map(c => ({ id: c.id, label: c.label, icon: c.icon })),
   },
   {
     key: 'timeOfDay',
+    label: 'Time of day',
     question: 'What time of day?',
     subtitle: 'When will you be wearing it?',
     options: TIME_OF_DAY.map(t => ({ id: t.id, label: t.label, icon: t.icon, desc: t.description })),
   },
   {
     key: 'dressCode',
+    label: 'Outfit',
     question: 'What are you wearing?',
     subtitle: 'Your outfit guides the fragrance choice',
     options: DRESS_CODES.map(d => ({ id: d.id, label: d.label, icon: d.icon, desc: d.description })),
@@ -111,57 +116,47 @@ export default function Discover() {
 
   const results = useMemo(() => {
     const hasAny = activeFilterCount > 0;
+    if (!hasAny) return fragrances.map(f => ({ fragrance: f, score: 0, total: 0, matchPercent: 100 }));
+
+    const occIds = filters.occasionCategory.flatMap(cat => OCCASION_BY_CATEGORY[cat] || []);
+    const engineFilters = {
+      season: filters.season,
+      timeOfDay: filters.timeOfDay,
+      dressCode: filters.dressCode,
+      occasionIds: occIds,
+    };
+
     const scored = fragrances.map(f => {
-      if (!hasAny) return { fragrance: f, score: 0, total: 0, matchPercent: 100 };
-      let matched = 0, total = 0;
-      if (filters.season.length) { total++; if (filters.season.some(s => f.seasons?.includes(s))) matched++; }
-      if (filters.timeOfDay.length) { total++; if (filters.timeOfDay.some(t => f.timeOfDay?.includes(t))) matched++; }
-      if (filters.dressCode.length) { total++; if (filters.dressCode.some(d => f.dressCodes?.includes(d))) matched++; }
-      if (filters.occasionCategory.length) {
-        total++;
-        const occIds = filters.occasionCategory.flatMap(cat => OCCASION_BY_CATEGORY[cat] || []);
-        if (occIds.some(o => f.occasions?.includes(o))) matched++;
-      }
-      const matchPercent = total > 0 ? Math.round((matched / total) * 100) : 100;
-      return { fragrance: f, score: matched, total, matchPercent };
+      const { score, matchPercent, relevance } = discoverScore(f, engineFilters);
+      return { fragrance: f, score, total: Object.values(filters).filter(a => a.length).length, matchPercent, relevance };
     });
-    if (hasAny) {
-      scored.sort((a, b) => b.score !== a.score ? b.score - a.score : b.matchPercent - a.matchPercent);
-      return scored.filter(s => s.score > 0);
-    }
-    return scored;
+    scored.sort((a, b) => b.score !== a.score ? b.score - a.score : b.relevance - a.relevance);
+    return scored.filter(s => s.score > 0);
   }, [fragrances, filters, activeFilterCount]);
 
   return (
     <div className={styles.page}>
 
-      {/* ── Step area ── */}
+      {/* Step area */}
       <div className={styles.stepContainer}>
 
-        {/* Stepper */}
-        <div className={styles.stepper}>
-          <div className={styles.stepperLine} />
+        {/* daisyUI Steps */}
+        <ul className="steps steps-horizontal w-full mb-8 sm:mb-12">
           {STEPS.map((s, i) => {
-            const isActive = !done && i === currentStep;
             const isPast = done || i < currentStep;
+            const isActive = !done && i === currentStep;
             const hasSelection = filters[s.key]?.length > 0;
             return (
-              <button
+              <li
                 key={s.key}
-                className={`${styles.stepDot}
-                  ${isActive ? styles.stepDotActive : ''}
-                  ${isPast && hasSelection ? styles.stepDotDone : ''}
-                  ${isPast && !hasSelection ? styles.stepDotSkipped : ''}`}
+                className={`step cursor-pointer ${isPast && hasSelection ? 'step-primary' : ''} ${isActive ? 'step-primary' : ''}`}
                 onClick={() => goToStep(i)}
-                aria-label={s.question}
               >
-                {isPast && hasSelection
-                  ? <Check size={11} strokeWidth={3} />
-                  : <span>{i + 1}</span>}
-              </button>
+                <span className="hidden sm:inline text-xs">{s.question.replace("What's the ", '').replace('What ', '').replace('?', '')}</span>
+              </li>
             );
           })}
-        </div>
+        </ul>
 
         {!done ? (
           <>
@@ -207,14 +202,22 @@ export default function Discover() {
 
             {/* Navigation */}
             <div className={styles.navRow}>
-              <button className={styles.navBack} onClick={goBack} disabled={currentStep === 0}>
+              <button
+                className="btn btn-ghost btn-sm rounded-full gap-1.5"
+                onClick={goBack}
+                disabled={currentStep === 0}
+              >
                 <ArrowLeft size={15} />
                 Back
               </button>
-              <div className={styles.navRight}>
-                <button className={styles.navSkip} onClick={goNext}>Skip</button>
+              <div className="flex items-center gap-2">
+                <button className="btn btn-ghost btn-sm text-base-content/40" onClick={goNext}>Skip</button>
                 <button
-                  className={`${styles.navNext} ${currentSelections.length > 0 ? styles.navNextActive : ''}`}
+                  className={`btn btn-sm rounded-full gap-1.5 ${
+                    currentSelections.length > 0
+                      ? 'btn-primary shadow-md'
+                      : 'btn-outline border-base-300 text-base-content/40'
+                  }`}
                   onClick={goNext}
                 >
                   {currentStep === STEPS.length - 1 ? 'See Results' : 'Next'}
@@ -224,35 +227,63 @@ export default function Discover() {
             </div>
           </>
         ) : (
-          /* ── Done state ── */
+          /* Done state */
           <div className={styles.doneState}>
-            <span className={styles.doneEmoji}>✨</span>
-            <h2 className={styles.doneTitle}>
-              {results.length} fragrance{results.length !== 1 ? 's' : ''} matched
-            </h2>
-            <p className={styles.doneSubtitle}>
-              Based on {activeFilterCount} preference{activeFilterCount !== 1 ? 's' : ''}
-            </p>
-            <div className={styles.doneActions}>
-              <button className={styles.navBack} onClick={goBack}>
-                <ArrowLeft size={15} />
-                Edit Preferences
-              </button>
-              <button className={styles.restartBtn} onClick={restart}>
-                <RotateCcw size={13} />
-                Start over
-              </button>
+            <div className={styles.doneHeader}>
+              <span className={styles.doneEmoji}>&#10024;</span>
+              <div>
+                <h2 className={styles.doneTitle}>
+                  {results.length} fragrance{results.length !== 1 ? 's' : ''} matched
+                </h2>
+                <p className={styles.doneSubtitle}>
+                  Based on {activeFilterCount} preference{activeFilterCount !== 1 ? 's' : ''}
+                </p>
+              </div>
             </div>
+
+            <div className={styles.selectionSummary}>
+              {STEPS.map((s, i) => {
+                const selected = filters[s.key] || [];
+                const selectedOpts = s.options.filter(o => selected.includes(o.id));
+                return (
+                  <div key={s.key} className={styles.selectionRow}>
+                    <span className={styles.selectionLabel}>{s.label}</span>
+                    <div className={styles.selectionChips}>
+                      {selectedOpts.length > 0 ? (
+                        selectedOpts.map(opt => (
+                          <span key={opt.id} className={styles.selectionChip}>
+                            {opt.icon} {opt.label}
+                          </span>
+                        ))
+                      ) : (
+                        <span className={styles.selectionSkipped}>Any</span>
+                      )}
+                    </div>
+                    <button
+                      className={styles.editStepBtn}
+                      onClick={() => goToStep(i)}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+
+            <button className="btn btn-ghost btn-sm text-base-content/40 gap-1.5" onClick={restart}>
+              <RotateCcw size={13} />
+              Start over
+            </button>
           </div>
         )}
       </div>
 
-      {/* ── Live results ── */}
+      {/* Live results */}
       <div className={styles.resultsSection}>
         <div className={styles.resultsInner}>
           {activeFilterCount === 0 ? (
             <div className={styles.resultsHint}>
-              <span className={styles.resultsHintIcon}>🌸</span>
+              <span className={styles.resultsHintIcon}>&#127800;</span>
               <p>Your matches will appear here as you answer</p>
             </div>
           ) : results.length > 0 ? (
@@ -279,7 +310,7 @@ export default function Discover() {
             </>
           ) : (
             <div className={styles.resultsHint}>
-              <span className={styles.resultsHintIcon}>🔍</span>
+              <span className={styles.resultsHintIcon}>&#128270;</span>
               <p>No fragrances match this combination — try different options or skip a step</p>
             </div>
           )}

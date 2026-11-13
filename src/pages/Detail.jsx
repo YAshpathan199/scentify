@@ -14,7 +14,7 @@ import {
   TIME_OF_DAY,
   MOODS,
 } from '../data/constants';
-import { getSprayGuide } from '../utils/sprayGuide';
+import { getSprayGuideForFragrance } from '../utils/sprayGuide';
 import { getCurrentSeason, formatPrice, getProjectionPercent } from '../utils/helpers';
 import styles from './Detail.module.css';
 
@@ -186,7 +186,7 @@ export default function Detail() {
 
   const sprayGuide = useMemo(() => {
     if (!fragrance || !selectedOccasion) return null;
-    return getSprayGuide(currentSeasonId, selectedOccasion, fragrance.concentration);
+    return getSprayGuideForFragrance(fragrance, currentSeasonId, selectedOccasion);
   }, [fragrance, selectedOccasion, currentSeasonId]);
 
   const currentSeason = SEASONS.find((s) => s.id === currentSeasonId);

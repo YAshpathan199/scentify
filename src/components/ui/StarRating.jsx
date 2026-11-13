@@ -1,6 +1,5 @@
 import React from 'react';
 import { Star } from 'lucide-react';
-import styles from './StarRating.module.css';
 
 const sizeMap = {
   sm: 14,
@@ -15,13 +14,13 @@ function StarRating({
   const iconSize = sizeMap[size] || 18;
 
   return (
-    <div className={styles.container}>
+    <div className="inline-flex items-center gap-0.5">
       {[0, 1, 2, 3, 4].map((index) => {
         const isFilled = index < rating;
         return (
           <span
             key={index}
-            className={`${styles.star} ${isFilled ? styles.filled : styles.empty}`}
+            className={isFilled ? 'text-primary' : 'text-base-300'}
           >
             <Star
               size={iconSize}
@@ -31,7 +30,7 @@ function StarRating({
           </span>
         );
       })}
-      {showValue && <span className={styles.value}>{rating}</span>}
+      {showValue && <span className="ml-1 text-sm font-medium text-base-content/70">{rating}</span>}
     </div>
   );
 }

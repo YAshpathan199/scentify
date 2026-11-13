@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none">
+  <defs>
+    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="0.8">
+      <stop offset="0%" stop-color="#2a2420" stop-opacity="0.75"/>
+      <stop offset="50%" stop-color="#1e1a16" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#150f0b" stop-opacity="0.92"/>
+    </linearGradient>
+    <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7a5230" stop-opacity="0.85"/>
+      <stop offset="30%" stop-color="#5c3c20"/>
+      <stop offset="65%" stop-color="#3e2810"/>
+      <stop offset="100%" stop-color="#241508"/>
+    </linearGradient>
+    <linearGradient id="smokeGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8c7060" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#6a5040" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#8c7060" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="highlightGrad" x1="0" y1="0" x2="1" y2="0.6">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="capGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2e2e2e"/>
+      <stop offset="30%" stop-color="#1a1a1a"/>
+      <stop offset="55%" stop-color="#282828"/>
+      <stop offset="80%" stop-color="#141414"/>
+      <stop offset="100%" stop-color="#1e1e1e"/>
+    </linearGradient>
+    <linearGradient id="bandGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#c8a060"/>
+      <stop offset="50%" stop-color="#a07840"/>
+      <stop offset="100%" stop-color="#7a5820"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-5%" width="120%" height="115%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="9" result="blur"/>
+      <feOffset in="blur" dx="0" dy="7" result="offsetBlur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.22" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="reflectionGrad" cx="0.27" cy="0.33" r="0.44">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="200" cy="462" rx="88" ry="11" fill="#000" opacity="0.18"/>
+
+  <g filter="url(#shadow)">
+    <!-- Angular, more rugged bottle body -->
+    <path d="
+      M 130 162
+      Q 126 172 126 190
+      L 128 436
+      Q 128 450 148 450
+      L 252 450
+      Q 272 450 272 436
+      L 274 190
+      Q 274 172 270 162
+      Z
+    " fill="url(#glassGrad)" stroke="#3c2c1c" stroke-width="1"/>
+
+    <!-- Liquid -->
+    <path d="
+      M 128 205
+      L 130 434
+      Q 131 448 148 448
+      L 252 448
+      Q 269 448 270 434
+      L 272 205
+      Z
+    " fill="url(#liquidGrad)"/>
+
+    <!-- Smoke wisps -->
+    <path d="
+      M 130 268
+      Q 158 258 200 268
+      Q 242 278 270 268
+      L 270 286
+      Q 242 296 200 286
+      Q 158 276 130 286
+      Z
+    " fill="url(#smokeGrad)"/>
+
+    <path d="
+      M 130 338
+      Q 162 328 200 338
+      Q 238 348 270 338
+      L 270 354
+      Q 238 364 200 354
+      Q 162 344 130 354
+      Z
+    " fill="url(#smokeGrad)"/>
+
+    <!-- Glass highlight strip -->
+    <path d="
+      M 140 172
+      L 138 182
+      L 142 408
+      L 150 408
+      L 148 182
+      L 146 172
+      Z
+    " fill="url(#highlightGrad)"/>
+
+    <!-- Reflection -->
+    <ellipse cx="155" cy="308" rx="17" ry="78" fill="url(#reflectionGrad)" transform="rotate(-3 155 308)"/>
+
+    <!-- Gold band on bottle -->
+    <rect x="140" y="295" width="120" height="6" rx="3" fill="url(#bandGrad)" opacity="0.85"/>
+
+    <!-- Bottle neck - narrower, more angular -->
+    <path d="
+      M 176 110
+      L 174 162
+      L 226 162
+      L 224 110
+      Q 222 104 218 104
+      L 182 104
+      Q 178 104 176 110
+      Z
+    " fill="url(#glassGrad)" stroke="#3c2c1c" stroke-width="1"/>
+
+    <!-- Neck highlight -->
+    <rect x="180" y="114" width="4" height="44" rx="2" fill="#ffffff" opacity="0.12"/>
+
+    <!-- Matte black cap - tall, sharp edges -->
+    <rect x="164" y="22" width="72" height="82" rx="2" fill="url(#capGrad)" stroke="#0a0a0a" stroke-width="0.8"/>
+    <!-- Gold cap band -->
+    <rect x="164" y="92" width="72" height="4" rx="1" fill="url(#bandGrad)" opacity="0.9"/>
+    <!-- Cap top highlight -->
+    <rect x="164" y="22" width="72" height="3" rx="1" fill="#404040"/>
+    <!-- Cap subtle highlight -->
+    <rect x="168" y="26" width="4" height="62" rx="2" fill="#ffffff" opacity="0.08"/>
+  </g>
+</svg>

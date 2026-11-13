@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none">
+  <defs>
+    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5e8f0" stop-opacity="0.65"/>
+      <stop offset="45%" stop-color="#eed4e8" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#e0c0d8" stop-opacity="0.56"/>
+    </linearGradient>
+    <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d060a0" stop-opacity="0.78"/>
+      <stop offset="30%" stop-color="#b84888"/>
+      <stop offset="65%" stop-color="#983068"/>
+      <stop offset="100%" stop-color="#741848"/>
+    </linearGradient>
+    <linearGradient id="petalGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e890c8" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#d060a0" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#e890c8" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="highlightGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.52"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="capGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0d890"/>
+      <stop offset="25%" stop-color="#c8a848"/>
+      <stop offset="50%" stop-color="#e8cc80"/>
+      <stop offset="75%" stop-color="#a88830"/>
+      <stop offset="100%" stop-color="#c8a848"/>
+    </linearGradient>
+    <linearGradient id="roseGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e890c8"/>
+      <stop offset="50%" stop-color="#c06090"/>
+      <stop offset="100%" stop-color="#903060"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-5%" width="120%" height="115%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur"/>
+      <feOffset in="blur" dx="0" dy="6" result="offsetBlur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.13" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="reflectionGrad" cx="0.3" cy="0.3" r="0.5">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="200" cy="460" rx="80" ry="11" fill="#000" opacity="0.1"/>
+
+  <g filter="url(#shadow)">
+    <!-- Elegant curved bottle with slightly flared base for Arabian Desire -->
+    <path d="
+      M 138 158
+      Q 132 170 130 196
+      L 126 400
+      Q 125 420 134 435
+      Q 142 448 160 448
+      L 240 448
+      Q 258 448 266 435
+      Q 275 420 274 400
+      L 270 196
+      Q 268 170 262 158
+      Z
+    " fill="url(#glassGrad)" stroke="#d8b0d0" stroke-width="1"/>
+
+    <!-- Liquid fill -->
+    <path d="
+      M 132 212
+      Q 158 205 200 216
+      Q 242 227 268 212
+      L 272 400
+      Q 272 420 262 433
+      Q 254 445 240 445
+      L 160 445
+      Q 146 445 138 433
+      Q 128 420 128 400
+      Z
+    " fill="url(#liquidGrad)"/>
+
+    <!-- Petal wave accent 1 -->
+    <path d="
+      M 132 268
+      Q 160 258 200 268
+      Q 240 278 268 268
+      L 268 286
+      Q 240 296 200 286
+      Q 160 276 132 286
+      Z
+    " fill="url(#petalGrad)"/>
+
+    <!-- Petal wave accent 2 -->
+    <path d="
+      M 130 348
+      Q 162 338 200 348
+      Q 238 358 270 348
+      L 270 363
+      Q 238 373 200 363
+      Q 162 353 130 363
+      Z
+    " fill="url(#petalGrad)"/>
+
+    <!-- Glass highlight -->
+    <path d="
+      M 148 168
+      Q 146 200 145 300
+      L 158 300
+      Q 159 200 161 168
+      Z
+    " fill="url(#highlightGrad)"/>
+
+    <!-- Reflection -->
+    <ellipse cx="163" cy="298" rx="16" ry="76" fill="url(#reflectionGrad)" transform="rotate(-3 163 298)"/>
+
+    <!-- Rose motif on bottle -->
+    <circle cx="200" cy="310" r="22" fill="url(#roseGrad)" opacity="0.22"/>
+    <circle cx="200" cy="310" r="14" fill="url(#roseGrad)" opacity="0.18"/>
+    <circle cx="200" cy="310" r="7" fill="url(#roseGrad)" opacity="0.3"/>
+
+    <!-- Bottle neck with gentle curve -->
+    <path d="
+      M 172 108
+      Q 170 115 170 158
+      L 230 158
+      Q 230 115 228 108
+      Q 226 102 222 102
+      L 178 102
+      Q 174 102 172 108
+      Z
+    " fill="url(#glassGrad)" stroke="#d8b0d0" stroke-width="1"/>
+
+    <!-- Neck highlight -->
+    <rect x="176" y="112" width="5" height="43" rx="2.5" fill="#ffffff" opacity="0.28"/>
+
+    <!-- Ornate gold cap for Arabian Desire -->
+    <path d="
+      M 160 24
+      L 160 102
+      L 240 102
+      L 240 24
+      Q 240 15 230 15
+      L 170 15
+      Q 160 15 160 24
+      Z
+    " fill="url(#capGrad)" stroke="#a88030" stroke-width="0.8"/>
+    <!-- Cap decorative bands -->
+    <rect x="160" y="34" width="80" height="2" rx="1" fill="#f0d890" opacity="0.65"/>
+    <rect x="160" y="50" width="80" height="2" rx="1" fill="#f0d890" opacity="0.55"/>
+    <rect x="160" y="66" width="80" height="2" rx="1" fill="#f0d890" opacity="0.5"/>
+    <rect x="160" y="82" width="80" height="2" rx="1" fill="#f0d890" opacity="0.55"/>
+    <rect x="160" y="94" width="80" height="2" rx="1" fill="#f0d890" opacity="0.65"/>
+    <!-- Cap highlight -->
+    <rect x="166" y="19" width="5" height="80" rx="2.5" fill="#ffffff" opacity="0.2"/>
+    <!-- Cap top -->
+    <rect x="160" y="15" width="80" height="4" rx="2" fill="#ece090"/>
+    <!-- Rose emblem on cap -->
+    <circle cx="200" cy="52" r="8" fill="url(#roseGrad)" opacity="0.5"/>
+    <circle cx="200" cy="52" r="4" fill="url(#roseGrad)" opacity="0.4"/>
+  </g>
+</svg>

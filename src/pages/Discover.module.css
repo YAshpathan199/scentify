@@ -350,15 +350,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
   padding: var(--space-lg) 0 var(--space-xl);
-  gap: var(--space-sm);
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.doneHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: left;
 }
 
 .doneEmoji {
-  font-size: 2.8rem;
+  font-size: 2.4rem;
   line-height: 1;
-  margin-bottom: var(--space-xs);
+  flex-shrink: 0;
 }
 
 .doneTitle {
@@ -373,14 +380,94 @@
   font-family: var(--font-body);
   font-size: var(--text-body);
   color: var(--text-secondary);
-  margin: 0;
+  margin: var(--space-xs) 0 0;
+}
+
+/* ---- Selection Summary ---- */
+
+.selectionSummary {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.selectionRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--border);
+}
+
+.selectionRow:last-child {
+  border-bottom: none;
+}
+
+.selectionLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 80px;
+  flex-shrink: 0;
+}
+
+.selectionChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex: 1;
+}
+
+.selectionChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  background: var(--highlight-gold);
+  border: 1px solid var(--accent-light);
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.selectionSkipped {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.editStepBtn {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.editStepBtn:hover {
+  border-color: var(--accent-light);
+  color: var(--accent);
+  background: var(--highlight-warm);
 }
 
 .doneActions {
   display: flex;
   align-items: center;
   gap: var(--space-md);
-  margin-top: var(--space-md);
+  margin-top: var(--space-sm);
 }
 
 .restartBtn {

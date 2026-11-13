@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none">
+  <defs>
+    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0eed8" stop-opacity="0.6"/>
+      <stop offset="45%" stop-color="#e8e4c0" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#d8d4a8" stop-opacity="0.52"/>
+    </linearGradient>
+    <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f5c842" stop-opacity="0.78"/>
+      <stop offset="30%" stop-color="#e8b020"/>
+      <stop offset="65%" stop-color="#d09000"/>
+      <stop offset="100%" stop-color="#b07400"/>
+    </linearGradient>
+    <linearGradient id="burstGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffe066" stop-opacity="0.42"/>
+      <stop offset="50%" stop-color="#f5c842" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#ffe066" stop-opacity="0.42"/>
+    </linearGradient>
+    <linearGradient id="highlightGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="capGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f5e8b0"/>
+      <stop offset="30%" stop-color="#d4c060"/>
+      <stop offset="55%" stop-color="#ecdda0"/>
+      <stop offset="80%" stop-color="#b8a040"/>
+      <stop offset="100%" stop-color="#d4c060"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-5%" width="120%" height="115%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="7" result="blur"/>
+      <feOffset in="blur" dx="0" dy="5" result="offsetBlur"/>
+      <feFlood flood-color="#000000" flood-opacity="0.12" result="color"/>
+      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <radialGradient id="reflectionGrad" cx="0.3" cy="0.3" r="0.5">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="200" cy="460" rx="72" ry="10" fill="#000" opacity="0.09"/>
+
+  <g filter="url(#shadow)">
+    <!-- Slim, tall modern bottle for Daily Rizz -->
+    <path d="
+      M 148 158
+      Q 143 168 142 194
+      L 140 422
+      Q 140 444 158 444
+      L 242 444
+      Q 260 444 260 422
+      L 258 194
+      Q 257 168 252 158
+      Z
+    " fill="url(#glassGrad)" stroke="#d8d090" stroke-width="1"/>
+
+    <!-- Liquid fill -->
+    <path d="
+      M 143 210
+      Q 165 203 200 213
+      Q 235 223 257 210
+      L 258 420
+      Q 258 442 242 442
+      L 158 442
+      Q 142 442 142 420
+      Z
+    " fill="url(#liquidGrad)"/>
+
+    <!-- Citrus burst accent 1 -->
+    <path d="
+      M 144 272
+      Q 168 262 200 272
+      Q 232 282 256 272
+      L 256 290
+      Q 232 300 200 290
+      Q 168 280 144 290
+      Z
+    " fill="url(#burstGrad)"/>
+
+    <!-- Citrus burst accent 2 -->
+    <path d="
+      M 144 350
+      Q 170 340 200 350
+      Q 230 360 256 350
+      L 256 365
+      Q 230 375 200 365
+      Q 170 355 144 365
+      Z
+    " fill="url(#burstGrad)"/>
+
+    <!-- Glass highlight -->
+    <path d="
+      M 155 168
+      Q 153 198 152 302
+      L 164 302
+      Q 165 198 167 168
+      Z
+    " fill="url(#highlightGrad)"/>
+
+    <!-- Reflection -->
+    <ellipse cx="168" cy="295" rx="14" ry="72" fill="url(#reflectionGrad)" transform="rotate(-3 168 295)"/>
+
+    <!-- Slim neck -->
+    <path d="
+      M 174 110
+      L 173 158
+      L 227 158
+      L 226 110
+      Q 224 104 220 104
+      L 180 104
+      Q 176 104 174 110
+      Z
+    " fill="url(#glassGrad)" stroke="#d8d090" stroke-width="1"/>
+
+    <!-- Neck highlight -->
+    <rect x="178" y="114" width="5" height="41" rx="2.5" fill="#ffffff" opacity="0.3"/>
+
+    <!-- Gold cap - modern cylinder style -->
+    <path d="
+      M 164 60
+      Q 164 52 174 52
+      L 226 52
+      Q 236 52 236 60
+      L 236 104
+      L 164 104
+      Z
+    " fill="url(#capGrad)" stroke="#c0a040" stroke-width="0.8"/>
+    <!-- Cap groove line -->
+    <rect x="164" y="78" width="72" height="2" rx="1" fill="#b89830" opacity="0.55"/>
+    <!-- Cap highlight -->
+    <rect x="168" y="56" width="5" height="45" rx="2.5" fill="#ffffff" opacity="0.28"/>
+    <!-- Cap top -->
+    <rect x="164" y="52" width="72" height="4" rx="2" fill="#ece0a8"/>
+  </g>
+</svg>

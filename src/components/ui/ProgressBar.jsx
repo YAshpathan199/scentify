@@ -1,5 +1,10 @@
 import React from 'react';
-import styles from './ProgressBar.module.css';
+
+const heightClass = {
+  sm: 'h-1.5',
+  md: 'h-2.5',
+  lg: 'h-4',
+};
 
 function ProgressBar({
   value = 0,
@@ -8,22 +13,21 @@ function ProgressBar({
   height = 'md',
 }) {
   const clampedValue = Math.min(100, Math.max(0, value));
-  const fillColor = color || 'var(--accent)';
 
   return (
-    <div className={styles.container}>
+    <div className="flex flex-col gap-1.5">
       {label && (
-        <div className={styles.labelRow}>
-          <span className={styles.label}>{label}</span>
-          <span className={styles.valueText}>{Math.round(clampedValue)}%</span>
+        <div className="flex justify-between items-center">
+          <span className="text-sm text-base-content/70">{label}</span>
+          <span className="text-sm font-medium text-base-content/80">{Math.round(clampedValue)}%</span>
         </div>
       )}
-      <div className={`${styles.track} ${styles[height]}`}>
+      <div className={`w-full rounded-full bg-base-300/50 overflow-hidden ${heightClass[height] || heightClass.md}`}>
         <div
-          className={styles.fill}
+          className="h-full rounded-full transition-all duration-500 ease-out"
           style={{
             width: `${clampedValue}%`,
-            backgroundColor: fillColor,
+            backgroundColor: color || 'oklch(var(--p))',
           }}
         />
       </div>

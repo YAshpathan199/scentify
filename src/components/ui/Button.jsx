@@ -1,5 +1,17 @@
 import React from 'react';
-import styles from './Button.module.css';
+
+const variantClass = {
+  primary: 'btn-primary shadow-md hover:shadow-lg',
+  secondary: 'btn-secondary',
+  ghost: 'btn-ghost',
+  outline: 'btn-outline border-base-300',
+};
+
+const sizeClass = {
+  sm: 'btn-sm',
+  md: 'btn-md',
+  lg: 'btn-lg',
+};
 
 function Button({
   children,
@@ -13,23 +25,17 @@ function Button({
   ...rest
 }) {
   const classes = [
-    styles.button,
-    styles[variant],
-    styles[size],
-    fullWidth ? styles.fullWidth : '',
-    iconPosition === 'right' ? styles.iconRight : '',
+    'btn rounded-full font-medium',
+    variantClass[variant] || '',
+    sizeClass[size] || '',
+    fullWidth ? 'btn-block' : '',
+    iconPosition === 'right' ? 'flex-row-reverse' : '',
     className,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  ].filter(Boolean).join(' ');
 
   return (
     <button className={classes} disabled={disabled} {...rest}>
-      {Icon && (
-        <span className={styles.icon}>
-          <Icon size={size === 'sm' ? 14 : size === 'lg' ? 20 : 16} />
-        </span>
-      )}
+      {Icon && <Icon size={size === 'sm' ? 14 : size === 'lg' ? 20 : 16} />}
       {children}
     </button>
   );

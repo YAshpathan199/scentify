@@ -32,7 +32,7 @@ export default function FeaturedCollection() {
   return (
     <Section
       title="Featured Collection"
-      subtitle="12 carefully curated fragrances"
+      subtitle={`${SAMPLE_FRAGRANCES.length} carefully curated fragrances`}
       id="featured"
     >
       <motion.div

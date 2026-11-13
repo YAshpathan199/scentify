@@ -1,21 +1,48 @@
 /* ==========================================================================
    Scentify Global Styles
-   Base reset, typography, utilities, and foundational layout
+   Tailwind CSS v4 + daisyUI v5 + custom design tokens
    ========================================================================== */
 
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: scentify --default;
+}
+
+/* ---- daisyUI Theme ---- */
+@theme scentify {
+  --color-base-100: #FFFDF9;
+  --color-base-200: #F5F0E8;
+  --color-base-300: #EBE4D8;
+  --color-base-content: #141210;
+  --color-primary: #A67C4E;
+  --color-primary-content: #ffffff;
+  --color-secondary: #E2D9CB;
+  --color-secondary-content: #141210;
+  --color-accent: #DBBF9A;
+  --color-accent-content: #4A4239;
+  --color-neutral: #221E1A;
+  --color-neutral-content: #F2EBE0;
+  --color-info: #6A859A;
+  --color-info-content: #ffffff;
+  --color-success: #5A7E60;
+  --color-success-content: #ffffff;
+  --color-warning: #D08A10;
+  --color-warning-content: #ffffff;
+  --color-error: #B34A45;
+  --color-error-content: #ffffff;
+  --radius-selector: 1.5rem;
+  --radius-field: 0.75rem;
+  --radius-box: 0.75rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+/* ---- Design Tokens (preserved for CSS modules) ---- */
 @import './design-tokens.css';
 
 /* ---- Google Fonts ---- */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
-
-/* ---- CSS Reset ---- */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
 /* ---- Base Elements ---- */
 html {
