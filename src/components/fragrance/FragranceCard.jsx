@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Star, Clock, Wind, ShoppingCart, ExternalLink } from 'lucide-react';
+import { Star, Clock, Wind } from 'lucide-react';
 import { Badge } from '../ui';
 import { FRAGRANCE_FAMILIES } from '../../data/constants';
-import { formatPrice } from '../../utils/helpers';
 import { use3DTilt } from '../../hooks/use3DTilt';
 import styles from './FragranceCard.module.css';
 
@@ -62,23 +61,6 @@ export default function FragranceCard({ fragrance, matchPercent }) {
             </div>
           </div>
 
-          {fragrance.price > 0 && (
-            <p className={styles.price}>{formatPrice(fragrance.price)}</p>
-          )}
-
-          {fragrance.buyingLink && (
-            <a
-              href={fragrance.buyingLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.buyButton}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ShoppingCart size={14} />
-              Buy Now
-              <ExternalLink size={12} />
-            </a>
-          )}
         </div>
       </div>
     </Link>

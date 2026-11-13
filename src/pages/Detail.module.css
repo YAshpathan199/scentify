@@ -162,6 +162,29 @@
   font-weight: 600;
 }
 
+.buyButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius-full);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 16px var(--accent-glow);
+  margin-bottom: var(--space-md);
+}
+
+.buyButton:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--accent-glow);
+}
+
 /* ---- Right Column ---- */
 
 .rightCol {

@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, Droplets, Shirt, Hand, Lightbulb } from 'lucide-react';
+import { ArrowLeft, Droplets, Shirt, Hand, Lightbulb, ShoppingCart, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button, Badge, StarRating, ProgressBar } from '../components/ui';
 import { use3DTilt } from '../hooks/use3DTilt';
@@ -276,6 +276,19 @@ export default function Detail() {
 
             {fragrance.price > 0 && (
               <p className={styles.price}>{formatPrice(fragrance.price)}</p>
+            )}
+
+            {fragrance.buyingLink && (
+              <a
+                href={fragrance.buyingLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.buyButton}
+              >
+                <ShoppingCart size={15} />
+                Buy Now
+                <ExternalLink size={13} />
+              </a>
             )}
 
             {fragrance.size && (
