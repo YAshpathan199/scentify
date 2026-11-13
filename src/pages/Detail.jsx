@@ -313,6 +313,21 @@ export default function Detail() {
               <span className={styles.familyDesc}>{family?.description}</span>
             </div>
 
+            {/* Description & Wearer */}
+            {(fragrance.description || fragrance.wearer) && (
+              <div className={styles.section}>
+                {fragrance.description && (
+                  <p className={styles.descriptionText}>{fragrance.description}</p>
+                )}
+                {fragrance.wearer && (
+                  <div className={styles.wearerBox}>
+                    <span className={styles.wearerLabel}>Who wears this</span>
+                    <p className={styles.wearerText}>{fragrance.wearer}</p>
+                  </div>
+                )}
+              </div>
+            )}
+
             {/* Characteristics */}
             <div className={styles.section}>
               <h3 className={styles.sectionTitle}>Characteristics</h3>

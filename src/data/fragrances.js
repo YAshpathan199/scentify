@@ -23,6 +23,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '100ml',
     dateAdded: '2024-01-15',
     buyingLink: 'https://www.perfumenetwork.in/products/buy-rasasi-hawas-pour-homme-online',
+    description: 'A fresh, fruity aquatic that opens with apple, bergamot and lemon, with a little cinnamon warmth behind the freshness. It settles into watery, slightly sweet notes and a musky, amber-like dry-down, and it projects strongly for a fresh scent. This is worn on hot afternoons and evenings in summer and spring — out with friends, a birthday, a dinner plan or a casual first meeting — when a soft, quiet fragrance would simply get lost in the heat.',
+    wearer: 'An outgoing wearer who likes fresh scents but wants to be noticed — dressed casual or smart-casual, usually the energetic one in the group.',
   },
   {
     id: 'aventus-legacy',
@@ -48,6 +50,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '50ml',
     dateAdded: '2024-02-10',
     buyingLink: 'https://colognehouse.co.in/products/aventus-legacy-the-crown-used-by-jay-z-david-beckham-henry-cavill',
+    description: 'A fruity-woody scent built around pineapple and bergamot at the top, birch and patchouli in the middle, and a mossy, musky base. It smells neat and put-together rather than sweet or loud, and it carries from morning into evening without changing character much. It gets worn across spring, summer and autumn — office days, meetings, interviews, travel and dinners — basically whenever there is no time to think about which bottle to pick.',
+    wearer: 'A wearer who wants one dependable bottle for almost everything — dresses neat, prefers looking sorted over making a statement.',
   },
   {
     id: 'cool-rush',
@@ -73,6 +77,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '50ml',
     dateAdded: '2024-02-10',
     buyingLink: 'https://colognehouse.co.in/products/cool-rush-ocean-drift',
+    description: 'The lightest bottle in this collection. Lemon, apple and mint up front, lavender and green tea in the middle, and a clean cedar and white-musk finish. It is soft and close to the skin, and honestly it fades faster than the others, so it may need a top-up during the day. It is worn in peak summer, monsoon and spring — office, college, the mall, brunch or a short trip — when anything heavier would feel like too much.',
+    wearer: 'Someone who wants to smell clean and fresh without announcing it — a casual, everyday wearer who stays away from strong perfumes.',
   },
   {
     id: 'tobacco-dreams',
@@ -98,6 +104,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '50ml',
     dateAdded: '2024-02-10',
     buyingLink: 'https://colognehouse.co.in/products/tobacco-dreams-vanilla-noir',
+    description: 'A warm, sweet tobacco scent. Pepper and clove spice open it, then vanilla, tonka bean, cinnamon and dried fruits make it rich and rounded, over amber and sandalwood. It is an evening scent through and through, and it belongs to autumn and winter — in summer heat it can feel heavy. It is worn for dinner dates, receptions, weddings, sangeet and festive nights, usually on formal or ethnic clothes, and a couple of sprays are enough.',
+    wearer: 'A wearer who enjoys sweet, heavy winter scents and dresses up for evenings — patient, romantic, and comfortable with a scent that fills a room slowly.',
   },
   {
     id: 'silent-storm',
@@ -123,6 +131,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '100ml',
     dateAdded: '2024-03-05',
     buyingLink: 'https://in.ajmal.com/products/silent-storm-edp-perfume-100ml-long-lasting-scent-spray-gift-for-men',
+    description: 'A bright citrus scent with more depth than most. Bergamot and orange open it fresh, ginger and cardamom add a gentle spice in the middle, and vanilla, cedarwood and musk smooth out the finish. It lasts a decent part of the day without turning sharp. It is worn on summer and spring mornings and afternoons — office, brunch, meeting friends or travelling — when the plan is daytime and the shirt is light-coloured.',
+    wearer: 'A practical daily wearer — fresh and energetic at work, but who finds plain citrus scents a bit boring and wants some warmth underneath.',
   },
   {
     id: 'oud-nirvana',
@@ -148,6 +158,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '30ml',
     dateAdded: '2024-03-05',
     buyingLink: 'https://in.ajmal.com/products/oud-nirvana-perfume-30-ml-for-men-and-women',
+    description: 'A deep oud-style scent and the most serious one in this set. Saffron and incense open it, leather and patchouli keep it dark and earthy in the middle, and labdanum, amber and musk give it a heavy, resinous base. This is not an everyday or office scent — it is kept for winter and autumn evenings: weddings, receptions, Diwali, Eid, pooja at home and anniversaries, mostly with ethnic or formal wear.',
+    wearer: 'A wearer who likes traditional, heavy fragrances and saves them for occasions that matter — calm on the outside, fond of scents with real weight.',
   },
   {
     id: 'white-oud',
@@ -173,6 +185,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '30ml',
     dateAdded: '2024-03-05',
     buyingLink: 'https://in.ajmal.com/products/white-oud-perfume-30-ml-for-men-and-women',
+    description: 'The gentlest way into oud in this collection. Rose, bergamot and apple make the opening fresh and slightly floral, cedarwood and jasmine sit in the middle, and musk, amber and tonka bean leave a soft, clean finish — there is oud character here, but nothing dark or smoky. It works across all seasons, morning or evening, and is worn for pooja, prayer gatherings, mehendi, engagements and brunch, usually with ethnic or smart clothes.',
+    wearer: 'A wearer who wants an oud-type scent without the heaviness — prefers things clean, calm and graceful rather than loud.',
   },
   {
     id: 'oud-on-the-rocks',
@@ -198,6 +212,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '30ml',
     dateAdded: '2024-03-05',
     buyingLink: 'https://in.ajmal.com/products/oud-on-the-rocks-perfume-30-ml-for-men-and-women',
+    description: 'An unusual one — it opens with coffee, softened by bergamot and lavender, moves through a sweet tonka-bean heart, and settles into a warm mix of liquor-like notes, musk and sandalwood. It projects strongly and feels made for the night. It is worn in winter and autumn for club nights, house parties, receptions, sangeet and dinner dates, when a fresh daytime scent would disappear within an hour.',
+    wearer: 'A confident night-time wearer who likes warm, slightly boozy and sweet-dark scents — the one who plans evenings around going out, not staying in.',
   },
   {
     id: 'travel-perfume',
@@ -223,6 +239,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '14ml',
     dateAdded: '2024-04-01',
     buyingLink: 'https://in.ajmal.com/products/aristocrat-perfume-14-ml-for-men',
+    description: 'The small carry bottle of the collection — Ajmal\'s Aristocrat in a travel size that lives in a bag or pocket. Citrus, bergamot and green notes open it fresh, a light floral-spicy heart keeps it neat, and musk, cedar and amber finish it cleanly. It is moderate in strength, which makes it easy to top up during the day. It gets used on office days, business meetings, flights and day trips across spring, summer and autumn.',
+    wearer: 'A traveller and office-goer who likes to re-apply during the day — organised, on the move, and not interested in carrying a full bottle around.',
   },
   {
     id: 'black-tie',
@@ -248,6 +266,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '50ml',
     dateAdded: '2024-04-15',
     buyingLink: 'https://www.artiscents.com/products/black-tie',
+    description: 'A dressed-up evening scent. Black pepper, cardamom and violet leaf give it a spicy, slightly green start, iris and leather make the middle feel smooth and formal, and oud, vanilla and amber warm up the base. It sits at moderate strength — present, not shouting. It is worn in autumn, winter and spring evenings for dinner dates, weddings, receptions, anniversaries, business meetings and graduation-type occasions, almost always with formal or smart clothes.',
+    wearer: 'A wearer who dresses formally for evenings and wants the scent to match — composed, well-groomed, more classic than trendy.',
   },
   {
     id: 'modern-code',
@@ -273,6 +293,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '50ml',
     dateAdded: '2024-04-15',
     buyingLink: 'https://www.artiscents.com/products/modern-code',
+    description: 'A clean aromatic scent for regular days. Mint, lavender and apple keep the opening fresh, a little nutmeg and geranium add spice in the middle, and tonka bean, cedar and musk give it a smooth, slightly warm finish. It moves easily from morning to evening and across autumn, winter and spring. It is the office-and-meetings bottle — interviews, conferences, travel, brunch and casual dinners all suit it.',
+    wearer: 'A working wearer who needs one neat, office-safe scent — professional in the day, relaxed in the evening, not chasing attention with fragrance.',
   },
   {
     id: 'wet-cherry',
@@ -298,6 +320,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '50ml',
     dateAdded: '2024-04-15',
     buyingLink: 'https://www.artiscents.com/products/wet-cherry',
+    description: 'A sweet gourmand built on cherry. Cherry and bitter almond open it, cherry blossom, Turkish rose and praline make the middle soft and dessert-like, and vanilla and benzoin leave a warm, sweet trail. It is strong and long-lasting, so a light hand is better. It belongs to autumn and winter evenings — dinner dates, anniversaries, parties, weddings and festive nights like Diwali season and Christmas — and it is not really a morning or office scent.',
+    wearer: 'A wearer who genuinely loves sweet scents and enjoys standing out a little — romantic, expressive, and unbothered if the room notices the cherry first.',
   },
   {
     id: 'dive-club',
@@ -323,6 +347,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '50ml',
     dateAdded: '2026-11-13',
     buyingLink: 'https://hirafragrances.com/products/hira-dive-club-eau-de-parfum',
+    description: 'A sea-fresh aquatic for casual days. Bergamot, sea notes and a touch of Sichuan pepper open it clean and slightly sparkling, lavender and warm woods sit in the middle, and ambroxan, cedar and musk give it a smooth, modern finish. It is lighter and easier than the big fresh scent in this collection, which is exactly its job. It is worn in summer and spring daytime — out with friends, the mall, travel, brunch and relaxed office days.',
+    wearer: 'A casual daytime wearer — t-shirt or an open shirt, plans with friends, wants to smell like sea air and a clean shirt rather than a big occasion.',
   },
   {
     id: 'oak-smoke',
@@ -348,6 +374,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '50ml',
     dateAdded: '2026-11-13',
     buyingLink: 'https://hirafragrances.com/products/oak-smoke-eau-de-parfum',
+    description: 'A dark, smoky woody scent. Warm cardamom spice opens it, then leather and smoky woods take over, over a dry amber and patchouli base. It projects strongly and feels mature — this is not a fresh or friendly scent, and it is too much for a daytime office. It is kept for winter and autumn nights: receptions, club evenings, anniversaries, weddings and Eid, usually with formal or ethnic wear, and on darker clothes.',
+    wearer: 'A wearer who likes leather and smoke and carries it with confidence — quiet, serious, and dressing for the night rather than the day.',
   },
   {
     id: 'daily-rizz',
@@ -373,6 +401,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '100ml',
     dateAdded: '2026-11-13',
     buyingLink: 'https://sniiffculture.com/products/daily-rizz-100ml',
+    description: 'A bright citrus made for daily wear. Citrus, cardamom and apple open it zesty and clean, an aquatic musk and cedarwood heart keeps it light, and amber, tonka bean and vanilla add just a little sweetness at the end. It is moderate in strength and on the lighter side for longevity, so it suits a morning-to-afternoon plan better than a long night. It is worn in summer, spring and monsoon — office, travel, brunch and meeting friends.',
+    wearer: 'A young, easy-going daily wearer — casual clothes, daytime plans, wants to smell fresh and approachable without thinking too hard about it.',
   },
   {
     id: 'arabian-desire',
@@ -398,6 +428,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '100ml',
     dateAdded: '2026-11-13',
     buyingLink: 'https://sniiffculture.com/products/arabian-desire-100-ml',
+    description: 'A floral scent with a warm Arabian base. Geranium and berries open it fruity and bright, rose forms the heart, and oud, amber and musk underneath keep it from ever feeling light or girly — the rose stays rich and evening-like. It is worn in spring, autumn and winter, mostly in the evening: weddings, mehendi, sangeet, receptions, engagements, Diwali, Eid and family gatherings, usually with ethnic or formal dress.',
+    wearer: 'A wearer dressing up for family and festive occasions — enjoys rose and floral scents but wants them deep and grown-up, not fresh and simple.',
   },
   {
     id: 'tobacco-mabkhar',
@@ -423,6 +455,8 @@ export const SAMPLE_FRAGRANCES = [
     size: '50ml',
     dateAdded: '2026-11-13',
     buyingLink: 'https://oudose.com/products/toq-tobacco-mabkhar-edp',
+    description: 'A rich Arabic-style tobacco scent from Ibrahim Al Qurashi\'s Toq Collection, and the strongest bottle in this set. Tobacco and spices open it with violet flower and juniper, cedarwood and amber form the middle, and musk, leather, berries and oakmoss leave a dark, long trail — two sprays are genuinely enough. It is saved for winter and autumn evenings: receptions, weddings, Eid, anniversaries and special dinners, with ethnic or formal wear. Heat and closed offices are not its place.',
+    wearer: 'A wearer who collects heavy, statement fragrances — patient enough to save a bottle for the right night, and happy when one scent carries the whole outfit.',
   },
 ];
 

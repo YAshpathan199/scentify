@@ -55,8 +55,14 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-lg);
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+@media (min-width: 400px) {
+  .grid {
+    gap: var(--space-lg);
+  }
 }
 
 @media (min-width: 600px) {

@@ -185,6 +185,44 @@
   box-shadow: 0 6px 20px var(--accent-glow);
 }
 
+/* ---- Description & Wearer ---- */
+
+.descriptionText {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0 0 var(--space-md);
+}
+
+.wearerBox {
+  background: var(--bg-secondary);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.wearerLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.wearerText {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+}
+
 /* ---- Right Column ---- */
 
 .rightCol {
