@@ -204,12 +204,22 @@
 
 .optionCardSelected {
   border-color: var(--accent);
-  background: var(--highlight-gold);
-  box-shadow: 0 0 0 2.5px var(--accent-glow), var(--shadow-md);
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow), var(--shadow-md);
 }
 
 .optionCardSelected:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
   transform: translateY(-2px);
+}
+
+.optionCardSelected .optionLabel {
+  color: #fff;
+}
+
+.optionCardSelected .optionDesc {
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .optionCheckmark {
@@ -219,7 +229,7 @@
   width: 18px;
   height: 18px;
   border-radius: var(--radius-full);
-  background: var(--accent);
+  background: rgba(255, 255, 255, 0.25);
   color: #fff;
   display: flex;
   align-items: center;

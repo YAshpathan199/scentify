@@ -203,21 +203,17 @@ export default function Discover() {
             {/* Navigation */}
             <div className={styles.navRow}>
               <button
-                className="btn btn-ghost btn-sm rounded-full gap-1.5"
+                className={styles.navBack}
                 onClick={goBack}
                 disabled={currentStep === 0}
               >
                 <ArrowLeft size={15} />
                 Back
               </button>
-              <div className="flex items-center gap-2">
-                <button className="btn btn-ghost btn-sm text-base-content/40" onClick={goNext}>Skip</button>
+              <div className={styles.navRight}>
+                <button className={styles.navSkip} onClick={goNext}>Skip</button>
                 <button
-                  className={`btn btn-sm rounded-full gap-1.5 ${
-                    currentSelections.length > 0
-                      ? 'btn-primary shadow-md'
-                      : 'btn-outline border-base-300 text-base-content/40'
-                  }`}
+                  className={`${styles.navNext} ${currentSelections.length > 0 ? styles.navNextActive : ''}`}
                   onClick={goNext}
                 >
                   {currentStep === STEPS.length - 1 ? 'See Results' : 'Next'}
