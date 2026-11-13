@@ -5,34 +5,34 @@
 
 :root {
   /* ---- Colors ---- */
-  --bg-primary: #F5F0E8;
-  --bg-secondary: #EBE4D8;
-  --bg-surface: #FFFDF9;
-  --bg-elevated: #E2D9CB;
+  --bg-primary: #EEF7FA;
+  --bg-secondary: #DFF0EF;
+  --bg-surface: #F8FFFE;
+  --bg-elevated: #CBE8E6;
 
-  --text-primary: #141210;
-  --text-secondary: #4A4239;
-  --text-muted: #7A6F63;
-  --text-inverse: #FDFBF7;
+  --text-primary: #0C1E26;
+  --text-secondary: #274858;
+  --text-muted: #4E7585;
+  --text-inverse: #EDF8FA;
 
-  --accent: #A67C4E;
-  --accent-hover: #8D6638;
-  --accent-light: #DBBF9A;
-  --accent-glow: rgba(166, 124, 78, 0.14);
+  --accent: #3A8FA8;
+  --accent-hover: #2C7A92;
+  --accent-light: #9DD3E5;
+  --accent-glow: rgba(58, 143, 168, 0.16);
 
-  --border: #D4CABC;
-  --border-strong: #BFB3A1;
+  --border: #B2D8E5;
+  --border-strong: #8BC2D3;
 
-  --success: #5A7E60;
+  --success: #4FA870;
   --error: #B34A45;
-  --info: #6A859A;
+  --info: #3A8FA8;
 
-  --dark-bg: #151210;
-  --dark-surface: #221E1A;
-  --dark-text: #F2EBE0;
+  --dark-bg: #0C1E26;
+  --dark-surface: #183040;
+  --dark-text: #DDF2F8;
 
-  --highlight-warm: rgba(166, 124, 78, 0.08);
-  --highlight-gold: rgba(166, 124, 78, 0.18);
+  --highlight-warm: rgba(58, 143, 168, 0.07);
+  --highlight-gold: rgba(74, 168, 112, 0.16);
 
   /* ---- Typography ---- */
   --font-display: 'Playfair Display', Georgia, serif;

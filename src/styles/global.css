@@ -10,23 +10,23 @@
 
 /* ---- daisyUI Theme ---- */
 @theme scentify {
-  --color-base-100: #FFFDF9;
-  --color-base-200: #F5F0E8;
-  --color-base-300: #EBE4D8;
-  --color-base-content: #141210;
-  --color-primary: #A67C4E;
+  --color-base-100: #F8FFFE;
+  --color-base-200: #EEF7FA;
+  --color-base-300: #DFF0EF;
+  --color-base-content: #0C1E26;
+  --color-primary: #3A8FA8;
   --color-primary-content: #ffffff;
-  --color-secondary: #E2D9CB;
-  --color-secondary-content: #141210;
-  --color-accent: #DBBF9A;
-  --color-accent-content: #4A4239;
-  --color-neutral: #221E1A;
-  --color-neutral-content: #F2EBE0;
-  --color-info: #6A859A;
+  --color-secondary: #4FA870;
+  --color-secondary-content: #ffffff;
+  --color-accent: #9DD3E5;
+  --color-accent-content: #1A4555;
+  --color-neutral: #183040;
+  --color-neutral-content: #DDF2F8;
+  --color-info: #3A8FA8;
   --color-info-content: #ffffff;
-  --color-success: #5A7E60;
+  --color-success: #4FA870;
   --color-success-content: #ffffff;
-  --color-warning: #D08A10;
+  --color-warning: #C8900A;
   --color-warning-content: #ffffff;
   --color-error: #B34A45;
   --color-error-content: #ffffff;
