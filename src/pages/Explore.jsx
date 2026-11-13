@@ -188,7 +188,7 @@ export default function Explore() {
             ))}
           </div>
 
-          <div className="shrink-0">
+          <div className={styles.sortWrap}>
             <select
               className="select select-bordered select-sm rounded-xl bg-base-100 border-base-300 text-base-content focus:border-primary focus:outline-none"
               value={sortBy}

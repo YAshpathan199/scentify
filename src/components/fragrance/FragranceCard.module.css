@@ -135,6 +135,21 @@
   color: var(--text-secondary);
 }
 
+@media (max-width: 599px) {
+  .info {
+    padding: 10px 12px;
+  }
+
+  .name {
+    font-size: 0.9rem;
+  }
+
+  .stats {
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+}
+
 .price {
   font-size: var(--text-small);
   font-weight: 600;
