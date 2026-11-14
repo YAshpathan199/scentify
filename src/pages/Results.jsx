@@ -1,12 +1,14 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate, Navigate } from 'react-router-dom';
-import { Check, RotateCcw, Compass, Droplets, Lightbulb } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Check, RotateCcw, Compass, Droplets, Lightbulb, ChevronDown, ChevronUp } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Button, Badge } from '../components/ui';
-import { NotesPyramid } from '../components/fragrance';
+import { NotesPyramid, SprayGuidePanel } from '../components/fragrance';
 import { SAMPLE_FRAGRANCES } from '../data/fragrances';
 import { OCCASIONS, SEASONS, FRAGRANCE_FAMILIES, HOME_ROOMS, HOME_SPRAY_GUIDE } from '../data/constants';
 import { calculateQuizScores } from '../utils/scoring';
+import { getSprayGuideForFragrance } from '../utils/sprayGuide';
+import { getCurrentSeason } from '../utils/helpers';
 import styles from './Results.module.css';
 
 function findLabel(list, id) {
@@ -204,6 +206,7 @@ export default function Results() {
   const location = useLocation();
   const navigate = useNavigate();
   const state = location.state;
+  const [openGuides, setOpenGuides] = useState(new Set());
 
   if (state?.mode === 'home' && state?.homeAnswers) {
     return <HomeResults homeAnswers={state.homeAnswers} />;
@@ -220,8 +223,18 @@ export default function Results() {
     return <Navigate to="/discover" replace />;
   }
 
-  const occasionLabel = findLabel(OCCASIONS, answers.occasion);
-  const seasonLabel = findLabel(SEASONS, answers.season);
+  const seasonId = answers.season || getCurrentSeason();
+  const occasionId = answers.occasion;
+  const occasionLabel = findLabel(OCCASIONS, occasionId);
+  const seasonLabel = findLabel(SEASONS, seasonId);
+
+  function toggleGuide(id) {
+    setOpenGuides(prev => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  }
 
   return (
     <div className={styles.page}>
@@ -250,10 +263,12 @@ export default function Results() {
         <div className={styles.results}>
           {results.map((result, index) => {
             const { fragrance, percentage, reasons } = result;
-            const family = FRAGRANCE_FAMILIES.find(
-              (f) => f.id === fragrance.family
-            );
+            const family = FRAGRANCE_FAMILIES.find(f => f.id === fragrance.family);
             const isFirst = index === 0;
+            const guideOpen = openGuides.has(fragrance.id);
+            const sprayGuide = occasionId
+              ? getSprayGuideForFragrance(fragrance, seasonId, occasionId)
+              : null;
 
             return (
               <motion.div
@@ -271,11 +286,7 @@ export default function Results() {
                     {index === 2 && '🥉'}
                     <span className={styles.rankNumber}>#{index + 1}</span>
                   </span>
-                  <span
-                    className={`${styles.matchPercent} ${
-                      isFirst ? styles.matchPercentFirst : ''
-                    }`}
-                  >
+                  <span className={`${styles.matchPercent} ${isFirst ? styles.matchPercentFirst : ''}`}>
                     {percentage}% match
                   </span>
                 </div>
@@ -294,9 +305,7 @@ export default function Results() {
                       <Badge variant="family" color={family?.color} size="sm">
                         {family?.label}
                       </Badge>
-                      <span className={styles.concentration}>
-                        {fragrance.concentration}
-                      </span>
+                      <span className={styles.concentration}>{fragrance.concentration}</span>
                     </div>
                   </div>
                 </div>
@@ -309,9 +318,7 @@ export default function Results() {
                 {/* Reasons */}
                 {reasons.length > 0 && (
                   <div className={styles.reasonsSection}>
-                    <h3 className={styles.reasonsTitle}>
-                      Why this fragrance
-                    </h3>
+                    <h3 className={styles.reasonsTitle}>Why this fragrance</h3>
                     <ul className={styles.reasonsList}>
                       {reasons.map((reason, i) => (
                         <li key={i} className={styles.reasonItem}>
@@ -323,15 +330,47 @@ export default function Results() {
                   </div>
                 )}
 
-                {/* View Details */}
-                <Link
-                  to={`/fragrance/${fragrance.id}`}
-                  className={styles.viewLink}
-                >
-                  <Button variant="outline" size="sm">
-                    View Details
-                  </Button>
-                </Link>
+                {/* How to Wear toggle */}
+                {sprayGuide && (
+                  <div className={styles.howToWearSection}>
+                    <button
+                      className={styles.howToWearToggle}
+                      onClick={() => toggleGuide(fragrance.id)}
+                      aria-expanded={guideOpen}
+                    >
+                      <Droplets size={15} className={styles.howToWearIcon} />
+                      How to Wear
+                      {guideOpen
+                        ? <ChevronUp size={15} className={styles.chevron} />
+                        : <ChevronDown size={15} className={styles.chevron} />
+                      }
+                    </button>
+
+                    <AnimatePresence initial={false}>
+                      {guideOpen && (
+                        <motion.div
+                          key="guide"
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.25 }}
+                          style={{ overflow: 'hidden' }}
+                        >
+                          <div className={styles.howToWearInner}>
+                            <SprayGuidePanel guide={sprayGuide} compact />
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                )}
+
+                {/* Card footer */}
+                <div className={styles.cardFooter}>
+                  <Link to={`/fragrance/${fragrance.id}`} className={styles.viewLink}>
+                    <Button variant="outline" size="sm">Full Details</Button>
+                  </Link>
+                </div>
               </motion.div>
             );
           })}
@@ -344,18 +383,10 @@ export default function Results() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.7 }}
         >
-          <Button
-            variant="outline"
-            icon={RotateCcw}
-            onClick={() => navigate('/discover')}
-          >
+          <Button variant="outline" icon={RotateCcw} onClick={() => navigate('/discover')}>
             Retake Quiz
           </Button>
-          <Button
-            variant="ghost"
-            icon={Compass}
-            onClick={() => navigate('/explore')}
-          >
+          <Button variant="ghost" icon={Compass} onClick={() => navigate('/explore')}>
             Explore All
           </Button>
         </motion.div>

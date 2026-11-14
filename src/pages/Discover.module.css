@@ -575,3 +575,38 @@
   .stepQuestion { font-size: 1.3rem; }
   .navSkip { display: none; }
 }
+
+/* ---- How to Wear inline panel ---- */
+
+.howToWearSection {
+  margin-top: var(--space-sm);
+}
+
+.howToWearToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  padding: 5px 12px;
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--accent);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.howToWearToggle:hover {
+  background: rgba(184, 149, 106, 0.08);
+  border-color: var(--accent);
+}
+
+.chevron {
+  color: var(--text-muted);
+}
+
+.howToWearInner {
+  margin-top: var(--space-sm);
+}

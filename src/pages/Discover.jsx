@@ -1,13 +1,15 @@
 import { useState, useMemo } from 'react';
-import { ArrowLeft, ArrowRight, RotateCcw, Check } from 'lucide-react';
+import { ArrowLeft, ArrowRight, RotateCcw, Check, Droplets, ChevronDown, ChevronUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FragranceCard } from '../components/fragrance';
+import { FragranceCard, SprayGuidePanel } from '../components/fragrance';
 import { useFragrances } from '../context/FragranceContext';
 import {
   SEASONS, TIME_OF_DAY, DRESS_CODES,
   OCCASION_CATEGORIES, OCCASIONS,
 } from '../data/constants';
 import { discoverScore } from '../utils/engine';
+import { getSprayGuideForFragrance } from '../utils/sprayGuide';
+import { getCurrentSeason } from '../utils/helpers';
 import styles from './Discover.module.css';
 
 function buildOccasionMap() {
@@ -68,6 +70,15 @@ export default function Discover() {
   const [direction, setDirection] = useState(1);
   const [filters, setFilters] = useState(EMPTY_FILTERS);
   const [done, setDone] = useState(false);
+  const [openGuides, setOpenGuides] = useState(new Set());
+
+  function toggleGuide(id) {
+    setOpenGuides(prev => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  }
 
   const step = STEPS[currentStep];
   const currentSelections = done ? [] : (filters[step?.key] || []);
@@ -289,18 +300,59 @@ export default function Discover() {
               </p>
               <div className={styles.grid}>
                 <AnimatePresence mode="popLayout">
-                  {results.map(({ fragrance, matchPercent }, i) => (
-                    <motion.div
-                      key={fragrance.id}
-                      layout
-                      initial={{ opacity: 0, y: 24, scale: 0.96 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.94 }}
-                      transition={{ duration: 0.26, delay: i * 0.03 }}
-                    >
-                      <FragranceCard fragrance={fragrance} matchPercent={matchPercent} />
-                    </motion.div>
-                  ))}
+                  {results.map(({ fragrance, matchPercent }, i) => {
+                    const guideOpen = openGuides.has(fragrance.id);
+                    const catId = filters.occasionCategory[0];
+                    const occ = catId ? OCCASIONS.find(o => o.category === catId) : null;
+                    const seasonId = filters.season[0] || getCurrentSeason();
+                    const sprayGuide = occ
+                      ? getSprayGuideForFragrance(fragrance, seasonId, occ.id)
+                      : null;
+                    return (
+                      <motion.div
+                        key={fragrance.id}
+                        layout
+                        initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.94 }}
+                        transition={{ duration: 0.26, delay: i * 0.03 }}
+                      >
+                        <FragranceCard fragrance={fragrance} matchPercent={matchPercent} />
+                        {sprayGuide && (
+                          <div className={styles.howToWearSection}>
+                            <button
+                              className={styles.howToWearToggle}
+                              onClick={() => toggleGuide(fragrance.id)}
+                              aria-expanded={guideOpen}
+                            >
+                              <Droplets size={14} />
+                              How to Wear
+                              {guideOpen
+                                ? <ChevronUp size={14} className={styles.chevron} />
+                                : <ChevronDown size={14} className={styles.chevron} />
+                              }
+                            </button>
+                            <AnimatePresence initial={false}>
+                              {guideOpen && (
+                                <motion.div
+                                  key="guide"
+                                  initial={{ opacity: 0, height: 0 }}
+                                  animate={{ opacity: 1, height: 'auto' }}
+                                  exit={{ opacity: 0, height: 0 }}
+                                  transition={{ duration: 0.25 }}
+                                  style={{ overflow: 'hidden' }}
+                                >
+                                  <div className={styles.howToWearInner}>
+                                    <SprayGuidePanel guide={sprayGuide} compact />
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        )}
+                      </motion.div>
+                    );
+                  })}
                 </AnimatePresence>
               </div>
             </>

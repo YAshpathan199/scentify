@@ -1,0 +1,147 @@
+.panel {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  border: 1px solid var(--border);
+}
+
+.compact {
+  padding: var(--space-md);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+/* ---- Spray count ---- */
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.sprayCount {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+}
+
+.icon {
+  color: var(--accent);
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.sprayNum {
+  font-family: var(--font-display);
+  font-size: var(--text-h1);
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.compact .sprayNum {
+  font-size: var(--text-h2);
+}
+
+.sprayLabel {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ---- Detail rows ---- */
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+}
+
+.rowIcon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.rowLabel {
+  flex-shrink: 0;
+  color: var(--text-muted);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  background: var(--bg-elevated);
+  font-size: var(--text-caption);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* ---- Tip ---- */
+
+.tip {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(184, 149, 106, 0.08);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+}
+
+.tipIcon {
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* ---- Body map ---- */
+
+.bodyMapWrap {
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.bodyMapWrapCompact {
+  width: 70px;
+  flex-shrink: 0;
+}
+
+.bodyMap {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bodyMapWrap,
+  .bodyMapWrapCompact {
+    display: none;
+  }
+}
