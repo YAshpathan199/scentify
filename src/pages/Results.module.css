@@ -410,30 +410,58 @@
 /* ---- Responsive ---- */
 
 @media (max-width: 599px) {
+  /* 2 cards per row on mobile */
+  .results {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .card {
+    padding: var(--space-md);
+    gap: var(--space-sm);
+  }
+
+  /* Stack image above info inside each card */
+  .cardBody {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
   .imageWrap {
-    width: 80px;
-    height: 100px;
+    width: 72px;
+    height: 92px;
+  }
+
+  .fragranceInfo {
+    text-align: center;
+    width: 100%;
+  }
+
+  .familyRow {
+    justify-content: center;
+  }
+
+  .matchPercent {
+    font-size: 1.1rem;
+  }
+
+  .matchPercentFirst {
+    font-size: 1.3rem;
+  }
+
+  .fragranceName {
+    font-size: var(--text-small);
+  }
+
+  .brand {
+    font-size: var(--text-caption);
   }
 
   .homeGuideHeader {
     flex-direction: column;
     align-items: center;
     text-align: center;
-  }
-
-  .card {
-    padding: var(--space-lg);
-  }
-
-  .matchPercent {
-    font-size: 1.5rem;
-  }
-
-  .matchPercentFirst {
-    font-size: 2rem;
-  }
-
-  .fragranceName {
-    font-size: var(--text-h3);
   }
 }
