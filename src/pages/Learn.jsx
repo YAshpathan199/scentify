@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Droplets, Flower2, Archive, ArrowRight } from 'lucide-react';
+import { Droplets, Flower2, Archive, ArrowRight, FlaskConical } from 'lucide-react';
+import { CONCENTRATIONS } from '../data/constants';
 import styles from './Learn.module.css';
+
+const CONC_COLORS = ['#6A859A', '#3A8FA8', '#B8956A', '#8B6914'];
+const CONC_PERCENT = ['2–5%', '5–15%', '15–20%', '20–30%'];
 
 const CARDS = [
   {
@@ -109,6 +113,66 @@ export default function Learn() {
             );
           })}
         </div>
+
+        {/* Concentration Section */}
+        <section className={styles.concSection}>
+          <div className={styles.concHeader}>
+            <div className={styles.concIconWrap}>
+              <FlaskConical size={24} className={styles.cardIcon} />
+            </div>
+            <div>
+              <h2 className={styles.concTitle}>Concentration — EDT or EDP?</h2>
+              <p className={styles.concSubtitle}>
+                The concentration determines how long a fragrance lasts and how strong it projects. Higher concentration = fewer sprays needed.
+              </p>
+            </div>
+          </div>
+
+          <div className={styles.concGrid}>
+            {CONCENTRATIONS.map((conc, i) => (
+              <motion.div
+                key={conc.id}
+                className={styles.concCard}
+                style={{ '--conc-color': CONC_COLORS[i] }}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ delay: i * 0.1, duration: 0.4 }}
+              >
+                <span className={styles.concBadge}>{conc.shortLabel}</span>
+                <h3 className={styles.concName}>{conc.label}</h3>
+                <span className={styles.concPercent}>{CONC_PERCENT[i]} oil</span>
+
+                <div className={styles.concBarWrap}>
+                  <motion.div
+                    className={styles.concBar}
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${conc.strength * 25}%` }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.1, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+                  />
+                </div>
+
+                <div className={styles.concMeta}>
+                  <div className={styles.concMetaItem}>
+                    <span className={styles.concMetaLabel}>Lasts</span>
+                    <span className={styles.concMetaValue}>{conc.longevityRange[0]}–{conc.longevityRange[1]}h</span>
+                  </div>
+                  <div className={styles.concMetaItem}>
+                    <span className={styles.concMetaLabel}>Sprays</span>
+                    <span className={styles.concMetaValue}>{conc.baseSprays}</span>
+                  </div>
+                </div>
+
+                <p className={styles.concDesc}>{conc.description}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className={styles.concTip}>
+            <strong>Pro tip:</strong> In India's hot summers, EDT performs better than you'd expect — heat amplifies projection. Save your EDP and Parfum for cooler months when you need that extra push.
+          </div>
+        </section>
 
         <section className={styles.statsSection}>
           <h2 className={styles.statsTitle}>Quick Facts</h2>
