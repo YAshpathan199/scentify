@@ -65,6 +65,7 @@ function ScentDNA({ activeFamily, onFamilyClick }) {
 export default function Explore() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeGender, setActiveGender] = useState('all');
+  const [activeConcentration, setActiveConcentration] = useState('all');
   const [activeFamily, setActiveFamily] = useState('all');
   const [sortBy, setSortBy] = useState('name');
 
@@ -86,6 +87,10 @@ export default function Explore() {
       if (activeGender === 'men') result = result.filter(f => f.gender === 'men' || f.gender === 'unisex');
       else if (activeGender === 'women') result = result.filter(f => f.gender === 'women' || f.gender === 'unisex');
       else result = result.filter(f => f.gender === activeGender);
+    }
+
+    if (activeConcentration !== 'all') {
+      result = result.filter(f => f.concentration === activeConcentration);
     }
 
     if (activeFamily !== 'all') {
@@ -110,11 +115,12 @@ export default function Explore() {
     }
 
     return result;
-  }, [searchQuery, activeGender, activeFamily, sortBy]);
+  }, [searchQuery, activeGender, activeConcentration, activeFamily, sortBy]);
 
   const clearFilters = () => {
     setSearchQuery('');
     setActiveGender('all');
+    setActiveConcentration('all');
     setActiveFamily('all');
   };
 
@@ -246,7 +252,7 @@ export default function Explore() {
         </div>
 
         {/* Gender Tabs */}
-        <div className="flex gap-2 mb-4 justify-center">
+        <div className="flex gap-2 mb-3 justify-center">
           {[
             { id: 'all', label: 'All', icon: '✨' },
             { id: 'men', label: 'Him', icon: '👔' },
@@ -260,6 +266,23 @@ export default function Explore() {
             >
               <span className="text-sm leading-none">{g.icon}</span>
               {g.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Concentration Tabs */}
+        <div className="flex gap-2 mb-4 justify-center">
+          {[
+            { id: 'all', label: 'All' },
+            { id: 'EDP', label: 'EDP' },
+            { id: 'EDT', label: 'EDT' },
+          ].map(c => (
+            <button
+              key={c.id}
+              className={`btn btn-sm rounded-full ${activeConcentration === c.id ? 'btn-secondary' : 'btn-outline border-base-300 text-base-content/70'}`}
+              onClick={() => setActiveConcentration(c.id)}
+            >
+              {c.label}
             </button>
           ))}
         </div>
