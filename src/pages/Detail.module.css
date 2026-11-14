@@ -90,42 +90,8 @@
   }
 }
 
-/* ---- Image Area with View Toggle ---- */
-
-.imageAreaWrap {
-  margin-bottom: var(--space-lg);
-}
-
-.viewToggle {
-  display: flex;
-  gap: 4px;
-  margin-bottom: var(--space-sm);
-  background: var(--bg-secondary);
-  border-radius: var(--radius-full);
-  padding: 3px;
-  width: fit-content;
-}
-
-.viewToggleBtn {
-  padding: 5px 14px;
-  border: none;
-  border-radius: var(--radius-full);
-  background: transparent;
-  font-family: var(--font-body);
-  font-size: var(--text-caption);
-  font-weight: 500;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all 0.18s;
-}
-
-.viewToggleBtnActive {
-  background: var(--bg-surface);
-  color: var(--accent);
-  box-shadow: var(--shadow-sm);
-}
-
 .imageArea {
+  margin-bottom: var(--space-lg);
   aspect-ratio: 1;
   border-radius: var(--radius-lg);
   display: flex;
