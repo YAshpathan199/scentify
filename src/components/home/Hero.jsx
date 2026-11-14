@@ -1,8 +1,10 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Button, ParticleField } from '../ui';
 import styles from './Hero.module.css';
+
+const PerfumeBottle3D = lazy(() => import('./PerfumeBottle3D'));
 
 const SPARKLES = Array.from({ length: 18 }, (_, i) => ({
   id: i,
@@ -97,50 +99,65 @@ export default function Hero() {
         </div>
       )}
 
-      <div className={styles.content} style={!prefersReduced ? {
-        transform: `translate(${mouse.x * -5}px, ${mouse.y * -5}px)`,
-        transition: 'transform 0.2s ease-out',
-      } : undefined}>
-        <motion.h1
-          className={styles.title}
-          variants={variants}
-          initial="hidden"
-          animate="visible"
-          custom={0}
+      {/* Two-column layout: text left, bottle right */}
+      <div className={styles.heroLayout}>
+        <div
+          className={styles.content}
+          style={!prefersReduced ? {
+            transform: `translate(${mouse.x * -5}px, ${mouse.y * -5}px)`,
+            transition: 'transform 0.2s ease-out',
+          } : undefined}
         >
-          Discover the Fragrance That Feels Like You
-        </motion.h1>
-
-        <motion.p
-          className={styles.subtitle}
-          variants={variants}
-          initial="hidden"
-          animate="visible"
-          custom={1}
-        >
-          Your personal fragrance advisor for every occasion, season, and mood
-          &mdash; curated for the Indian fragrance lover.
-        </motion.p>
-
-        <motion.div
-          className={styles.actions}
-          variants={variants}
-          initial="hidden"
-          animate="visible"
-          custom={2}
-        >
-          <Button variant="primary" size="lg" onClick={() => navigate('/discover')}>
-            Find Your Scent
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className={styles.outlineLight}
-            onClick={() => navigate('/explore')}
+          <motion.h1
+            className={styles.title}
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            custom={0}
           >
-            Explore Collection
-          </Button>
-        </motion.div>
+            Discover the Fragrance That Feels Like You
+          </motion.h1>
+
+          <motion.p
+            className={styles.subtitle}
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            custom={1}
+          >
+            Your personal fragrance advisor for every occasion, season, and mood
+            &mdash; curated for the Indian fragrance lover.
+          </motion.p>
+
+          <motion.div
+            className={styles.actions}
+            variants={variants}
+            initial="hidden"
+            animate="visible"
+            custom={2}
+          >
+            <Button variant="primary" size="lg" onClick={() => navigate('/discover')}>
+              Find Your Scent
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className={styles.outlineLight}
+              onClick={() => navigate('/explore')}
+            >
+              Explore Collection
+            </Button>
+          </motion.div>
+        </div>
+
+        {/* 3D Bottle column */}
+        <div className={styles.bottleSlot} aria-hidden="true">
+          {!prefersReduced && (
+            <Suspense fallback={null}>
+              <PerfumeBottle3D style={{ width: '100%', height: '100%' }} />
+            </Suspense>
+          )}
+        </div>
       </div>
     </section>
   );

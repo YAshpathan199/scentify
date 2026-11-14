@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Search, SearchX, ShoppingBag, TrendingUp, Package, IndianRupee, Award } from 'lucide-react';
+import { Search, SearchX, ShoppingBag, TrendingUp, Package, IndianRupee, Award, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../components/ui';
 import { FragranceCard } from '../components/fragrance';
@@ -8,11 +8,67 @@ import { FRAGRANCE_FAMILIES } from '../data/constants';
 import { formatPrice } from '../utils/helpers';
 import styles from './Explore.module.css';
 
+function ScentDNA({ activeFamily, onFamilyClick }) {
+  const familyCounts = useMemo(() => {
+    return FRAGRANCE_FAMILIES.map(f => ({
+      ...f,
+      count: SAMPLE_FRAGRANCES.filter(fr => fr.family === f.id).length,
+    })).sort((a, b) => b.count - a.count);
+  }, []);
+
+  const max = Math.max(...familyCounts.map(c => c.count));
+
+  return (
+    <motion.div
+      className={styles.dnaSection}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.15 }}
+    >
+      <div className={styles.dnaSectionHeader}>
+        <Activity size={18} className={styles.valueIcon} />
+        <span className={styles.dnaSectionTitle}>Scent DNA</span>
+        <span className={styles.dnaSectionSub}>Collection by family · click to filter</span>
+      </div>
+      <div className={styles.dnaBars}>
+        {familyCounts.map((f, i) => (
+          <motion.button
+            key={f.id}
+            className={`${styles.dnaBar} ${activeFamily === f.id ? styles.dnaBarActive : ''}`}
+            onClick={() => onFamilyClick(activeFamily === f.id ? 'all' : f.id)}
+            initial={{ opacity: 0, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.1 + i * 0.045, duration: 0.35 }}
+            whileHover={{ scale: 1.004 }}
+            whileTap={{ scale: 0.997 }}
+            style={{ '--family-color': f.color }}
+          >
+            <span className={styles.dnaBarIcon}>{f.icon}</span>
+            <span className={styles.dnaBarLabel}>{f.label}</span>
+            <div className={styles.dnaBarTrack}>
+              <motion.div
+                className={styles.dnaBarFill}
+                initial={{ width: '0%' }}
+                animate={{ width: `${(f.count / max) * 100}%` }}
+                transition={{ delay: 0.45 + i * 0.045, duration: 0.75, ease: [0.25, 0.46, 0.45, 0.94] }}
+                style={{ backgroundColor: f.color }}
+              />
+            </div>
+            <span className={styles.dnaBarCount}>{f.count}</span>
+          </motion.button>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
 export default function Explore() {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeGender, setActiveGender] = useState('all');
   const [activeFamily, setActiveFamily] = useState('all');
   const [sortBy, setSortBy] = useState('name');
+
+  const activeFamilyData = FRAGRANCE_FAMILIES.find(f => f.id === activeFamily);
 
   const filteredFragrances = useMemo(() => {
     let result = [...SAMPLE_FRAGRANCES];
@@ -80,6 +136,17 @@ export default function Explore() {
 
   return (
     <div className={styles.page}>
+      {/* Ambient family aura — morphs to active family colour */}
+      <motion.div
+        className={styles.aura}
+        animate={{
+          backgroundColor: activeFamilyData?.color ?? '#3A8FA8',
+          opacity: activeFamily !== 'all' ? 0.22 : 0.06,
+        }}
+        transition={{ duration: 0.9, ease: 'easeInOut' }}
+        aria-hidden="true"
+      />
+
       <div className={styles.container}>
         {/* Page Header */}
         <header className={styles.header}>
@@ -161,6 +228,9 @@ export default function Explore() {
           </div>
         </motion.div>
 
+        {/* Scent DNA Chart */}
+        <ScentDNA activeFamily={activeFamily} onFamilyClick={setActiveFamily} />
+
         {/* Search Bar — daisyUI input with icon */}
         <div className="max-w-[500px] mx-auto mb-6">
           <label className="input input-bordered flex items-center gap-2 rounded-full shadow-sm bg-base-100 border-base-300 focus-within:border-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary/15">
@@ -204,14 +274,22 @@ export default function Explore() {
               All
             </button>
             {FRAGRANCE_FAMILIES.map((family) => (
-              <button
+              <motion.button
                 key={family.id}
-                className={`btn btn-sm rounded-full gap-1 ${activeFamily === family.id ? 'btn-primary' : 'btn-outline border-base-300 text-base-content/70'}`}
+                className={`btn btn-sm rounded-full gap-1 ${activeFamily === family.id ? '' : 'btn-outline border-base-300 text-base-content/70'}`}
+                style={activeFamily === family.id ? {
+                  backgroundColor: family.color,
+                  borderColor: family.color,
+                  color: '#fff',
+                  boxShadow: `0 0 16px ${family.color}55`,
+                } : {}}
                 onClick={() => setActiveFamily(family.id)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
                 <span className="text-sm leading-none">{family.icon}</span>
                 {family.label}
-              </button>
+              </motion.button>
             ))}
           </div>
 
