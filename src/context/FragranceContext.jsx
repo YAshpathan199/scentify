@@ -26,8 +26,18 @@ function generateId() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 9);
 }
 
+// Always use latest SAMPLE_FRAGRANCES for base items so schema changes (like
+// adding the `gender` field) don't get masked by stale localStorage data.
+// Custom fragrances (user-added, IDs not in SAMPLE_FRAGRANCES) are preserved.
+function mergeFragrances(stored) {
+  if (!stored) return SAMPLE_FRAGRANCES;
+  const baseIds = new Set(SAMPLE_FRAGRANCES.map(f => f.id));
+  const custom = stored.filter(f => !baseIds.has(f.id));
+  return [...SAMPLE_FRAGRANCES, ...custom];
+}
+
 const initialState = {
-  fragrances: loadFromStorage(STORAGE_KEYS.fragrances, null) || SAMPLE_FRAGRANCES,
+  fragrances: mergeFragrances(loadFromStorage(STORAGE_KEYS.fragrances, null)),
   history: loadFromStorage(STORAGE_KEYS.history, []),
   settings: loadFromStorage(STORAGE_KEYS.settings, { onboarded: false }),
 };
