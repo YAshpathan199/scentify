@@ -17,12 +17,14 @@ const NOTE_TO_ACCORDS = {
   'green tea': { green: 0.6, herbal: 0.4 },
   mint: { fresh: 0.7, herbal: 0.3 },
   lavender: { lavender: 0.7, aromatic: 0.3 },
+  lavandin: { lavender: 0.7, aromatic: 0.3 },
   geranium: { floral: 0.6, aromatic: 0.4 },
   honeysuckle: { floral: 0.7, fresh: 0.3 },
 
   // Floral
   rose: { rose: 0.8, floral: 0.2 },
   jasmine: { 'white floral': 0.8, floral: 0.2 },
+  lily: { 'white floral': 0.9, floral: 0.1 },
   'orange blossom': { 'white floral': 0.6, floral: 0.4 },
   'cherry blossom': { floral: 0.7, fruity: 0.3 },
   'turkish rose': { rose: 0.9, floral: 0.1 },
@@ -34,6 +36,7 @@ const NOTE_TO_ACCORDS = {
 
   // Fruity
   apple: { fruity: 0.8, fresh: 0.2 },
+  watermelon: { aquatic: 0.5, fresh: 0.3, fruity: 0.2 },
   pineapple: { fruity: 0.6, tropical: 0.4 },
   'black currant': { fruity: 0.8, sweet: 0.2 },
   plum: { fruity: 0.7, sweet: 0.3 },
@@ -140,7 +143,6 @@ function allNotes(fragrance) {
 }
 
 export function noteAccords(fragrance) {
-  const notes = allNotes(fragrance);
   const accords = {};
   const layer = { top: 1.0, heart: 0.8, base: 0.6 };
 
@@ -155,11 +157,37 @@ export function noteAccords(fragrance) {
     }
   }
 
-  // Normalize so the total sums to 1
-  const total = Object.values(accords).reduce((s, v) => s + v, 0);
-  if (total > 0) {
-    for (const k of Object.keys(accords)) accords[k] /= total;
+  // Normalize note-derived accords
+  const noteTotal = Object.values(accords).reduce((s, v) => s + v, 0);
+  if (noteTotal > 0) {
+    for (const k of Object.keys(accords)) accords[k] /= noteTotal;
   }
+
+  // Blend with Fragrantica community accords when available.
+  // Community data reflects what thousands of noses actually detect,
+  // correcting gaps in the note-to-accord mapping.
+  if (fragrance.fragranticaAccords) {
+    const fa = fragrance.fragranticaAccords;
+    const faTotal = Object.values(fa).reduce((s, v) => s + v, 0);
+    if (faTotal > 0) {
+      // Higher vote counts earn more community weight (capped at 60%)
+      const votes = fragrance.fragranticaVotes ?? 10;
+      const communityWeight = votes >= 500 ? 0.60 : votes >= 100 ? 0.55 : 0.45;
+      const noteWeight = 1 - communityWeight;
+
+      const allKeys = new Set([...Object.keys(accords), ...Object.keys(fa)]);
+      const blended = {};
+      for (const k of allKeys) {
+        blended[k] = noteWeight * (accords[k] || 0) + communityWeight * ((fa[k] || 0) / faTotal);
+      }
+      const blendTotal = Object.values(blended).reduce((s, v) => s + v, 0);
+      if (blendTotal > 0) {
+        for (const k of Object.keys(blended)) blended[k] /= blendTotal;
+      }
+      return blended;
+    }
+  }
+
   return accords;
 }
 
