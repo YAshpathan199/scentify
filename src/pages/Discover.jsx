@@ -304,7 +304,7 @@ export default function Discover() {
               <span className={styles.resultsHintIcon}>&#127800;</span>
               <p>Your matches will appear here as you answer</p>
             </div>
-          ) : results.length > 0 ? (
+          ) : (
             <>
               <div className={styles.genderToggleRow}>
                 {[
@@ -325,69 +325,71 @@ export default function Discover() {
                   {results.length} {results.length === 1 ? 'match' : 'matches'}
                 </span>
               </div>
-              <div className={styles.grid}>
-                <AnimatePresence mode="popLayout">
-                  {results.map(({ fragrance, matchPercent }, i) => {
-                    const guideOpen = openGuides.has(fragrance.id);
-                    const catId = filters.occasionCategory[0];
-                    const occ = catId ? OCCASIONS.find(o => o.category === catId) : null;
-                    const seasonId = filters.season[0] || getCurrentSeason();
-                    const sprayGuide = occ
-                      ? getSprayGuideForFragrance(fragrance, seasonId, occ.id)
-                      : null;
-                    return (
-                      <motion.div
-                        key={fragrance.id}
-                        layout
-                        initial={{ opacity: 0, y: 24, scale: 0.96 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.94 }}
-                        transition={{ duration: 0.26, delay: i * 0.03 }}
-                      >
-                        <FragranceCard fragrance={fragrance} matchPercent={matchPercent} />
-                        {sprayGuide && (
-                          <div className={styles.howToWearSection}>
-                            <button
-                              className={styles.howToWearToggle}
-                              onClick={() => toggleGuide(fragrance.id)}
-                              aria-expanded={guideOpen}
-                            >
-                              <Droplets size={14} />
-                              How to Wear
-                              {guideOpen
-                                ? <ChevronUp size={14} className={styles.chevron} />
-                                : <ChevronDown size={14} className={styles.chevron} />
-                              }
-                            </button>
-                            <AnimatePresence initial={false}>
-                              {guideOpen && (
-                                <motion.div
-                                  key="guide"
-                                  initial={{ opacity: 0, height: 0 }}
-                                  animate={{ opacity: 1, height: 'auto' }}
-                                  exit={{ opacity: 0, height: 0 }}
-                                  transition={{ duration: 0.25 }}
-                                  style={{ overflow: 'hidden' }}
-                                >
-                                  <div className={styles.howToWearInner}>
-                                    <SprayGuidePanel guide={sprayGuide} compact />
-                                  </div>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                          </div>
-                        )}
-                      </motion.div>
-                    );
-                  })}
-                </AnimatePresence>
-              </div>
+              {results.length > 0 ? (
+                <div className={styles.grid}>
+                  <AnimatePresence mode="popLayout">
+                    {results.map(({ fragrance, matchPercent }, i) => {
+                      const guideOpen = openGuides.has(fragrance.id);
+                      const catId = filters.occasionCategory[0];
+                      const occ = catId ? OCCASIONS.find(o => o.category === catId) : null;
+                      const seasonId = filters.season[0] || getCurrentSeason();
+                      const sprayGuide = occ
+                        ? getSprayGuideForFragrance(fragrance, seasonId, occ.id)
+                        : null;
+                      return (
+                        <motion.div
+                          key={fragrance.id}
+                          layout
+                          initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.94 }}
+                          transition={{ duration: 0.26, delay: i * 0.03 }}
+                        >
+                          <FragranceCard fragrance={fragrance} matchPercent={matchPercent} />
+                          {sprayGuide && (
+                            <div className={styles.howToWearSection}>
+                              <button
+                                className={styles.howToWearToggle}
+                                onClick={() => toggleGuide(fragrance.id)}
+                                aria-expanded={guideOpen}
+                              >
+                                <Droplets size={14} />
+                                How to Wear
+                                {guideOpen
+                                  ? <ChevronUp size={14} className={styles.chevron} />
+                                  : <ChevronDown size={14} className={styles.chevron} />
+                                }
+                              </button>
+                              <AnimatePresence initial={false}>
+                                {guideOpen && (
+                                  <motion.div
+                                    key="guide"
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: 'auto' }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.25 }}
+                                    style={{ overflow: 'hidden' }}
+                                  >
+                                    <div className={styles.howToWearInner}>
+                                      <SprayGuidePanel guide={sprayGuide} compact />
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
+                          )}
+                        </motion.div>
+                      );
+                    })}
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <div className={styles.resultsHint}>
+                  <span className={styles.resultsHintIcon}>&#128270;</span>
+                  <p>No matches for this filter — tap All to see all results</p>
+                </div>
+              )}
             </>
-          ) : (
-            <div className={styles.resultsHint}>
-              <span className={styles.resultsHintIcon}>&#128270;</span>
-              <p>No fragrances match this combination — try different options or skip a step</p>
-            </div>
           )}
         </div>
       </div>
