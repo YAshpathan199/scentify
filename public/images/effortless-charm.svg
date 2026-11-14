@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <!-- Warm amber glass gradient -->
+    <linearGradient id="ec-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c8853a" stop-opacity="0.25"/>
+      <stop offset="30%" stop-color="#e8b56a" stop-opacity="0.18"/>
+      <stop offset="70%" stop-color="#c8763a" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#a05a20" stop-opacity="0.3"/>
+    </linearGradient>
+    <!-- Citrus-amber liquid -->
+    <linearGradient id="ec-liquid" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#f0a830"/>
+      <stop offset="25%" stop-color="#e8921a"/>
+      <stop offset="55%" stop-color="#c87020"/>
+      <stop offset="80%" stop-color="#a85818"/>
+      <stop offset="100%" stop-color="#7a3c10"/>
+    </linearGradient>
+    <!-- Citrus glow top -->
+    <linearGradient id="ec-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffe599" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#f0a830" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Silver cap gradient -->
+    <linearGradient id="ec-cap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8e8e8"/>
+      <stop offset="40%" stop-color="#c0c0c0"/>
+      <stop offset="100%" stop-color="#8a8a8a"/>
+    </linearGradient>
+    <!-- Bronze accent -->
+    <linearGradient id="ec-accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#d4921a"/>
+      <stop offset="50%" stop-color="#b87818"/>
+      <stop offset="100%" stop-color="#8a5810"/>
+    </linearGradient>
+    <!-- Edge highlight -->
+    <linearGradient id="ec-highlight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- Shadow filter -->
+    <filter id="ec-shadow" x="-20%" y="-10%" width="140%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#7a3c10" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#ec-shadow)">
+    <!-- Main bottle body - rounded modern shape -->
+    <rect x="145" y="145" width="110" height="285" rx="8" fill="url(#ec-glass)" stroke="#c87830" stroke-width="0.8"/>
+
+    <!-- Liquid fill -->
+    <clipPath id="ec-clip">
+      <rect x="148" y="148" width="104" height="279" rx="6"/>
+    </clipPath>
+    <rect x="148" y="162" width="104" height="265" fill="url(#ec-liquid)" clip-path="url(#ec-clip)" opacity="0.88"/>
+
+    <!-- Citrus glow swirl in liquid -->
+    <ellipse cx="180" cy="210" rx="22" ry="35" fill="url(#ec-glow)" clip-path="url(#ec-clip)" opacity="0.4"/>
+    <ellipse cx="225" cy="280" rx="16" ry="25" fill="#ffe599" fill-opacity="0.08" clip-path="url(#ec-clip)"/>
+
+    <!-- Tea streaks at bottom -->
+    <line x1="162" y1="350" x2="165" y2="425" stroke="#7a3c10" stroke-width="0.8" opacity="0.2"/>
+    <line x1="195" y1="340" x2="192" y2="430" stroke="#8a4818" stroke-width="0.6" opacity="0.15"/>
+    <line x1="228" y1="355" x2="230" y2="420" stroke="#7a3c10" stroke-width="0.7" opacity="0.18"/>
+
+    <!-- Left edge highlight -->
+    <rect x="147" y="148" width="18" height="279" fill="url(#ec-highlight)" opacity="0.55"/>
+
+    <!-- Small bright highlight strip -->
+    <rect x="150" y="175" width="5" height="90" rx="2.5" fill="#ffffff" opacity="0.22"/>
+
+    <!-- Bronze accent line near bottom -->
+    <rect x="145" y="412" width="110" height="2.5" fill="url(#ec-accent)" opacity="0.75"/>
+
+    <!-- Bronze accent line near top of body -->
+    <rect x="145" y="148" width="110" height="2.5" fill="url(#ec-accent)" opacity="0.55"/>
+
+    <!-- Neck - tapered elegant -->
+    <path d="M172,122 L172,148 L228,148 L228,122 Q228,118 220,116 L180,116 Q172,118 172,122 Z" fill="url(#ec-glass)" stroke="#c87830" stroke-width="0.8"/>
+
+    <!-- Neck bronze ring -->
+    <rect x="170" y="134" width="60" height="3" fill="url(#ec-accent)" opacity="0.85"/>
+
+    <!-- Sprayer/nozzle -->
+    <rect x="192" y="108" width="16" height="12" rx="2" fill="#b0b0b0"/>
+    <rect x="195" y="102" width="10" height="8" rx="1" fill="#c0c0c0"/>
+
+    <!-- Cap - rounded silver -->
+    <rect x="150" y="38" width="100" height="80" rx="6" fill="url(#ec-cap)" stroke="#a0a0a0" stroke-width="0.8"/>
+
+    <!-- Cap top surface -->
+    <rect x="150" y="38" width="100" height="12" rx="6" fill="#e0e0e0"/>
+
+    <!-- Cap left highlight -->
+    <rect x="153" y="44" width="12" height="68" fill="#ffffff" opacity="0.22"/>
+
+    <!-- Cap bright line -->
+    <rect x="156" y="48" width="4" height="42" rx="2" fill="#ffffff" opacity="0.28"/>
+
+    <!-- Cap logo indent area -->
+    <rect x="168" y="62" width="64" height="28" rx="3" fill="#b8b8b8" opacity="0.4"/>
+    <text x="200" y="80" font-family="Georgia, serif" font-size="7" font-weight="bold" fill="#888" text-anchor="middle" letter-spacing="1.5">ARTISCENTS</text>
+
+    <!-- Cap bottom edge -->
+    <rect x="150" y="114" width="100" height="4" rx="1" fill="#999999"/>
+
+    <!-- Bottom base -->
+    <rect x="143" y="428" width="114" height="5" rx="2.5" fill="#a86020" opacity="0.5"/>
+
+    <!-- Ground reflection -->
+    <ellipse cx="200" cy="440" rx="60" ry="5" fill="#c87830" opacity="0.1"/>
+  </g>
+</svg>
