@@ -26,6 +26,10 @@ dist-ssr
 *.sln
 *.sw?
 
+# Scratch / temporary data files
+*_tmp.json
+fragrantica_data.json
+
 # wrangler files
 .wrangler
 .dev.vars*
