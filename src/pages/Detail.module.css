@@ -1,9 +1,9 @@
 /* ==========================================================================
-   Detail Page
+   Detail Page — Minimal & Editorial
    ========================================================================== */
 
 .page {
-  padding-top: calc(100px + var(--space-xl));
+  padding-top: calc(100px + var(--space-lg));
   padding-bottom: var(--space-3xl);
   min-height: 100vh;
   background: var(--bg-primary);
@@ -20,12 +20,12 @@
 .backLink {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   font-family: var(--font-body);
   font-size: var(--text-small);
-  color: var(--text-secondary);
+  color: var(--text-muted);
   text-decoration: none;
-  margin-bottom: var(--space-xl);
+  margin-bottom: var(--space-lg);
   transition: color var(--transition-fast);
 }
 
@@ -33,7 +33,7 @@
   color: var(--accent);
 }
 
-/* ---- Not Found State ---- */
+/* ---- Not Found ---- */
 
 .notFound {
   display: flex;
@@ -71,7 +71,7 @@
 
 @media (min-width: 768px) {
   .layout {
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 1fr 1.1fr;
     gap: var(--space-2xl);
   }
 }
@@ -85,9 +85,44 @@
 @media (min-width: 768px) {
   .leftCol {
     position: sticky;
-    top: 120px;
+    top: 110px;
     align-self: start;
   }
+}
+
+/* ---- Image Area with View Toggle ---- */
+
+.imageAreaWrap {
+  margin-bottom: var(--space-lg);
+}
+
+.viewToggle {
+  display: flex;
+  gap: 4px;
+  margin-bottom: var(--space-sm);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+  padding: 3px;
+  width: fit-content;
+}
+
+.viewToggleBtn {
+  padding: 5px 14px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.viewToggleBtnActive {
+  background: var(--bg-surface);
+  color: var(--accent);
+  box-shadow: var(--shadow-sm);
 }
 
 .imageArea {
@@ -96,13 +131,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: var(--space-lg);
-  padding: var(--space-xl);
+  padding: var(--space-lg);
   overflow: hidden;
   position: relative;
-  cursor: grab;
   border: 1px solid var(--border);
-  box-shadow: var(--shadow-md);
 }
 
 .bottleGlow {
@@ -122,17 +154,20 @@
 }
 
 .familyIconLarge {
-  font-size: 6rem;
+  font-size: 5rem;
   line-height: 1;
 }
+
+/* ---- Typography ---- */
 
 .brand {
   font-family: var(--font-body);
   font-size: var(--text-caption);
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin: 0 0 var(--space-xs);
+  letter-spacing: 0.1em;
+  margin: 0 0 4px;
+  font-weight: 500;
 }
 
 .fragranceName {
@@ -140,7 +175,7 @@
   font-size: var(--text-h1);
   color: var(--text-primary);
   margin: 0 0 var(--space-md);
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 .metaRow {
@@ -166,7 +201,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 24px;
+  padding: 10px 20px;
   background: var(--accent);
   color: #fff;
   border-radius: var(--radius-full);
@@ -181,8 +216,46 @@
 
 .buyButton:hover {
   background: var(--accent-hover);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+/* ---- Right Column ---- */
+
+.rightCol {
+  min-width: 0;
+}
+
+.familyBadgeRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.familyDesc {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+}
+
+/* ---- Sections ---- */
+
+.section {
+  margin-bottom: var(--space-xl);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin: 0 0 var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: 1px solid var(--border);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 /* ---- Description & Wearer ---- */
@@ -223,41 +296,7 @@
   font-style: italic;
 }
 
-/* ---- Right Column ---- */
-
-.rightCol {
-  min-width: 0;
-}
-
-.familyBadgeRow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-  margin-bottom: var(--space-lg);
-  flex-wrap: wrap;
-}
-
-.familyDesc {
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  color: var(--text-secondary);
-}
-
-/* ---- Section ---- */
-
-.section {
-  margin-bottom: var(--space-xl);
-}
-
-.sectionTitle {
-  font-family: var(--font-display);
-  font-size: var(--text-h3);
-  color: var(--text-primary);
-  margin: 0 0 var(--space-md);
-  padding-bottom: var(--space-sm);
-  border-bottom: 2px solid var(--border-strong);
-  font-weight: 500;
-}
+/* ---- Characteristics ---- */
 
 .characteristics {
   display: flex;
@@ -269,10 +308,12 @@
 
 .tagGroupLabel {
   font-family: var(--font-body);
-  font-size: var(--text-small);
-  color: var(--text-secondary);
-  margin: var(--space-md) 0 var(--space-sm);
-  font-weight: 500;
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  margin: var(--space-md) 0 var(--space-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .tagGroupLabel:first-child {
@@ -282,16 +323,16 @@
 .tagGroup {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-sm);
+  gap: 6px;
 }
 
 .tag {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  padding: 4px 12px;
+  padding: 3px 10px;
   border-radius: var(--radius-full);
-  background: var(--bg-elevated);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
   font-family: var(--font-body);
   font-size: var(--text-caption);
@@ -371,9 +412,7 @@
   min-width: 80px;
 }
 
-.sprayIcon {
-  color: var(--accent);
-}
+.sprayIcon { color: var(--accent); }
 
 .sprayNumber {
   font-family: var(--font-display);
@@ -419,7 +458,7 @@
   align-items: flex-start;
   gap: var(--space-sm);
   padding: var(--space-sm) var(--space-md);
-  background: var(--accent-glow, rgba(184, 149, 106, 0.1));
+  background: rgba(184, 149, 106, 0.08);
   border-radius: var(--radius-md);
   font-family: var(--font-body);
   font-size: var(--text-small);
@@ -450,18 +489,33 @@
 
 .relatedGrid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-md);
-}
-
-@media (min-width: 480px) {
-  .relatedGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (min-width: 768px) {
   .relatedGrid {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---- Responsive ---- */
+
+@media (max-width: 599px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+
+  .imageArea {
+    aspect-ratio: auto;
+    height: 320px;
+  }
+
+  .fragranceName {
+    font-size: var(--text-h2);
+  }
+
+  .sectionTitle {
+    font-size: var(--text-small);
   }
 }

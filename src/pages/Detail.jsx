@@ -1,9 +1,8 @@
-import { useState, useMemo, useRef, useCallback } from 'react';
+import { useState, useMemo, useRef, useCallback, lazy, Suspense } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, ExternalLink } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Button, Badge, StarRating, ProgressBar } from '../components/ui';
-import { use3DTilt } from '../hooks/use3DTilt';
 import { FragranceCard, NotesPyramid, SprayGuidePanel } from '../components/fragrance';
 import { SAMPLE_FRAGRANCES } from '../data/fragrances';
 import {
@@ -18,6 +17,8 @@ import { getSprayGuideForFragrance } from '../utils/sprayGuide';
 import { getCurrentSeason, formatPrice, getProjectionPercent } from '../utils/helpers';
 import styles from './Detail.module.css';
 
+const DetailBottle3D = lazy(() => import('./DetailBottle3D'));
+
 const PROJECTION_COLORS = {
   soft: 'var(--info)',
   moderate: 'var(--accent)',
@@ -25,56 +26,85 @@ const PROJECTION_COLORS = {
   beast: 'var(--error)',
 };
 
-function BottleViewer({ fragrance, family }) {
+function BottleViewer({ fragrance, family, prefersReduced }) {
   const containerRef = useRef(null);
+  const [view, setView] = useState('3d');
   const [transform, setTransform] = useState('');
   const [shadow, setShadow] = useState('');
   const [glowOpacity, setGlowOpacity] = useState(0);
 
   const handleMove = useCallback((e) => {
+    if (view !== 'image') return;
     const rect = containerRef.current?.getBoundingClientRect();
     if (!rect) return;
     const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
     const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-    const rotateY = x * 20;
-    const rotateX = -y * 12;
-    setTransform(`perspective(800px) rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale3d(1.05,1.05,1.05)`);
+    setTransform(`perspective(800px) rotateY(${x * 20}deg) rotateX(${-y * 12}deg) scale3d(1.05,1.05,1.05)`);
     setShadow(`${-x * 20}px ${y * 20}px 40px rgba(0,0,0,0.15)`);
     setGlowOpacity(0.4);
-  }, []);
+  }, [view]);
 
   const handleLeave = useCallback(() => {
-    setTransform('perspective(800px) rotateY(0deg) rotateX(0deg) scale3d(1,1,1)');
-    setShadow('0px 8px 30px rgba(0,0,0,0.08)');
+    setTransform('');
+    setShadow('');
     setGlowOpacity(0);
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className={styles.imageArea}
-      style={{ background: `${family?.color || '#999'}10` }}
-      onMouseMove={handleMove}
-      onMouseLeave={handleLeave}
-    >
-      <div className={styles.bottleGlow} style={{
-        opacity: glowOpacity,
-        background: `radial-gradient(circle, ${family?.color || '#B8956A'}30 0%, transparent 70%)`,
-      }} />
-      {fragrance.image ? (
-        <img
-          src={fragrance.image}
-          alt={fragrance.name}
-          className={styles.bottleImage}
-          style={{
-            transform: transform || 'perspective(800px) rotateY(0deg) rotateX(0deg)',
-            filter: `drop-shadow(${shadow || '0px 8px 30px rgba(0,0,0,0.08)'})`,
-            transition: 'transform 0.15s ease-out, filter 0.15s ease-out',
-          }}
-        />
-      ) : (
-        <span className={styles.familyIconLarge}>{family?.icon}</span>
-      )}
+    <div className={styles.imageAreaWrap}>
+      <div className={styles.viewToggle}>
+        <button
+          className={`${styles.viewToggleBtn} ${view === '3d' ? styles.viewToggleBtnActive : ''}`}
+          onClick={() => setView('3d')}
+        >
+          3D View
+        </button>
+        {fragrance.image && (
+          <button
+            className={`${styles.viewToggleBtn} ${view === 'image' ? styles.viewToggleBtnActive : ''}`}
+            onClick={() => setView('image')}
+          >
+            Photo
+          </button>
+        )}
+      </div>
+
+      <div
+        ref={containerRef}
+        className={styles.imageArea}
+        style={{ background: `${family?.color || '#999'}10` }}
+        onMouseMove={handleMove}
+        onMouseLeave={handleLeave}
+      >
+        {view === '3d' && !prefersReduced ? (
+          <Suspense fallback={
+            <span className={styles.familyIconLarge}>{family?.icon}</span>
+          }>
+            <DetailBottle3D familyId={fragrance.family} style={{ width: '100%', height: '100%' }} />
+          </Suspense>
+        ) : (
+          <>
+            <div className={styles.bottleGlow} style={{
+              opacity: glowOpacity,
+              background: `radial-gradient(circle, ${family?.color || '#B8956A'}30 0%, transparent 70%)`,
+            }} />
+            {fragrance.image ? (
+              <img
+                src={fragrance.image}
+                alt={fragrance.name}
+                className={styles.bottleImage}
+                style={{
+                  transform: transform || 'perspective(800px) rotateY(0deg) rotateX(0deg)',
+                  filter: `drop-shadow(${shadow || '0px 8px 30px rgba(0,0,0,0.08)'})`,
+                  transition: 'transform 0.15s ease-out, filter 0.15s ease-out',
+                }}
+              />
+            ) : (
+              <span className={styles.familyIconLarge}>{family?.icon}</span>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }
@@ -82,6 +112,7 @@ function BottleViewer({ fragrance, family }) {
 export default function Detail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const prefersReduced = useReducedMotion();
 
   const fragrance = SAMPLE_FRAGRANCES.find((f) => f.id === id);
 
@@ -169,7 +200,7 @@ export default function Detail() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <BottleViewer fragrance={fragrance} family={family} />
+            <BottleViewer fragrance={fragrance} family={family} prefersReduced={prefersReduced} />
 
             <p className={styles.brand}>{fragrance.brand}</p>
             <h1 className={styles.fragranceName}>{fragrance.name}</h1>
