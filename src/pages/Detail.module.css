@@ -155,29 +155,59 @@
   margin-bottom: var(--space-sm);
 }
 
+/* ---- Buy Card ---- */
+
+.buyCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-md);
+}
+
+.buyCardTop {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
 .price {
   font-family: var(--font-display);
-  font-size: var(--text-h3);
+  font-size: var(--text-h2);
   color: var(--accent);
-  margin: 0 0 var(--space-sm);
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.sizeBadge {
+  font-family: var(--font-body);
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .buyButton {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
+  padding: 12px 24px;
   background: var(--accent);
   color: #fff;
   border-radius: var(--radius-full);
   font-family: var(--font-body);
-  font-size: var(--text-small);
+  font-size: var(--text-body);
   font-weight: 600;
   text-decoration: none;
   transition: all var(--transition-fast);
   box-shadow: 0 4px 16px var(--accent-glow);
-  margin-bottom: var(--space-md);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .buyButton:hover {
