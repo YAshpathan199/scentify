@@ -59,16 +59,15 @@ const slideVariants = {
   exit: d => ({ x: d > 0 ? -60 : 60, opacity: 0 }),
 };
 
-const EMPTY_FILTERS = {
-  season: [], occasionCategory: [],
-  timeOfDay: [], dressCode: [],
-};
+function defaultFilters() {
+  return { season: [getCurrentSeason()], occasionCategory: [], timeOfDay: [], dressCode: [] };
+}
 
 export default function Discover() {
   const { fragrances } = useFragrances();
   const [currentStep, setCurrentStep] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [filters, setFilters] = useState(EMPTY_FILTERS);
+  const [filters, setFilters] = useState(defaultFilters);
   const [done, setDone] = useState(false);
   const [openGuides, setOpenGuides] = useState(new Set());
 
@@ -119,7 +118,7 @@ export default function Discover() {
 
   function restart() {
     scrollTop();
-    setFilters(EMPTY_FILTERS);
+    setFilters(defaultFilters());
     setCurrentStep(0);
     setDone(false);
     setDirection(1);
@@ -185,7 +184,12 @@ export default function Discover() {
               >
                 <p className={styles.stepCounter}>Step {currentStep + 1} of {STEPS.length}</p>
                 <h2 className={styles.stepQuestion}>{step.question}</h2>
-                <p className={styles.stepSubtitle}>{step.subtitle}</p>
+                <p className={styles.stepSubtitle}>
+                  {step.subtitle}
+                  {step.key === 'season' && (
+                    <span className={styles.autoDetected}> · auto-detected, tap to change</span>
+                  )}
+                </p>
 
                 <div className={styles.optionsGrid}>
                   {step.options.map(opt => {

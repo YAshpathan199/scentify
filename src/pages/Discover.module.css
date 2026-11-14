@@ -146,6 +146,12 @@
   margin: 0 0 var(--space-lg);
 }
 
+.autoDetected {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 @media (min-width: 600px) {
   .stepSubtitle {
     margin: 0 0 var(--space-xl);
