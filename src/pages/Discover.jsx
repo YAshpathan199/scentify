@@ -24,6 +24,16 @@ const OCCASION_BY_CATEGORY = buildOccasionMap();
 
 const STEPS = [
   {
+    key: 'gender',
+    label: 'For',
+    question: "Who's this for?",
+    subtitle: 'Get recommendations tailored for them',
+    options: [
+      { id: 'men', label: 'Him', icon: '👔', desc: "Men's fragrances" },
+      { id: 'women', label: 'Her', icon: '👗', desc: "Women's fragrances" },
+    ],
+  },
+  {
     key: 'season',
     label: 'Season',
     question: 'What season is it?',
@@ -60,7 +70,7 @@ const slideVariants = {
 };
 
 function defaultFilters() {
-  return { season: [getCurrentSeason()], occasionCategory: [], timeOfDay: [], dressCode: [] };
+  return { gender: [], season: [getCurrentSeason()], occasionCategory: [], timeOfDay: [], dressCode: [] };
 }
 
 export default function Discover() {
@@ -124,9 +134,16 @@ export default function Discover() {
     setDirection(1);
   }
 
+  const genderFiltered = useMemo(() => {
+    if (!filters.gender.length) return fragrances;
+    return fragrances.filter(f =>
+      f.gender === 'unisex' || filters.gender.includes(f.gender)
+    );
+  }, [fragrances, filters.gender]);
+
   const results = useMemo(() => {
     const hasAny = activeFilterCount > 0;
-    if (!hasAny) return fragrances.map(f => ({ fragrance: f, score: 0, total: 0, matchPercent: 100 }));
+    if (!hasAny) return genderFiltered.map(f => ({ fragrance: f, score: 0, total: 0, matchPercent: 100 }));
 
     const occIds = filters.occasionCategory.flatMap(cat => OCCASION_BY_CATEGORY[cat] || []);
     const engineFilters = {
@@ -136,13 +153,13 @@ export default function Discover() {
       occasionIds: occIds,
     };
 
-    const scored = fragrances.map(f => {
+    const scored = genderFiltered.map(f => {
       const { score, matchPercent, relevance } = discoverScore(f, engineFilters);
       return { fragrance: f, score, total: Object.values(filters).filter(a => a.length).length, matchPercent, relevance };
     });
     scored.sort((a, b) => b.score !== a.score ? b.score - a.score : b.relevance - a.relevance);
     return scored.filter(s => s.score > 0);
-  }, [fragrances, filters, activeFilterCount]);
+  }, [genderFiltered, filters, activeFilterCount]);
 
   return (
     <div className={styles.page}>

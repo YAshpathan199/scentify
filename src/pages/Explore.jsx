@@ -10,6 +10,7 @@ import styles from './Explore.module.css';
 
 export default function Explore() {
   const [searchQuery, setSearchQuery] = useState('');
+  const [activeGender, setActiveGender] = useState('all');
   const [activeFamily, setActiveFamily] = useState('all');
   const [sortBy, setSortBy] = useState('name');
 
@@ -23,6 +24,12 @@ export default function Explore() {
           f.name.toLowerCase().includes(query) ||
           f.brand.toLowerCase().includes(query)
       );
+    }
+
+    if (activeGender !== 'all') {
+      if (activeGender === 'men') result = result.filter(f => f.gender === 'men' || f.gender === 'unisex');
+      else if (activeGender === 'women') result = result.filter(f => f.gender === 'women' || f.gender === 'unisex');
+      else result = result.filter(f => f.gender === activeGender);
     }
 
     if (activeFamily !== 'all') {
@@ -47,10 +54,11 @@ export default function Explore() {
     }
 
     return result;
-  }, [searchQuery, activeFamily, sortBy]);
+  }, [searchQuery, activeGender, activeFamily, sortBy]);
 
   const clearFilters = () => {
     setSearchQuery('');
+    setActiveGender('all');
     setActiveFamily('all');
   };
 
@@ -165,6 +173,25 @@ export default function Explore() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </label>
+        </div>
+
+        {/* Gender Tabs */}
+        <div className="flex gap-2 mb-4 justify-center">
+          {[
+            { id: 'all', label: 'All', icon: '✨' },
+            { id: 'men', label: 'Him', icon: '👔' },
+            { id: 'women', label: 'Her', icon: '👗' },
+            { id: 'unisex', label: 'Unisex', icon: '🌸' },
+          ].map(g => (
+            <button
+              key={g.id}
+              className={`btn btn-sm rounded-full gap-1 ${activeGender === g.id ? 'btn-primary' : 'btn-outline border-base-300 text-base-content/70'}`}
+              onClick={() => setActiveGender(g.id)}
+            >
+              <span className="text-sm leading-none">{g.icon}</span>
+              {g.label}
+            </button>
+          ))}
         </div>
 
         {/* Filter Chips + Sort Row */}
