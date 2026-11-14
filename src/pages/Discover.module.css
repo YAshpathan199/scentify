@@ -548,6 +548,54 @@
   max-width: 320px;
 }
 
+.genderToggleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.genderToggleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.genderToggleBtn:hover {
+  border-color: var(--accent-light);
+  color: var(--accent);
+  background: var(--highlight-warm);
+}
+
+.genderToggleBtnActive {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.genderToggleBtnActive:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.genderToggleCount {
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+}
+
 .resultsCount {
   font-family: var(--font-body);
   font-size: var(--text-small);

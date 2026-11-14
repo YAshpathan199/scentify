@@ -24,16 +24,6 @@ const OCCASION_BY_CATEGORY = buildOccasionMap();
 
 const STEPS = [
   {
-    key: 'gender',
-    label: 'For',
-    question: "Who's this for?",
-    subtitle: 'Get recommendations tailored for them',
-    options: [
-      { id: 'men', label: 'Him', icon: '👔', desc: "Men's fragrances" },
-      { id: 'women', label: 'Her', icon: '👗', desc: "Women's fragrances" },
-    ],
-  },
-  {
     key: 'season',
     label: 'Season',
     question: 'What season is it?',
@@ -70,7 +60,7 @@ const slideVariants = {
 };
 
 function defaultFilters() {
-  return { gender: [], season: [getCurrentSeason()], occasionCategory: [], timeOfDay: [], dressCode: [] };
+  return { season: [getCurrentSeason()], occasionCategory: [], timeOfDay: [], dressCode: [] };
 }
 
 export default function Discover() {
@@ -80,6 +70,7 @@ export default function Discover() {
   const [filters, setFilters] = useState(defaultFilters);
   const [done, setDone] = useState(false);
   const [openGuides, setOpenGuides] = useState(new Set());
+  const [genderFilter, setGenderFilter] = useState('all');
 
   function toggleGuide(id) {
     setOpenGuides(prev => {
@@ -132,14 +123,13 @@ export default function Discover() {
     setCurrentStep(0);
     setDone(false);
     setDirection(1);
+    setGenderFilter('all');
   }
 
   const genderFiltered = useMemo(() => {
-    if (!filters.gender.length) return fragrances;
-    return fragrances.filter(f =>
-      f.gender === 'unisex' || filters.gender.includes(f.gender)
-    );
-  }, [fragrances, filters.gender]);
+    if (genderFilter === 'all') return fragrances;
+    return fragrances.filter(f => f.gender === 'unisex' || f.gender === genderFilter);
+  }, [fragrances, genderFilter]);
 
   const results = useMemo(() => {
     const hasAny = activeFilterCount > 0;
@@ -316,9 +306,25 @@ export default function Discover() {
             </div>
           ) : results.length > 0 ? (
             <>
-              <p className={styles.resultsCount}>
-                {results.length} {results.length === 1 ? 'match' : 'matches'}
-              </p>
+              <div className={styles.genderToggleRow}>
+                {[
+                  { id: 'all', label: 'All', icon: '✨' },
+                  { id: 'men', label: 'Him', icon: '👔' },
+                  { id: 'women', label: 'Her', icon: '👗' },
+                ].map(g => (
+                  <button
+                    key={g.id}
+                    className={`${styles.genderToggleBtn} ${genderFilter === g.id ? styles.genderToggleBtnActive : ''}`}
+                    onClick={() => setGenderFilter(g.id)}
+                  >
+                    <span>{g.icon}</span>
+                    {g.label}
+                  </button>
+                ))}
+                <span className={styles.genderToggleCount}>
+                  {results.length} {results.length === 1 ? 'match' : 'matches'}
+                </span>
+              </div>
               <div className={styles.grid}>
                 <AnimatePresence mode="popLayout">
                   {results.map(({ fragrance, matchPercent }, i) => {
