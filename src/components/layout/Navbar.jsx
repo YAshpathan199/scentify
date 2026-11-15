@@ -129,7 +129,7 @@ export default function Navbar() {
 
             <label
               htmlFor={drawerId}
-              className="btn btn-ghost btn-square md:hidden"
+              className={`btn btn-ghost btn-square md:hidden ${styles.hamburger}`}
               aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
             >
               {drawerOpen ? <X size={22} /> : <Menu size={22} />}

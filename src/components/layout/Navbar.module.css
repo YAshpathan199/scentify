@@ -229,6 +229,20 @@
   background: var(--border);
 }
 
+.hamburger {
+  color: var(--text-primary);
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.transparent .hamburger {
+  color: rgba(245, 240, 232, 0.9);
+}
+
+.transparent .hamburger:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.12);
+}
+
 @media (min-width: 768px) {
   .container {
     padding: 0 var(--space-lg);
