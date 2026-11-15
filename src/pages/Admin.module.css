@@ -235,6 +235,162 @@
   margin: 0;
 }
 
+/* ---- Logout Button ---- */
+
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: rgba(245, 240, 232, 0.5);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-top: var(--space-sm);
+  transition: color var(--transition-fast);
+}
+
+.logoutBtn:hover {
+  color: #e57373;
+}
+
+/* ==========================================================================
+   Admin Login Gate
+   ========================================================================== */
+
+.loginPage {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dark-bg);
+  padding: var(--space-lg);
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 380px;
+  background: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  box-shadow: var(--shadow-xl);
+}
+
+.loginIconWrap {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(184, 149, 106, 0.10);
+  border-radius: var(--radius-full);
+  color: var(--accent);
+}
+
+.loginTitle {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.loginSubtitle {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.loginInputWrap {
+  width: 100%;
+  position: relative;
+}
+
+.loginInput {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  padding-right: 44px;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.loginInput:focus {
+  border-color: var(--accent);
+}
+
+.loginToggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.loginToggle:hover {
+  color: var(--text-secondary);
+}
+
+.loginError {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--error);
+  margin: 0;
+  text-align: center;
+}
+
+.loginBtn {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background var(--transition-fast), opacity var(--transition-fast);
+}
+
+.loginBtn:hover:not(:disabled) {
+  background: var(--accent-hover, #96704a);
+}
+
+.loginBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.loginBack {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.loginBack:hover {
+  color: var(--text-secondary);
+}
+
 /* ==========================================================================
    Responsive — below 900px
    ========================================================================== */

@@ -1,12 +1,101 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { Routes, Route, NavLink, Navigate, Link, useLocation } from 'react-router-dom';
 import {
   Sparkles, LayoutDashboard, FlaskConical, BarChart3,
   Calendar, Layers, Database, ExternalLink, Menu, X,
+  Lock, Eye, EyeOff, LogOut,
 } from 'lucide-react';
 import { Overview, FragranceManager, Analytics, WearHistory, LayeringLab, DataTools } from '../components/admin';
 import { getGreeting } from '../utils/helpers';
 import styles from './Admin.module.css';
+
+const ADMIN_HASH = '87b07733d3118f24ef5749b7b015d96f6cfb53c3641d362f414f63cdb0107046';
+const SESSION_KEY = 'scentify_admin_auth';
+
+async function hashPassword(password) {
+  const encoded = new TextEncoder().encode(password);
+  const buffer = await crypto.subtle.digest('SHA-256', encoded);
+  return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+function useAdminAuth() {
+  const [authed, setAuthed] = useState(() => sessionStorage.getItem(SESSION_KEY) === 'true');
+
+  const login = useCallback(async (password) => {
+    const hash = await hashPassword(password);
+    if (hash === ADMIN_HASH) {
+      sessionStorage.setItem(SESSION_KEY, 'true');
+      setAuthed(true);
+      return true;
+    }
+    return false;
+  }, []);
+
+  const logout = useCallback(() => {
+    sessionStorage.removeItem(SESSION_KEY);
+    setAuthed(false);
+  }, []);
+
+  return { authed, login, logout };
+}
+
+function AdminLogin({ onLogin }) {
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (!password.trim()) return;
+    setLoading(true);
+    setError('');
+    const ok = await onLogin(password);
+    setLoading(false);
+    if (!ok) setError('Incorrect password');
+  }
+
+  return (
+    <div className={styles.loginPage}>
+      <form className={styles.loginCard} onSubmit={handleSubmit}>
+        <div className={styles.loginIconWrap}>
+          <Lock size={28} />
+        </div>
+        <h1 className={styles.loginTitle}>Admin Panel</h1>
+        <p className={styles.loginSubtitle}>Enter the password to continue</p>
+
+        <div className={styles.loginInputWrap}>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            className={styles.loginInput}
+            value={password}
+            onChange={e => { setPassword(e.target.value); setError(''); }}
+            placeholder="Password"
+            autoFocus
+            autoComplete="current-password"
+          />
+          <button
+            type="button"
+            className={styles.loginToggle}
+            onClick={() => setShowPassword(v => !v)}
+            tabIndex={-1}
+            aria-label={showPassword ? 'Hide password' : 'Show password'}
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
+        </div>
+
+        {error && <p className={styles.loginError}>{error}</p>}
+
+        <button type="submit" className={styles.loginBtn} disabled={loading || !password.trim()}>
+          {loading ? 'Verifying...' : 'Unlock'}
+        </button>
+
+        <Link to="/" className={styles.loginBack}>Back to Site</Link>
+      </form>
+    </div>
+  );
+}
 
 const NAV_ITEMS = [
   { to: '/admin', label: 'Overview', icon: LayoutDashboard, end: true },
@@ -28,11 +117,14 @@ const TITLES = {
 
 export default function Admin() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { authed, login, logout } = useAdminAuth();
   const location = useLocation();
   const title = TITLES[location.pathname] || 'Dashboard';
   const today = new Date().toLocaleDateString('en-IN', {
     weekday: 'short', day: 'numeric', month: 'short', year: 'numeric',
   });
+
+  if (!authed) return <AdminLogin onLogin={login} />;
 
   return (
     <div className={styles.layout}>
@@ -80,6 +172,10 @@ export default function Admin() {
             <ExternalLink size={14} />
             Back to Site
           </Link>
+          <button className={styles.logoutBtn} onClick={logout}>
+            <LogOut size={14} />
+            Logout
+          </button>
         </div>
       </aside>
 
