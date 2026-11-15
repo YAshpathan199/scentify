@@ -19,13 +19,13 @@ export default function Footer() {
           <h6 className="footer-title font-[var(--font-body)] text-neutral-content/50 text-xs md:text-sm">Explore</h6>
           <Link to="/discover" className="link link-hover text-xs md:text-sm text-neutral-content/75">Discover</Link>
           <Link to="/explore" className="link link-hover text-xs md:text-sm text-neutral-content/75">Collection</Link>
-          <Link to="/guide" className="link link-hover text-xs md:text-sm text-neutral-content/75">How to Wear</Link>
+          <Link to="/scout" className="link link-hover text-xs md:text-sm text-neutral-content/75">Scent Scout</Link>
+          <Link to="/layering" className="link link-hover text-xs md:text-sm text-neutral-content/75">Layering Lab</Link>
         </nav>
 
         <nav>
-          <h6 className="footer-title font-[var(--font-body)] text-neutral-content/50 text-xs md:text-sm">
-            <Link to="/learn" className="hover:text-neutral-content/70 transition-colors">Learn</Link>
-          </h6>
+          <h6 className="footer-title font-[var(--font-body)] text-neutral-content/50 text-xs md:text-sm">Learn</h6>
+          <Link to="/learn" className="link link-hover text-xs md:text-sm text-neutral-content/75">Learn</Link>
           <Link to="/guide" className="link link-hover text-xs md:text-sm text-neutral-content/75">Spray Guide</Link>
           <Link to="/families" className="link link-hover text-xs md:text-sm text-neutral-content/75">Families</Link>
           <Link to="/storage" className="link link-hover text-xs md:text-sm text-neutral-content/75">Storage</Link>
