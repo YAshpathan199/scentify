@@ -1,60 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
   <defs>
-    <linearGradient id="rad-glass" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#e8c8e8" stop-opacity="0.3"/>
-      <stop offset="40%" stop-color="#f8e8f8" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#c8a8c8" stop-opacity="0.35"/>
+    <!-- Clear vial glass -->
+    <linearGradient id="fr-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a090c8" stop-opacity="0.22"/>
+      <stop offset="30%" stop-color="#c8c0e8" stop-opacity="0.13"/>
+      <stop offset="68%" stop-color="#a090c8" stop-opacity="0.17"/>
+      <stop offset="100%" stop-color="#806898" stop-opacity="0.26"/>
     </linearGradient>
-    <linearGradient id="rad-liquid" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f5d0f0"/>
-      <stop offset="40%" stop-color="#e8b0e0"/>
-      <stop offset="80%" stop-color="#d090c8"/>
-      <stop offset="100%" stop-color="#b870b0"/>
+    <!-- Violet-pink liquid (Radiance) -->
+    <linearGradient id="fr-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e890c8"/>
+      <stop offset="50%" stop-color="#d070b0"/>
+      <stop offset="100%" stop-color="#b05090"/>
     </linearGradient>
-    <linearGradient id="rad-cap" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f8f0f8"/>
-      <stop offset="50%" stop-color="#e0c8e0"/>
-      <stop offset="100%" stop-color="#c0a0c0"/>
+    <!-- Black spray head -->
+    <linearGradient id="fr-spray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#080808"/>
     </linearGradient>
-    <linearGradient id="rad-gold" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#e8d090"/>
-      <stop offset="100%" stop-color="#c0a850"/>
+    <linearGradient id="fr-hl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f8d8f0" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#f8d8f0" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="rad-hl" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
-    <filter id="rad-shadow">
-      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#c060c0" flood-opacity="0.18"/>
-    </filter>
+    <filter id="fr-sh"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#500840" flood-opacity="0.3"/></filter>
   </defs>
-  <g filter="url(#rad-shadow)">
-    <!-- Mini vial body — tall, slim -->
-    <rect x="168" y="160" width="64" height="260" rx="6" fill="url(#rad-glass)" stroke="#d8a8d8" stroke-width="0.8"/>
-    <clipPath id="rad-clip"><rect x="171" y="163" width="58" height="254" rx="5"/></clipPath>
-    <rect x="171" y="178" width="58" height="239" fill="url(#rad-liquid)" clip-path="url(#rad-clip)" opacity="0.85"/>
-    <ellipse cx="192" cy="230" rx="12" ry="20" fill="#ffffff" fill-opacity="0.12" clip-path="url(#rad-clip)"/>
-    <rect x="170" y="163" width="12" height="254" fill="url(#rad-hl)" opacity="0.5"/>
-    <rect x="173" y="185" width="3" height="60" rx="1.5" fill="#ffffff" opacity="0.25"/>
-    <rect x="168" y="398" width="64" height="2" fill="url(#rad-gold)" opacity="0.7"/>
-    <rect x="168" y="163" width="64" height="2" fill="url(#rad-gold)" opacity="0.5"/>
-    <!-- Neck -->
-    <rect x="180" y="140" width="40" height="22" rx="3" fill="url(#rad-glass)" stroke="#d8a8d8" stroke-width="0.7"/>
-    <rect x="178" y="150" width="44" height="2.5" fill="url(#rad-gold)" opacity="0.8"/>
+  <g filter="url(#fr-sh)">
+    <!-- Slim round vial: 28px wide, 290px tall, x:186-214, y:120-410 -->
+    <rect x="186" y="120" width="28" height="290" rx="14" fill="url(#fr-glass)" stroke="#c090c0" stroke-width="0.8"/>
+    <clipPath id="fr-cl"><rect x="189" y="123" width="22" height="284" rx="11"/></clipPath>
+    <rect x="189" y="134" width="22" height="273" fill="url(#fr-liquid)" clip-path="url(#fr-cl)" opacity="0.78"/>
+    <!-- Glass edge highlight on left -->
+    <rect x="188" y="123" width="8" height="284" fill="url(#fr-hl)" opacity="0.55"/>
+    <rect x="190" y="150" width="2.5" height="120" rx="1.25" fill="#f8d8f0" opacity="0.28"/>
+    <!-- Vertical "Faunwalk" text on vial -->
+    <text x="200" y="395" font-family="Arial,sans-serif" font-size="6" fill="#f0d8f0" text-anchor="middle" writing-mode="tb-rl" transform="rotate(180,200,290)" letter-spacing="1.5" opacity="0.75">Faunwalk</text>
+    <!-- Fallback horizontal small text at mid-vial -->
+    <text transform="rotate(-90,200,280)" x="200" y="284" font-family="Arial,sans-serif" font-size="5.5" fill="#f0d8f0" text-anchor="middle" letter-spacing="1.5" opacity="0.65">Faunwalk</text>
+    <!-- Product name below text -->
+    <text transform="rotate(-90,200,320)" x="200" y="324" font-family="Arial,sans-serif" font-size="5" fill="#f0d8f0" text-anchor="middle" letter-spacing="1" opacity="0.55">Radiance</text>
+    <!-- Base -->
+    <ellipse cx="200" cy="411" rx="16" ry="4" fill="#500840" opacity="0.2"/>
+    <!-- Black spray head (no cap) — wide flat spray actuator -->
+    <rect x="183" y="98" width="34" height="24" rx="3" fill="url(#fr-spray)"/>
     <!-- Spray nozzle -->
-    <rect x="195" y="128" width="10" height="14" rx="2" fill="#d0a0d0"/>
-    <rect x="197" y="122" width="6" height="8" rx="1" fill="#c898c8"/>
-    <!-- Cap -->
-    <rect x="162" y="52" width="76" height="90" rx="8" fill="url(#rad-cap)" stroke="#d0b0d0" stroke-width="0.8"/>
-    <rect x="162" y="52" width="76" height="14" rx="8" fill="#f0e0f0"/>
-    <rect x="165" y="58" width="10" height="78" fill="#ffffff" opacity="0.2"/>
-    <rect x="168" y="62" width="3" height="50" rx="1.5" fill="#ffffff" opacity="0.28"/>
-    <rect x="176" y="78" width="48" height="22" rx="3" fill="#d8b8d8" opacity="0.35"/>
-    <text x="200" y="93" font-family="Georgia, serif" font-size="6.5" font-weight="bold" fill="#907090" text-anchor="middle" letter-spacing="1.2">FAUNWALK</text>
-    <rect x="162" y="138" width="76" height="4" rx="2" fill="#c898c8"/>
-    <!-- Bottom base -->
-    <rect x="166" y="418" width="68" height="4" rx="2" fill="#c888c8" opacity="0.4"/>
-    <ellipse cx="200" cy="428" rx="40" ry="4" fill="#c060c0" opacity="0.1"/>
+    <rect x="195" y="88" width="10" height="12" rx="2" fill="url(#fr-spray)"/>
+    <!-- Spray head top highlight -->
+    <rect x="186" y="100" width="8" height="6" rx="2" fill="#484848" opacity="0.6"/>
+    <!-- Spray head shine -->
+    <rect x="186" y="100" width="6" height="4" rx="1" fill="#ffffff" opacity="0.08"/>
   </g>
 </svg>

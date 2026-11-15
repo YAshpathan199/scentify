@@ -1,144 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
   <defs>
-    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="0.6">
-      <stop offset="0%" stop-color="#3a2a1a" stop-opacity="0.7"/>
-      <stop offset="50%" stop-color="#2a1e12" stop-opacity="0.85"/>
-      <stop offset="100%" stop-color="#1e1410" stop-opacity="0.9"/>
+    <!-- Clear glass for faceted/hexagonal bottle -->
+    <linearGradient id="tm-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a08060" stop-opacity="0.22"/>
+      <stop offset="30%" stop-color="#c8b898" stop-opacity="0.13"/>
+      <stop offset="68%" stop-color="#a08060" stop-opacity="0.17"/>
+      <stop offset="100%" stop-color="#806040" stop-opacity="0.26"/>
     </linearGradient>
-    <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#8B4513" stop-opacity="0.8"/>
-      <stop offset="30%" stop-color="#6b3410"/>
-      <stop offset="60%" stop-color="#4a2008"/>
-      <stop offset="100%" stop-color="#2d1205"/>
+    <!-- Dark amber-brown liquid -->
+    <linearGradient id="tm-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8a4808"/>
+      <stop offset="50%" stop-color="#5a2c04"/>
+      <stop offset="100%" stop-color="#301400"/>
     </linearGradient>
-    <linearGradient id="highlightGrad" x1="0" y1="0" x2="1" y2="0.5">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    <!-- Facet face fills: alternate lighter/darker for 3D effect -->
+    <linearGradient id="tm-facet-l" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c0a080" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#a08060" stop-opacity="0.14"/>
     </linearGradient>
-    <linearGradient id="capGrad" x1="0" y1="0" x2="0.8" y2="1">
-      <stop offset="0%" stop-color="#c9a84c"/>
-      <stop offset="25%" stop-color="#a8873a"/>
-      <stop offset="50%" stop-color="#c9a84c"/>
-      <stop offset="75%" stop-color="#8a6e2f"/>
-      <stop offset="100%" stop-color="#a8873a"/>
+    <linearGradient id="tm-facet-d" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#806040" stop-opacity="0.30"/>
+      <stop offset="100%" stop-color="#604020" stop-opacity="0.26"/>
     </linearGradient>
-    <linearGradient id="ornateGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#d4b85c"/>
-      <stop offset="50%" stop-color="#a88838"/>
-      <stop offset="100%" stop-color="#7a6428"/>
+    <!-- Tall ornate silver cap -->
+    <linearGradient id="tm-cap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0f0ee"/>
+      <stop offset="30%" stop-color="#d0d0cc"/>
+      <stop offset="68%" stop-color="#b0b0ac"/>
+      <stop offset="100%" stop-color="#888888"/>
     </linearGradient>
-    <linearGradient id="labelGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#c9a84c" stop-opacity="0.3"/>
-      <stop offset="50%" stop-color="#a8873a" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#c9a84c" stop-opacity="0.3"/>
+    <linearGradient id="tm-cap-eng" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8e8e4"/>
+      <stop offset="100%" stop-color="#b8b8b4"/>
     </linearGradient>
-    <filter id="shadow" x="-10%" y="-5%" width="120%" height="115%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="9" result="blur"/>
-      <feOffset in="blur" dx="0" dy="7" result="offsetBlur"/>
-      <feFlood flood-color="#000000" flood-opacity="0.2" result="color"/>
-      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
-      <feMerge>
-        <feMergeNode in="shadow"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <radialGradient id="reflectionGrad" cx="0.28" cy="0.35" r="0.45">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.18"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
+    <filter id="tm-sh"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#180a00" flood-opacity="0.35"/></filter>
   </defs>
-
-  <ellipse cx="200" cy="462" rx="90" ry="12" fill="#000" opacity="0.14"/>
-
-  <g filter="url(#shadow)">
-    <!-- Dark bottle body - rectangular with slight curve -->
-    <path d="
-      M 125 160
-      Q 120 170 120 190
-      L 125 440
-      Q 127 452 145 452
-      L 255 452
-      Q 273 452 275 440
-      L 280 190
-      Q 280 170 275 160
-      Z
-    " fill="url(#glassGrad)" stroke="#4a3520" stroke-width="1"/>
-
-    <!-- Liquid -->
-    <path d="
-      M 123 210
-      L 127 438
-      Q 129 450 145 450
-      L 255 450
-      Q 271 450 273 438
-      L 277 210
-      Z
-    " fill="url(#liquidGrad)"/>
-
-    <!-- Glass highlight strip -->
-    <path d="
-      M 135 170
-      L 133 180
-      L 138 410
-      L 146 410
-      L 143 180
-      L 140 170
-      Z
-    " fill="url(#highlightGrad)"/>
-
-    <!-- Large reflection -->
-    <ellipse cx="155" cy="310" rx="18" ry="80" fill="url(#reflectionGrad)" transform="rotate(-3 155 310)"/>
-
-    <!-- Gold label area on bottle -->
-    <rect x="145" y="280" width="110" height="80" rx="3" fill="url(#labelGrad)" stroke="#c9a84c" stroke-width="0.8" opacity="0.7"/>
-    <!-- Label decorative lines -->
-    <line x1="155" y1="300" x2="245" y2="300" stroke="#c9a84c" stroke-width="0.5" opacity="0.5"/>
-    <line x1="155" y1="340" x2="245" y2="340" stroke="#c9a84c" stroke-width="0.5" opacity="0.5"/>
-
-    <!-- Bottle neck -->
-    <path d="
-      M 178 108
-      L 178 160
-      L 222 160
-      L 222 108
-      Q 220 103 217 103
-      L 183 103
-      Q 180 103 178 108
-      Z
-    " fill="url(#glassGrad)" stroke="#4a3520" stroke-width="1"/>
-
-    <!-- Neck highlight -->
-    <rect x="183" y="112" width="4" height="45" rx="2" fill="#ffffff" opacity="0.15"/>
-
-    <!-- Gold ornate cap - taller, Middle Eastern style -->
-    <path d="
-      M 162 28
-      L 162 103
-      L 238 103
-      L 238 28
-      Q 238 18 228 18
-      L 172 18
-      Q 162 18 162 28
-      Z
-    " fill="url(#capGrad)" stroke="#8a6e2f" stroke-width="0.8"/>
-
-    <!-- Cap decorative bands -->
-    <rect x="162" y="38" width="76" height="2.5" rx="1" fill="#d4b85c" opacity="0.7"/>
-    <rect x="162" y="52" width="76" height="2.5" rx="1" fill="#d4b85c" opacity="0.6"/>
-    <rect x="162" y="66" width="76" height="2.5" rx="1" fill="#d4b85c" opacity="0.5"/>
-    <rect x="162" y="80" width="76" height="2.5" rx="1" fill="#d4b85c" opacity="0.6"/>
-    <rect x="162" y="94" width="76" height="2.5" rx="1" fill="#d4b85c" opacity="0.7"/>
-
-    <!-- Cap highlight -->
-    <rect x="170" y="22" width="5" height="78" rx="2.5" fill="#ffffff" opacity="0.18"/>
-
-    <!-- Cap top crown -->
-    <rect x="162" y="18" width="76" height="5" rx="2.5" fill="#c9a84c" opacity="0.8"/>
-
-    <!-- Ornate diamond on cap -->
-    <path d="M 200 30 L 208 42 L 200 54 L 192 42 Z" fill="url(#ornateGrad)" stroke="#c9a84c" stroke-width="0.6"/>
-    <!-- Inner diamond detail -->
-    <path d="M 200 35 L 204 42 L 200 49 L 196 42 Z" fill="none" stroke="#d4b85c" stroke-width="0.4" opacity="0.6"/>
+  <g filter="url(#tm-sh)">
+    <!-- Faceted hexagonal body — approximate with 6 visible faces using polygon + rects -->
+    <!-- Main front face (widest) -->
+    <rect x="156" y="162" width="88" height="264" rx="2" fill="url(#tm-glass)" stroke="#a08060" stroke-width="0.6"/>
+    <!-- Left angled facet face (creates faceted 3D look) -->
+    <polygon points="156,162 148,170 148,422 156,426" fill="url(#tm-facet-d)" stroke="#907050" stroke-width="0.5"/>
+    <!-- Right angled facet face -->
+    <polygon points="244,162 252,170 252,422 244,426" fill="url(#tm-facet-d)" stroke="#907050" stroke-width="0.5"/>
+    <!-- Top-left bevel -->
+    <polygon points="156,162 164,154 236,154 244,162" fill="url(#tm-facet-l)" stroke="#c0a070" stroke-width="0.5"/>
+    <!-- Clip for liquid -->
+    <clipPath id="tm-cl"><rect x="159" y="165" width="82" height="258" rx="1"/></clipPath>
+    <rect x="159" y="176" width="82" height="247" fill="url(#tm-liquid)" clip-path="url(#tm-cl)" opacity="0.78"/>
+    <!-- Glass edge reflection on front -->
+    <rect x="158" y="165" width="14" height="258" fill="#f0d0a0" opacity="0.08"/>
+    <rect x="161" y="195" width="4" height="100" rx="2" fill="#f0d0a0" opacity="0.06"/>
+    <!-- Arabic calligraphy style decorative text -->
+    <!-- Decorative top line (ornamental) -->
+    <text x="200" y="248" font-family="Georgia,'Times New Roman',serif" font-size="12" fill="#c09050" text-anchor="middle" letter-spacing="1" opacity="0.80">Ibrahim Al Qurashi</text>
+    <!-- Arabic-style ornament (approximated) -->
+    <text x="200" y="268" font-family="Georgia,serif" font-size="9" fill="#b08040" text-anchor="middle" letter-spacing="2" opacity="0.70">TOBACCO MABKHAR</text>
+    <!-- Decorative diamond ornament line -->
+    <text x="200" y="284" font-family="Arial" font-size="8" fill="#c09050" text-anchor="middle" opacity="0.55">◆ ✦ ◆</text>
+    <!-- Base -->
+    <polygon points="148,422 156,426 244,426 252,422" fill="#180800" opacity="0.4"/>
+    <!-- Neck (faceted, narrower) -->
+    <rect x="174" y="142" width="52" height="22" rx="2" fill="url(#tm-glass)" stroke="#a08060" stroke-width="0.6"/>
+    <polygon points="174,142 170,146 170,164 174,164" fill="url(#tm-facet-d)" opacity="0.7"/>
+    <polygon points="226,142 230,146 230,164 226,164" fill="url(#tm-facet-d)" opacity="0.7"/>
+    <!-- Tall-rectangle ornate silver engraved cap -->
+    <rect x="162" y="76" width="76" height="68" rx="2" fill="url(#tm-cap)" stroke="#c8c8c4" stroke-width="0.6"/>
+    <!-- Engraved decoration panel -->
+    <rect x="168" y="82" width="64" height="58" rx="1" fill="url(#tm-cap-eng)" opacity="0.8"/>
+    <!-- Engraved vertical lines to simulate ornate engraving -->
+    <line x1="176" y1="84" x2="176" y2="138" stroke="#888880" stroke-width="0.5" opacity="0.4"/>
+    <line x1="184" y1="84" x2="184" y2="138" stroke="#888880" stroke-width="0.5" opacity="0.4"/>
+    <line x1="200" y1="84" x2="200" y2="138" stroke="#888880" stroke-width="0.6" opacity="0.5"/>
+    <line x1="216" y1="84" x2="216" y2="138" stroke="#888880" stroke-width="0.5" opacity="0.4"/>
+    <line x1="224" y1="84" x2="224" y2="138" stroke="#888880" stroke-width="0.5" opacity="0.4"/>
+    <!-- Horizontal engraving bands -->
+    <line x1="170" y1="96" x2="230" y2="96" stroke="#a0a09c" stroke-width="0.5" opacity="0.5"/>
+    <line x1="170" y1="110" x2="230" y2="110" stroke="#a0a09c" stroke-width="0.5" opacity="0.5"/>
+    <line x1="170" y1="124" x2="230" y2="124" stroke="#a0a09c" stroke-width="0.5" opacity="0.5"/>
+    <!-- Engraved logo text -->
+    <text x="200" y="107" font-family="Georgia,serif" font-size="5.5" fill="#686868" text-anchor="middle" letter-spacing="1.5" opacity="0.75">IBRAHIM</text>
+    <text x="200" y="118" font-family="Georgia,serif" font-size="5.5" fill="#686868" text-anchor="middle" letter-spacing="1" opacity="0.75">AL QURASHI</text>
+    <!-- Cap top chrome -->
+    <rect x="162" y="76" width="76" height="8" rx="2" fill="#f8f8f6"/>
+    <!-- Cap left highlight -->
+    <rect x="166" y="84" width="8" height="58" rx="2" fill="#ffffff" opacity="0.22"/>
+    <!-- Cap bottom ring -->
+    <rect x="162" y="138" width="76" height="6" rx="1" fill="#909090"/>
+    <ellipse cx="200" cy="435" rx="52" ry="4" fill="#180800" opacity="0.1"/>
   </g>
 </svg>

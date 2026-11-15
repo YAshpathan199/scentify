@@ -1,117 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
   <defs>
-    <!-- Bottle glass gradient -->
-    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="0.8">
-      <stop offset="0%" stop-color="#e8f5f5" stop-opacity="0.55"/>
-      <stop offset="50%" stop-color="#d5eded" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="#c5e0e0" stop-opacity="0.45"/>
+    <linearGradient id="cr-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3d1020" stop-opacity="0.95"/>
+      <stop offset="30%" stop-color="#581828" stop-opacity="0.82"/>
+      <stop offset="68%" stop-color="#3d1020" stop-opacity="0.90"/>
+      <stop offset="100%" stop-color="#250810" stop-opacity="0.98"/>
     </linearGradient>
-    <!-- Cool teal liquid gradient -->
-    <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#30c8c0" stop-opacity="0.7"/>
-      <stop offset="30%" stop-color="#20B2AA"/>
-      <stop offset="65%" stop-color="#189090"/>
-      <stop offset="100%" stop-color="#107070"/>
+    <linearGradient id="cr-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7a3808"/>
+      <stop offset="50%" stop-color="#4a2008"/>
+      <stop offset="100%" stop-color="#280e04"/>
     </linearGradient>
-    <!-- Mint accent gradient -->
-    <linearGradient id="mintGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#60e8d8" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="#20B2AA" stop-opacity="0.1"/>
+    <linearGradient id="cr-cap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3c1a0c"/>
+      <stop offset="100%" stop-color="#160804"/>
     </linearGradient>
-    <!-- Glass highlight -->
-    <linearGradient id="highlightGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    <linearGradient id="cr-hl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c08060" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#c08060" stop-opacity="0"/>
     </linearGradient>
-    <!-- Chrome cap gradient -->
-    <linearGradient id="capGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#f0f0f0"/>
-      <stop offset="20%" stop-color="#d0d0d0"/>
-      <stop offset="40%" stop-color="#e8e8e8"/>
-      <stop offset="60%" stop-color="#b8b8b8"/>
-      <stop offset="80%" stop-color="#d8d8d8"/>
-      <stop offset="100%" stop-color="#c0c0c0"/>
-    </linearGradient>
-    <!-- Drop shadow filter -->
-    <filter id="shadow" x="-10%" y="-5%" width="120%" height="115%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur"/>
-      <feOffset in="blur" dx="0" dy="6" result="offsetBlur"/>
-      <feFlood flood-color="#000000" flood-opacity="0.12" result="color"/>
-      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
-      <feMerge>
-        <feMergeNode in="shadow"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <!-- Reflection -->
-    <radialGradient id="reflectionGrad" cx="0.3" cy="0.3" r="0.45">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
+    <filter id="cr-sh"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#180608" flood-opacity="0.4"/></filter>
   </defs>
-
-  <!-- Shadow beneath bottle -->
-  <ellipse cx="200" cy="462" rx="65" ry="10" fill="#000" opacity="0.09"/>
-
-  <g filter="url(#shadow)">
-    <!-- Sleek modern tall bottle, slightly tapered at top -->
-    <path d="
-      M 155 140
-      Q 148 155 145 180
-      L 140 430
-      Q 140 450 155 450
-      L 245 450
-      Q 260 450 260 430
-      L 255 180
-      Q 252 155 245 140
-      Z
-    " fill="url(#glassGrad)" stroke="#b8d8d8" stroke-width="1"/>
-
-    <!-- Liquid fill -->
-    <path d="
-      M 147 210
-      L 142 430
-      Q 142 448 155 448
-      L 245 448
-      Q 258 448 258 430
-      L 253 210
-      Z
-    " fill="url(#liquidGrad)"/>
-
-    <!-- Mint accent strip inside liquid -->
-    <rect x="148" y="230" width="20" height="200" rx="10" fill="url(#mintGrad)"/>
-
-    <!-- Glass highlight -->
-    <path d="
-      M 155 150
-      L 153 160
-      L 150 350
-      L 160 350
-      L 162 160
-      L 160 150
-      Z
-    " fill="url(#highlightGrad)"/>
-
-    <!-- Large reflection oval -->
-    <ellipse cx="170" cy="300" rx="16" ry="85" fill="url(#reflectionGrad)" transform="rotate(-2 170 300)"/>
-
-    <!-- Bottle neck - slim modern -->
-    <rect x="177" y="100" width="46" height="44" rx="3" fill="url(#glassGrad)" stroke="#b8d8d8" stroke-width="1"/>
-
-    <!-- Neck highlight -->
-    <rect x="182" y="105" width="4" height="35" rx="2" fill="#ffffff" opacity="0.25"/>
-
-    <!-- Flat modern chrome cap -->
-    <rect x="168" y="72" width="64" height="32" rx="3" fill="url(#capGrad)" stroke="#a8a8a8" stroke-width="0.8"/>
-
-    <!-- Cap highlight line -->
-    <rect x="174" y="76" width="4" height="24" rx="2" fill="#ffffff" opacity="0.35"/>
-
-    <!-- Cap top edge -->
-    <rect x="168" y="72" width="64" height="3" rx="2" fill="#e0e0e0"/>
-
-    <!-- Cap bottom edge line -->
-    <line x1="168" y1="103" x2="232" y2="103" stroke="#b0b0b0" stroke-width="0.5"/>
+  <g filter="url(#cr-sh)">
+    <rect x="152" y="160" width="96" height="268" rx="3" fill="url(#cr-glass)" stroke="#501828" stroke-width="0.8"/>
+    <clipPath id="cr-cl"><rect x="155" y="163" width="90" height="262" rx="2"/></clipPath>
+    <rect x="155" y="174" width="90" height="251" fill="url(#cr-liquid)" clip-path="url(#cr-cl)" opacity="0.70"/>
+    <rect x="154" y="163" width="17" height="262" fill="url(#cr-hl)" opacity="0.5"/>
+    <text x="200" y="260" font-family="'Trebuchet MS',Arial,sans-serif" font-size="6.5" fill="#c89050" text-anchor="middle" letter-spacing="2.5" opacity="0.85">COLOGNE HOUSE</text>
+    <text x="200" y="278" font-family="Georgia,serif" font-size="11" font-weight="bold" fill="#d8a860" text-anchor="middle" letter-spacing="0.5" opacity="0.78">Cool Rush</text>
+    <line x1="170" y1="289" x2="230" y2="289" stroke="#c89050" stroke-width="0.5" opacity="0.4"/>
+    <rect x="150" y="424" width="100" height="4" rx="2" fill="#180608" opacity="0.4"/>
+    <rect x="176" y="141" width="48" height="21" rx="2" fill="url(#cr-glass)" stroke="#501828" stroke-width="0.7"/>
+    <rect x="156" y="88" width="88" height="55" rx="2" fill="url(#cr-cap)"/>
+    <rect x="156" y="90" width="8" height="51" rx="1" fill="#280c04" opacity="0.9"/>
+    <rect x="236" y="90" width="8" height="51" rx="1" fill="#280c04" opacity="0.9"/>
+    <rect x="156" y="88" width="88" height="6" rx="2" fill="#481c0c"/>
+    <rect x="159" y="94" width="7" height="45" fill="#ffffff" opacity="0.04"/>
+    <rect x="156" y="139" width="88" height="4" rx="1" fill="#180800"/>
+    <ellipse cx="200" cy="434" rx="52" ry="4" fill="#180608" opacity="0.1"/>
   </g>
 </svg>

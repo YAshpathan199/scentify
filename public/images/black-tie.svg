@@ -1,96 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
   <defs>
-    <!-- Dark glass gradient -->
+    <!-- Clear glass (slightly visible walls) -->
     <linearGradient id="bt-glass" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#2a2a2a" stop-opacity="0.8"/>
-      <stop offset="30%" stop-color="#3a3a3a" stop-opacity="0.7"/>
-      <stop offset="70%" stop-color="#252525" stop-opacity="0.8"/>
-      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0.9"/>
+      <stop offset="0%" stop-color="#a8a8a0" stop-opacity="0.20"/>
+      <stop offset="30%" stop-color="#d0d0c8" stop-opacity="0.11"/>
+      <stop offset="68%" stop-color="#a8a8a0" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#888880" stop-opacity="0.24"/>
     </linearGradient>
-    <!-- Liquid - near black with gold shimmer -->
-    <linearGradient id="bt-liquid" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1a1000"/>
-      <stop offset="30%" stop-color="#B8860B" stop-opacity="0.3"/>
-      <stop offset="50%" stop-color="#1a1000"/>
-      <stop offset="70%" stop-color="#B8860B" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#0a0500"/>
+    <!-- Clear/pale straw liquid -->
+    <linearGradient id="bt-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f8f8f0" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#f0edd8" stop-opacity="0.25"/>
     </linearGradient>
-    <!-- Gold accent gradient -->
-    <linearGradient id="bt-gold" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#d4af37"/>
-      <stop offset="50%" stop-color="#B8860B"/>
-      <stop offset="100%" stop-color="#96700a"/>
-    </linearGradient>
-    <!-- Cap gradient -->
+    <!-- Gold knurled cap -->
     <linearGradient id="bt-cap" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#333333"/>
-      <stop offset="50%" stop-color="#1a1a1a"/>
-      <stop offset="100%" stop-color="#0a0a0a"/>
+      <stop offset="0%" stop-color="#f0d060"/>
+      <stop offset="45%" stop-color="#c89830"/>
+      <stop offset="100%" stop-color="#806010"/>
     </linearGradient>
-    <!-- Edge highlight -->
-    <linearGradient id="bt-highlight" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.2"/>
+    <linearGradient id="bt-hl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
-    <!-- Shadow -->
-    <filter id="bt-shadow" x="-20%" y="-10%" width="140%" height="130%">
-      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000000" flood-opacity="0.25"/>
-    </filter>
+    <!-- Label gradient dark -->
+    <linearGradient id="bt-label" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#181818"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </linearGradient>
+    <filter id="bt-sh"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#303030" flood-opacity="0.22"/></filter>
   </defs>
-
-  <g filter="url(#bt-shadow)">
-    <!-- Main bottle body - tall slim rectangle with sharp edges -->
-    <rect x="150" y="145" width="100" height="290" rx="4" fill="url(#bt-glass)" stroke="#444444" stroke-width="0.8"/>
-
-    <!-- Liquid fill -->
-    <clipPath id="bt-clip">
-      <rect x="153" y="148" width="94" height="284" rx="3"/>
+  <g filter="url(#bt-sh)">
+    <!-- Curved body with rounded shoulders: 50ml, ~10cm, x:152-248, y:158-428 -->
+    <!-- Using path: rounded shoulders, straight sides, rounded base -->
+    <path d="M176,180 Q152,180 152,204 L152,425 Q152,428 155,428 L245,428 Q248,428 248,425 L248,204 Q248,180 224,180 Q218,160 200,156 Q182,160 176,180 Z" fill="url(#bt-glass)" stroke="#b0b0a8" stroke-width="0.8"/>
+    <clipPath id="bt-cl">
+      <path d="M155,205 L155,424 L245,424 L245,205 Q245,183 224,183 Q218,163 200,159 Q182,163 176,183 Z"/>
     </clipPath>
-    <rect x="153" y="170" width="94" height="262" fill="url(#bt-liquid)" clip-path="url(#bt-clip)" opacity="0.9"/>
-
-    <!-- Gold shimmer streaks in liquid -->
-    <line x1="170" y1="200" x2="175" y2="420" stroke="#B8860B" stroke-width="0.5" opacity="0.15"/>
-    <line x1="200" y1="190" x2="198" y2="430" stroke="#d4af37" stroke-width="0.3" opacity="0.1"/>
-    <line x1="225" y1="210" x2="228" y2="410" stroke="#B8860B" stroke-width="0.4" opacity="0.12"/>
-
-    <!-- Left edge highlight -->
-    <rect x="152" y="148" width="15" height="284" fill="url(#bt-highlight)" opacity="0.5"/>
-
-    <!-- Small bright highlight -->
-    <rect x="155" y="180" width="4" height="80" rx="2" fill="#ffffff" opacity="0.15"/>
-
-    <!-- Gold accent line near bottom -->
-    <rect x="150" y="415" width="100" height="2" fill="url(#bt-gold)" opacity="0.7"/>
-
-    <!-- Gold accent line near top of body -->
-    <rect x="150" y="148" width="100" height="2" fill="url(#bt-gold)" opacity="0.5"/>
-
+    <!-- Liquid fill -->
+    <rect x="156" y="182" width="88" height="244" fill="url(#bt-liquid)" clip-path="url(#bt-cl)"/>
+    <!-- Glass edge highlight -->
+    <path d="M176,180 Q152,180 152,204 L152,425" fill="none" stroke="url(#bt-hl)" stroke-width="18" opacity="0.42"/>
+    <rect x="155" y="210" width="4" height="130" rx="2" fill="#ffffff" opacity="0.22"/>
+    <!-- Illustrated paper label: dark panel with party silhouettes -->
+    <rect x="156" y="262" width="88" height="100" rx="1" fill="url(#bt-label)" opacity="0.88"/>
+    <!-- Silhouette art: stylized people at party (simple shapes) -->
+    <!-- Person 1 (left) -->
+    <ellipse cx="174" cy="296" rx="5" ry="5" fill="#ffffff" opacity="0.60"/>
+    <path d="M170,301 Q169,315 168,322 L180,322 Q179,315 178,301 Z" fill="#ffffff" opacity="0.55"/>
+    <!-- Person 2 (center, tall) -->
+    <ellipse cx="200" cy="289" rx="5" ry="5" fill="#ffffff" opacity="0.65"/>
+    <path d="M196,294 Q195,310 194,322 L206,322 Q205,310 204,294 Z" fill="#ffffff" opacity="0.60"/>
+    <!-- Person 3 (right) -->
+    <ellipse cx="226" cy="296" rx="5" ry="5" fill="#ffffff" opacity="0.60"/>
+    <path d="M222,301 Q221,315 220,322 L232,322 Q231,315 230,301 Z" fill="#ffffff" opacity="0.55"/>
+    <!-- Stars -->
+    <text x="185" y="288" font-family="Arial" font-size="6" fill="#f0d060" opacity="0.6">★</text>
+    <text x="208" y="284" font-family="Arial" font-size="5" fill="#f0d060" opacity="0.6">★</text>
+    <!-- Label text -->
+    <text x="200" y="345" font-family="Georgia,serif" font-size="10" fill="#f0d060" text-anchor="middle" letter-spacing="1.5" opacity="0.90">Black Tie</text>
+    <text x="200" y="356" font-family="Arial,sans-serif" font-size="5.5" fill="#c0a040" text-anchor="middle" letter-spacing="2.5" opacity="0.75">ARTISCENTS</text>
+    <!-- Base -->
+    <rect x="150" y="424" width="100" height="4" rx="2" fill="#484840" opacity="0.35"/>
     <!-- Neck -->
-    <rect x="170" y="120" width="60" height="28" rx="2" fill="url(#bt-glass)" stroke="#444444" stroke-width="0.8"/>
-
-    <!-- Neck gold ring -->
-    <rect x="168" y="135" width="64" height="3" fill="url(#bt-gold)" opacity="0.8"/>
-
-    <!-- Cap - tall rectangular, glossy black -->
-    <rect x="155" y="40" width="90" height="82" rx="3" fill="url(#bt-cap)" stroke="#333333" stroke-width="0.8"/>
-
-    <!-- Cap top surface -->
-    <rect x="155" y="40" width="90" height="10" rx="3" fill="#2a2a2a"/>
-
-    <!-- Cap left highlight -->
-    <rect x="158" y="45" width="10" height="72" fill="#ffffff" opacity="0.08"/>
-
-    <!-- Cap small bright line -->
-    <rect x="160" y="50" width="3" height="40" rx="1.5" fill="#ffffff" opacity="0.12"/>
-
-    <!-- Cap bottom edge -->
-    <rect x="155" y="118" width="90" height="4" rx="1" fill="#333333"/>
-
-    <!-- Bottom base -->
-    <rect x="148" y="433" width="104" height="5" rx="2" fill="#333333" opacity="0.6"/>
-
-    <!-- Ground reflection -->
-    <ellipse cx="200" cy="445" rx="55" ry="5" fill="#1a1a1a" opacity="0.15"/>
+    <rect x="174" y="136" width="52" height="26" rx="4" fill="url(#bt-glass)" stroke="#b0b0a8" stroke-width="0.7"/>
+    <!-- Tall round gold knurled cap -->
+    <rect x="171" y="78" width="58" height="62" rx="4" fill="url(#bt-cap)"/>
+    <!-- Knurl texture lines -->
+    <line x1="180" y1="80" x2="180" y2="138" stroke="#c89020" stroke-width="0.5" opacity="0.5"/>
+    <line x1="188" y1="80" x2="188" y2="138" stroke="#c89020" stroke-width="0.5" opacity="0.5"/>
+    <line x1="196" y1="80" x2="196" y2="138" stroke="#c89020" stroke-width="0.5" opacity="0.5"/>
+    <line x1="204" y1="80" x2="204" y2="138" stroke="#c89020" stroke-width="0.5" opacity="0.5"/>
+    <line x1="212" y1="80" x2="212" y2="138" stroke="#c89020" stroke-width="0.5" opacity="0.5"/>
+    <line x1="220" y1="80" x2="220" y2="138" stroke="#c89020" stroke-width="0.5" opacity="0.5"/>
+    <!-- Cap top -->
+    <ellipse cx="200" cy="78" rx="29" ry="9" fill="#f0d868"/>
+    <!-- Cap top highlight -->
+    <ellipse cx="190" cy="75" rx="11" ry="4" fill="#ffffff" opacity="0.22"/>
+    <!-- Cap bottom ring -->
+    <rect x="171" y="134" width="58" height="6" rx="2" fill="#a07818"/>
+    <!-- Left highlight on cap -->
+    <rect x="175" y="82" width="6" height="54" rx="3" fill="#ffffff" opacity="0.18"/>
+    <ellipse cx="200" cy="434" rx="52" ry="4" fill="#303030" opacity="0.1"/>
   </g>
 </svg>

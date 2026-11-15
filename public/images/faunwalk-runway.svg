@@ -1,56 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
   <defs>
-    <linearGradient id="run-glass" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#f07840" stop-opacity="0.22"/>
-      <stop offset="40%" stop-color="#f8a860" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#d05820" stop-opacity="0.28"/>
+    <linearGradient id="fw-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c08060" stop-opacity="0.22"/>
+      <stop offset="30%" stop-color="#e0a880" stop-opacity="0.13"/>
+      <stop offset="68%" stop-color="#c08060" stop-opacity="0.17"/>
+      <stop offset="100%" stop-color="#a06040" stop-opacity="0.26"/>
     </linearGradient>
-    <linearGradient id="run-liquid" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f8b870"/>
-      <stop offset="30%" stop-color="#f09040"/>
-      <stop offset="60%" stop-color="#d86820"/>
-      <stop offset="100%" stop-color="#a84810"/>
+    <!-- Bright orange-pink liquid (Runway) -->
+    <linearGradient id="fw-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f89860"/>
+      <stop offset="50%" stop-color="#f07040"/>
+      <stop offset="100%" stop-color="#d04820"/>
     </linearGradient>
-    <linearGradient id="run-cap" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f8d890"/>
-      <stop offset="50%" stop-color="#e0b060"/>
-      <stop offset="100%" stop-color="#c08030"/>
+    <linearGradient id="fw-spray" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#080808"/>
     </linearGradient>
-    <linearGradient id="run-accent" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#f8e080"/>
-      <stop offset="100%" stop-color="#d8b040"/>
+    <linearGradient id="fw-hl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f8c0a0" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#f8c0a0" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="run-hl" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
-    <filter id="run-shadow">
-      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#d05820" flood-opacity="0.2"/>
-    </filter>
+    <filter id="fw-sh"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#380810" flood-opacity="0.3"/></filter>
   </defs>
-  <g filter="url(#run-shadow)">
-    <rect x="168" y="160" width="64" height="260" rx="6" fill="url(#run-glass)" stroke="#e08030" stroke-width="0.8"/>
-    <clipPath id="run-clip"><rect x="171" y="163" width="58" height="254" rx="5"/></clipPath>
-    <rect x="171" y="178" width="58" height="239" fill="url(#run-liquid)" clip-path="url(#run-clip)" opacity="0.87"/>
-    <ellipse cx="195" cy="215" rx="14" ry="24" fill="#ffffff" fill-opacity="0.1" clip-path="url(#run-clip)"/>
-    <ellipse cx="210" cy="310" rx="8" ry="12" fill="#f8e090" fill-opacity="0.08" clip-path="url(#run-clip)"/>
-    <rect x="170" y="163" width="12" height="254" fill="url(#run-hl)" opacity="0.55"/>
-    <rect x="173" y="185" width="3" height="65" rx="1.5" fill="#ffffff" opacity="0.28"/>
-    <rect x="168" y="398" width="64" height="2" fill="url(#run-accent)" opacity="0.75"/>
-    <rect x="168" y="163" width="64" height="2" fill="url(#run-accent)" opacity="0.55"/>
-    <rect x="180" y="140" width="40" height="22" rx="3" fill="url(#run-glass)" stroke="#e08030" stroke-width="0.7"/>
-    <rect x="178" y="150" width="44" height="2.5" fill="url(#run-accent)" opacity="0.85"/>
-    <rect x="195" y="128" width="10" height="14" rx="2" fill="#d07020"/>
-    <rect x="197" y="122" width="6" height="8" rx="1" fill="#c06010"/>
-    <rect x="162" y="52" width="76" height="90" rx="8" fill="url(#run-cap)" stroke="#d09030" stroke-width="0.8"/>
-    <rect x="162" y="52" width="76" height="14" rx="8" fill="#f8e090"/>
-    <rect x="165" y="58" width="10" height="78" fill="#ffffff" opacity="0.22"/>
-    <rect x="168" y="62" width="3" height="50" rx="1.5" fill="#ffffff" opacity="0.3"/>
-    <rect x="176" y="78" width="48" height="22" rx="3" fill="#c88830" opacity="0.3"/>
-    <text x="200" y="93" font-family="Georgia, serif" font-size="6.5" font-weight="bold" fill="#907020" text-anchor="middle" letter-spacing="1.2">FAUNWALK</text>
-    <rect x="162" y="138" width="76" height="4" rx="2" fill="#d09030"/>
-    <rect x="166" y="418" width="68" height="4" rx="2" fill="#d05820" opacity="0.35"/>
-    <ellipse cx="200" cy="428" rx="40" ry="4" fill="#d05820" opacity="0.11"/>
+  <g filter="url(#fw-sh)">
+    <rect x="186" y="120" width="28" height="290" rx="14" fill="url(#fw-glass)" stroke="#d08050" stroke-width="0.8"/>
+    <clipPath id="fw-cl"><rect x="189" y="123" width="22" height="284" rx="11"/></clipPath>
+    <rect x="189" y="134" width="22" height="273" fill="url(#fw-liquid)" clip-path="url(#fw-cl)" opacity="0.78"/>
+    <rect x="188" y="123" width="8" height="284" fill="url(#fw-hl)" opacity="0.5"/>
+    <rect x="190" y="150" width="2.5" height="120" rx="1.25" fill="#f8d8b8" opacity="0.22"/>
+    <text transform="rotate(-90,200,280)" x="200" y="284" font-family="Arial,sans-serif" font-size="5.5" fill="#f8e8d8" text-anchor="middle" letter-spacing="1.5" opacity="0.65">Faunwalk</text>
+    <text transform="rotate(-90,200,320)" x="200" y="324" font-family="Arial,sans-serif" font-size="5" fill="#f8e8d8" text-anchor="middle" letter-spacing="1" opacity="0.55">Runway</text>
+    <ellipse cx="200" cy="411" rx="16" ry="4" fill="#380810" opacity="0.2"/>
+    <rect x="183" y="98" width="34" height="24" rx="3" fill="url(#fw-spray)"/>
+    <rect x="195" y="88" width="10" height="12" rx="2" fill="url(#fw-spray)"/>
+    <rect x="186" y="100" width="8" height="6" rx="2" fill="#484848" opacity="0.6"/>
+    <rect x="186" y="100" width="6" height="4" rx="1" fill="#ffffff" opacity="0.08"/>
   </g>
 </svg>

@@ -1,98 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
   <defs>
-    <!-- Faceted glass gradient -->
-    <linearGradient id="or-glass" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#4a4a4a" stop-opacity="0.6"/>
-      <stop offset="50%" stop-color="#2a2a2a" stop-opacity="0.7"/>
-      <stop offset="100%" stop-color="#1a1a1a" stop-opacity="0.8"/>
+    <!-- Dark brown to amber gradient glass -->
+    <linearGradient id="or-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2a1008" stop-opacity="0.97"/>
+      <stop offset="30%" stop-color="#4a2010" stop-opacity="0.85"/>
+      <stop offset="68%" stop-color="#341408" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#200a04" stop-opacity="0.98"/>
     </linearGradient>
-    <!-- Dark liquid -->
+    <linearGradient id="or-glass-vert" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7a3818" stop-opacity="0.90"/>
+      <stop offset="50%" stop-color="#4a2010" stop-opacity="0.90"/>
+      <stop offset="100%" stop-color="#2a1008" stop-opacity="0.97"/>
+    </linearGradient>
     <linearGradient id="or-liquid" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#5c3a1e"/>
-      <stop offset="40%" stop-color="#3a2010"/>
-      <stop offset="100%" stop-color="#1a0a00"/>
+      <stop offset="0%" stop-color="#5a2808"/>
+      <stop offset="50%" stop-color="#381508"/>
+      <stop offset="100%" stop-color="#200800"/>
     </linearGradient>
-    <!-- Left facet highlight -->
-    <linearGradient id="or-facet-left" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    <!-- Gold dome cap -->
+    <radialGradient id="or-cap-dome" cx="40%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#f0d060"/>
+      <stop offset="45%" stop-color="#c89830"/>
+      <stop offset="100%" stop-color="#806010"/>
+    </radialGradient>
+    <linearGradient id="or-hl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c08060" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#c08060" stop-opacity="0"/>
     </linearGradient>
-    <!-- Right facet -->
-    <linearGradient id="or-facet-right" x1="1" y1="0" x2="0" y2="0">
-      <stop offset="0%" stop-color="#000000" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
-    </linearGradient>
-    <!-- Cap gradient -->
-    <linearGradient id="or-cap" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#3a3a3a"/>
-      <stop offset="100%" stop-color="#1a1a1a"/>
-    </linearGradient>
-    <!-- Edge highlight -->
-    <linearGradient id="or-edge" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
-      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.1"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </linearGradient>
-    <!-- Shadow -->
-    <filter id="or-shadow" x="-20%" y="-10%" width="140%" height="130%">
-      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#000000" flood-opacity="0.3"/>
-    </filter>
+    <filter id="or-sh"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#180600" flood-opacity="0.5"/></filter>
   </defs>
-
-  <g filter="url(#or-shadow)">
-    <!-- Main bottle body - angular/faceted crystal rock shape -->
-    <path d="M130,180 L110,380 L140,420 L260,420 L290,380 L270,180 Z" fill="url(#or-glass)" stroke="#555555" stroke-width="0.8"/>
-
-    <!-- Liquid fill -->
-    <clipPath id="or-clip">
-      <path d="M132,185 L112,378 L141,418 L259,418 L288,378 L268,185 Z"/>
+  <g filter="url(#or-sh)">
+    <!-- Same tapered shape, dark brown -->
+    <path d="M172,220 Q164,220 164,230 L164,415 Q164,418 167,418 L233,418 Q236,418 236,415 L236,230 Q236,220 228,220 Q220,194 200,190 Q180,194 172,220 Z" fill="url(#or-glass)" stroke="#4a1a08" stroke-width="0.8"/>
+    <clipPath id="or-cl">
+      <path d="M166,222 Q166,224 166,230 L166,414 L234,414 L234,230 Q234,224 234,222 Q220,196 200,192 Q180,196 166,222 Z"/>
     </clipPath>
-    <rect x="112" y="220" width="180" height="200" fill="url(#or-liquid)" clip-path="url(#or-clip)" opacity="0.85"/>
-
-    <!-- Facet lines - diagonal cuts like crystal -->
-    <line x1="170" y1="180" x2="155" y2="420" stroke="#666666" stroke-width="0.5" opacity="0.4"/>
-    <line x1="230" y1="180" x2="245" y2="420" stroke="#666666" stroke-width="0.5" opacity="0.4"/>
-    <line x1="200" y1="180" x2="200" y2="420" stroke="#666666" stroke-width="0.3" opacity="0.3"/>
-
-    <!-- Left facet highlight panel -->
-    <path d="M130,180 L110,380 L140,420 L155,420 L170,180 Z" fill="url(#or-facet-left)"/>
-
-    <!-- Right facet shadow panel -->
-    <path d="M245,420 L260,420 L290,380 L270,180 L230,180 Z" fill="url(#or-facet-right)"/>
-
-    <!-- Sharp edge highlight on left -->
-    <line x1="130" y1="182" x2="112" y2="378" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
-
-    <!-- Top edge highlight -->
-    <line x1="132" y1="180" x2="268" y2="180" stroke="#ffffff" stroke-width="0.8" opacity="0.15"/>
-
-    <!-- Liquid surface line -->
-    <line x1="135" y1="230" x2="265" y2="230" stroke="#7a5030" stroke-width="0.8" opacity="0.4"/>
-
-    <!-- Neck - short angular -->
-    <path d="M175,150 L175,180 L225,180 L225,150 Z" fill="url(#or-glass)" stroke="#555555" stroke-width="0.8"/>
-
-    <!-- Neck edge highlight -->
-    <rect x="175" y="150" width="3" height="30" fill="url(#or-edge)" opacity="0.5"/>
-
-    <!-- Cap - matte black squared off -->
-    <rect x="168" y="110" width="64" height="42" rx="3" fill="url(#or-cap)" stroke="#444444" stroke-width="0.5"/>
-
-    <!-- Cap top surface -->
-    <rect x="168" y="110" width="64" height="8" rx="3" fill="#444444"/>
-
-    <!-- Cap subtle texture lines -->
-    <line x1="175" y1="118" x2="175" y2="150" stroke="#333333" stroke-width="0.5" opacity="0.5"/>
-    <line x1="225" y1="118" x2="225" y2="150" stroke="#333333" stroke-width="0.5" opacity="0.5"/>
-
-    <!-- Cap highlight -->
-    <rect x="172" y="115" width="20" height="2" rx="1" fill="#ffffff" opacity="0.1"/>
-
-    <!-- Bottom base edge -->
-    <line x1="140" y1="420" x2="260" y2="420" stroke="#666666" stroke-width="1" opacity="0.5"/>
-
-    <!-- Ground reflection -->
-    <ellipse cx="200" cy="430" rx="80" ry="6" fill="#1a1a1a" opacity="0.2"/>
+    <rect x="167" y="200" width="66" height="216" fill="url(#or-liquid)" clip-path="url(#or-cl)" opacity="0.88"/>
+    <path d="M172,220 Q164,220 164,230 L164,415" fill="none" stroke="url(#or-hl)" stroke-width="14" opacity="0.4"/>
+    <text x="200" y="312" font-family="Georgia,serif" font-size="8" fill="#c07840" text-anchor="middle" letter-spacing="0.5" opacity="0.75">Oud on the Rocks</text>
+    <text x="200" y="327" font-family="Arial,sans-serif" font-size="6" fill="#a06030" text-anchor="middle" letter-spacing="2" opacity="0.6">AJMAL</text>
+    <!-- Neck -->
+    <rect x="183" y="168" width="34" height="24" rx="2" fill="url(#or-glass)" stroke="#4a1a08" stroke-width="0.7"/>
+    <!-- Gold ribbed dome cap -->
+    <ellipse cx="200" cy="150" rx="30" ry="22" fill="url(#or-cap-dome)" stroke="#c09020" stroke-width="0.8"/>
+    <line x1="184" y1="138" x2="184" y2="171" stroke="#a07820" stroke-width="0.6" opacity="0.5"/>
+    <line x1="191" y1="132" x2="191" y2="171" stroke="#a07820" stroke-width="0.6" opacity="0.5"/>
+    <line x1="200" y1="130" x2="200" y2="171" stroke="#a07820" stroke-width="0.6" opacity="0.5"/>
+    <line x1="209" y1="132" x2="209" y2="171" stroke="#a07820" stroke-width="0.6" opacity="0.5"/>
+    <line x1="216" y1="138" x2="216" y2="171" stroke="#a07820" stroke-width="0.6" opacity="0.5"/>
+    <ellipse cx="192" cy="143" rx="10" ry="7" fill="#f8e890" opacity="0.25"/>
+    <rect x="162" y="413" width="76" height="5" rx="2" fill="#180600" opacity="0.4"/>
+    <ellipse cx="200" cy="427" rx="42" ry="4" fill="#180600" opacity="0.1"/>
   </g>
 </svg>

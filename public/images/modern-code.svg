@@ -1,96 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
   <defs>
-    <!-- Geometric glass gradient -->
     <linearGradient id="mc-glass" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#e8eee0" stop-opacity="0.7"/>
-      <stop offset="40%" stop-color="#f0f4ea" stop-opacity="0.6"/>
-      <stop offset="100%" stop-color="#d0d8c0" stop-opacity="0.5"/>
+      <stop offset="0%" stop-color="#a8a8a0" stop-opacity="0.20"/>
+      <stop offset="30%" stop-color="#d0d0c8" stop-opacity="0.11"/>
+      <stop offset="68%" stop-color="#a8a8a0" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#888880" stop-opacity="0.24"/>
     </linearGradient>
-    <!-- Olive green liquid -->
     <linearGradient id="mc-liquid" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#8aaa3a" stop-opacity="0.5"/>
-      <stop offset="50%" stop-color="#6B8E23" stop-opacity="0.7"/>
-      <stop offset="100%" stop-color="#4a6610" stop-opacity="0.9"/>
+      <stop offset="0%" stop-color="#f8f8f0" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#f0edd8" stop-opacity="0.25"/>
     </linearGradient>
-    <!-- Chrome/metallic cap -->
-    <linearGradient id="mc-chrome" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#a0a0a0"/>
-      <stop offset="20%" stop-color="#d8d8d8"/>
-      <stop offset="40%" stop-color="#f0f0f0"/>
-      <stop offset="60%" stop-color="#c0c0c0"/>
-      <stop offset="80%" stop-color="#e0e0e0"/>
-      <stop offset="100%" stop-color="#909090"/>
+    <linearGradient id="mc-cap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f0d060"/>
+      <stop offset="45%" stop-color="#c89830"/>
+      <stop offset="100%" stop-color="#806010"/>
     </linearGradient>
-    <!-- Cap top chrome -->
-    <linearGradient id="mc-chrome-top" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#e0e0e0"/>
-      <stop offset="50%" stop-color="#f8f8f8"/>
-      <stop offset="100%" stop-color="#b0b0b0"/>
-    </linearGradient>
-    <!-- Left facet highlight -->
-    <linearGradient id="mc-facet" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
+    <linearGradient id="mc-hl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.45"/>
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
     </linearGradient>
-    <!-- Shadow -->
-    <filter id="mc-shadow" x="-20%" y="-10%" width="140%" height="130%">
-      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.15"/>
-    </filter>
+    <linearGradient id="mc-label" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#101828"/>
+      <stop offset="100%" stop-color="#060e18"/>
+    </linearGradient>
+    <filter id="mc-sh"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#303030" flood-opacity="0.22"/></filter>
   </defs>
-
-  <g filter="url(#mc-shadow)">
-    <!-- Main bottle - hexagonal shape -->
-    <path d="M155,150 L130,290 L145,420 L255,420 L270,290 L245,150 Z" fill="url(#mc-glass)" stroke="#b0b8a0" stroke-width="1"/>
-
-    <!-- Center facet division -->
-    <path d="M200,150 L200,420" stroke="#c0c8b0" stroke-width="0.5" opacity="0.4"/>
-
-    <!-- Left angled facet -->
-    <path d="M155,150 L130,290 L145,420 L200,420 L200,150 Z" fill="url(#mc-facet)" opacity="0.4"/>
-
-    <!-- Liquid fill -->
-    <clipPath id="mc-clip">
-      <path d="M157,153 L132,290 L147,418 L253,418 L268,290 L243,153 Z"/>
+  <g filter="url(#mc-sh)">
+    <path d="M176,180 Q152,180 152,204 L152,425 Q152,428 155,428 L245,428 Q248,428 248,425 L248,204 Q248,180 224,180 Q218,160 200,156 Q182,160 176,180 Z" fill="url(#mc-glass)" stroke="#b0b0a8" stroke-width="0.8"/>
+    <clipPath id="mc-cl">
+      <path d="M155,205 L155,424 L245,424 L245,205 Q245,183 224,183 Q218,163 200,159 Q182,163 176,183 Z"/>
     </clipPath>
-    <rect x="130" y="210" width="140" height="210" fill="url(#mc-liquid)" clip-path="url(#mc-clip)"/>
-
-    <!-- Facet edge highlights -->
-    <line x1="155" y1="152" x2="130" y2="290" stroke="#ffffff" stroke-width="0.8" opacity="0.2"/>
-    <line x1="130" y1="290" x2="145" y2="420" stroke="#ffffff" stroke-width="0.5" opacity="0.15"/>
-
-    <!-- Right facet shadow edge -->
-    <line x1="245" y1="152" x2="270" y2="290" stroke="#000000" stroke-width="0.5" opacity="0.1"/>
-
-    <!-- Liquid surface -->
-    <path d="M156,210 L244,210" stroke="#6B8E23" stroke-width="0.8" opacity="0.3"/>
-
-    <!-- Left side bright reflection -->
-    <path d="M157,165 L140,280 L143,310 L157,310 Z" fill="#ffffff" opacity="0.1"/>
-    <path d="M158,175 L148,260 L150,280 L158,280 Z" fill="#ffffff" opacity="0.08"/>
-
-    <!-- Neck - angular -->
-    <path d="M178,125 L175,150 L225,150 L222,125 Z" fill="url(#mc-glass)" stroke="#b0b8a0" stroke-width="0.8"/>
-
-    <!-- Cap - chrome/metallic angular -->
-    <path d="M170,65 L165,125 L235,125 L230,65 Z" fill="url(#mc-chrome)" stroke="#a0a0a0" stroke-width="0.8"/>
-
-    <!-- Cap top -->
-    <path d="M170,65 L230,65" stroke="#d0d0d0" stroke-width="2"/>
-
-    <!-- Cap angular top plate -->
-    <path d="M172,65 L175,55 L225,55 L228,65 Z" fill="url(#mc-chrome-top)" stroke="#b0b0b0" stroke-width="0.5"/>
-
-    <!-- Cap center ridge -->
-    <line x1="200" y1="58" x2="200" y2="123" stroke="#c8c8c8" stroke-width="0.5" opacity="0.5"/>
-
-    <!-- Cap highlight -->
-    <path d="M175,70 L173,115 L180,115 L182,70 Z" fill="#ffffff" opacity="0.15"/>
-
-    <!-- Bottom base line -->
-    <line x1="145" y1="420" x2="255" y2="420" stroke="#a0a890" stroke-width="1.5" opacity="0.5"/>
-
-    <!-- Ground reflection -->
-    <ellipse cx="200" cy="432" rx="58" ry="5" fill="#6B8E23" opacity="0.08"/>
+    <rect x="156" y="182" width="88" height="244" fill="url(#mc-liquid)" clip-path="url(#mc-cl)"/>
+    <path d="M176,180 Q152,180 152,204 L152,425" fill="none" stroke="url(#mc-hl)" stroke-width="18" opacity="0.42"/>
+    <rect x="155" y="210" width="4" height="130" rx="2" fill="#ffffff" opacity="0.22"/>
+    <!-- City skyline label -->
+    <rect x="156" y="262" width="88" height="100" rx="1" fill="url(#mc-label)" opacity="0.88"/>
+    <!-- Skyline silhouette -->
+    <!-- Building group, left cluster -->
+    <rect x="159" y="316" width="10" height="38" fill="#ffffff" opacity="0.45"/>
+    <rect x="162" y="308" width="4" height="10" fill="#ffffff" opacity="0.45"/>
+    <rect x="171" y="322" width="8" height="32" fill="#ffffff" opacity="0.45"/>
+    <!-- Center tall tower -->
+    <rect x="181" y="295" width="8" height="59" fill="#ffffff" opacity="0.50"/>
+    <rect x="183" y="289" width="4" height="8" fill="#ffffff" opacity="0.50"/>
+    <!-- Center left cluster -->
+    <rect x="191" y="305" width="10" height="49" fill="#ffffff" opacity="0.45"/>
+    <rect x="193" y="299" width="6" height="8" fill="#ffffff" opacity="0.45"/>
+    <!-- Center right -->
+    <rect x="203" y="300" width="12" height="54" fill="#ffffff" opacity="0.48"/>
+    <!-- Right cluster -->
+    <rect x="217" y="312" width="10" height="42" fill="#ffffff" opacity="0.45"/>
+    <rect x="229" y="320" width="8" height="34" fill="#ffffff" opacity="0.45"/>
+    <rect x="232" y="315" width="4" height="7" fill="#ffffff" opacity="0.45"/>
+    <!-- Windows (dots) on tallest buildings -->
+    <rect x="183" y="293" width="2" height="2" fill="#f0d060" opacity="0.6"/>
+    <rect x="193" y="302" width="2" height="2" fill="#f0d060" opacity="0.5"/>
+    <!-- Label text -->
+    <text x="200" y="347" font-family="Georgia,serif" font-size="10" fill="#f0d060" text-anchor="middle" letter-spacing="1" opacity="0.90">Modern Code</text>
+    <text x="200" y="358" font-family="Arial,sans-serif" font-size="5.5" fill="#c0a040" text-anchor="middle" letter-spacing="2.5" opacity="0.75">ARTISCENTS</text>
+    <rect x="150" y="424" width="100" height="4" rx="2" fill="#484840" opacity="0.35"/>
+    <rect x="174" y="136" width="52" height="26" rx="4" fill="url(#mc-glass)" stroke="#b0b0a8" stroke-width="0.7"/>
+    <!-- Tall round gold knurled cap -->
+    <rect x="171" y="78" width="58" height="62" rx="4" fill="url(#mc-cap)"/>
+    <line x1="180" y1="80" x2="180" y2="138" stroke="#c89020" stroke-width="0.5" opacity="0.5"/>
+    <line x1="188" y1="80" x2="188" y2="138" stroke="#c89020" stroke-width="0.5" opacity="0.5"/>
+    <line x1="196" y1="80" x2="196" y2="138" stroke="#c89020" stroke-width="0.5" opacity="0.5"/>
+    <line x1="204" y1="80" x2="204" y2="138" stroke="#c89020" stroke-width="0.5" opacity="0.5"/>
+    <line x1="212" y1="80" x2="212" y2="138" stroke="#c89020" stroke-width="0.5" opacity="0.5"/>
+    <line x1="220" y1="80" x2="220" y2="138" stroke="#c89020" stroke-width="0.5" opacity="0.5"/>
+    <ellipse cx="200" cy="78" rx="29" ry="9" fill="#f0d868"/>
+    <ellipse cx="190" cy="75" rx="11" ry="4" fill="#ffffff" opacity="0.22"/>
+    <rect x="171" y="134" width="58" height="6" rx="2" fill="#a07818"/>
+    <rect x="175" y="82" width="6" height="54" rx="3" fill="#ffffff" opacity="0.18"/>
+    <ellipse cx="200" cy="434" rx="52" ry="4" fill="#303030" opacity="0.1"/>
   </g>
 </svg>

@@ -1,141 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
   <defs>
-    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="0.8">
-      <stop offset="0%" stop-color="#2a2420" stop-opacity="0.75"/>
-      <stop offset="50%" stop-color="#1e1a16" stop-opacity="0.88"/>
-      <stop offset="100%" stop-color="#150f0b" stop-opacity="0.92"/>
+    <linearGradient id="os-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#808080" stop-opacity="0.22"/>
+      <stop offset="30%" stop-color="#b0b0b0" stop-opacity="0.12"/>
+      <stop offset="68%" stop-color="#808080" stop-opacity="0.17"/>
+      <stop offset="100%" stop-color="#606060" stop-opacity="0.26"/>
     </linearGradient>
-    <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#7a5230" stop-opacity="0.85"/>
-      <stop offset="30%" stop-color="#5c3c20"/>
-      <stop offset="65%" stop-color="#3e2810"/>
-      <stop offset="100%" stop-color="#241508"/>
+    <!-- Dark smoky brown/near-black liquid -->
+    <linearGradient id="os-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#281408"/>
+      <stop offset="50%" stop-color="#180a04"/>
+      <stop offset="100%" stop-color="#080400"/>
     </linearGradient>
-    <linearGradient id="smokeGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#8c7060" stop-opacity="0.3"/>
-      <stop offset="50%" stop-color="#6a5040" stop-opacity="0.08"/>
-      <stop offset="100%" stop-color="#8c7060" stop-opacity="0.3"/>
+    <linearGradient id="os-cap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#080808"/>
     </linearGradient>
-    <linearGradient id="highlightGrad" x1="0" y1="0" x2="1" y2="0.6">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    <linearGradient id="os-hl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#907060" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#907060" stop-opacity="0"/>
     </linearGradient>
-    <linearGradient id="capGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#2e2e2e"/>
-      <stop offset="30%" stop-color="#1a1a1a"/>
-      <stop offset="55%" stop-color="#282828"/>
-      <stop offset="80%" stop-color="#141414"/>
-      <stop offset="100%" stop-color="#1e1e1e"/>
-    </linearGradient>
-    <linearGradient id="bandGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#c8a060"/>
-      <stop offset="50%" stop-color="#a07840"/>
-      <stop offset="100%" stop-color="#7a5820"/>
-    </linearGradient>
-    <filter id="shadow" x="-10%" y="-5%" width="120%" height="115%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="9" result="blur"/>
-      <feOffset in="blur" dx="0" dy="7" result="offsetBlur"/>
-      <feFlood flood-color="#000000" flood-opacity="0.22" result="color"/>
-      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
-      <feMerge>
-        <feMergeNode in="shadow"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <radialGradient id="reflectionGrad" cx="0.27" cy="0.33" r="0.44">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
+    <filter id="os-sh"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#080400" flood-opacity="0.5"/></filter>
   </defs>
-
-  <ellipse cx="200" cy="462" rx="88" ry="11" fill="#000" opacity="0.18"/>
-
-  <g filter="url(#shadow)">
-    <!-- Angular, more rugged bottle body -->
-    <path d="
-      M 130 162
-      Q 126 172 126 190
-      L 128 436
-      Q 128 450 148 450
-      L 252 450
-      Q 272 450 272 436
-      L 274 190
-      Q 274 172 270 162
-      Z
-    " fill="url(#glassGrad)" stroke="#3c2c1c" stroke-width="1"/>
-
-    <!-- Liquid -->
-    <path d="
-      M 128 205
-      L 130 434
-      Q 131 448 148 448
-      L 252 448
-      Q 269 448 270 434
-      L 272 205
-      Z
-    " fill="url(#liquidGrad)"/>
-
-    <!-- Smoke wisps -->
-    <path d="
-      M 130 268
-      Q 158 258 200 268
-      Q 242 278 270 268
-      L 270 286
-      Q 242 296 200 286
-      Q 158 276 130 286
-      Z
-    " fill="url(#smokeGrad)"/>
-
-    <path d="
-      M 130 338
-      Q 162 328 200 338
-      Q 238 348 270 338
-      L 270 354
-      Q 238 364 200 354
-      Q 162 344 130 354
-      Z
-    " fill="url(#smokeGrad)"/>
-
-    <!-- Glass highlight strip -->
-    <path d="
-      M 140 172
-      L 138 182
-      L 142 408
-      L 150 408
-      L 148 182
-      L 146 172
-      Z
-    " fill="url(#highlightGrad)"/>
-
-    <!-- Reflection -->
-    <ellipse cx="155" cy="308" rx="17" ry="78" fill="url(#reflectionGrad)" transform="rotate(-3 155 308)"/>
-
-    <!-- Gold band on bottle -->
-    <rect x="140" y="295" width="120" height="6" rx="3" fill="url(#bandGrad)" opacity="0.85"/>
-
-    <!-- Bottle neck - narrower, more angular -->
-    <path d="
-      M 176 110
-      L 174 162
-      L 226 162
-      L 224 110
-      Q 222 104 218 104
-      L 182 104
-      Q 178 104 176 110
-      Z
-    " fill="url(#glassGrad)" stroke="#3c2c1c" stroke-width="1"/>
-
-    <!-- Neck highlight -->
-    <rect x="180" y="114" width="4" height="44" rx="2" fill="#ffffff" opacity="0.12"/>
-
-    <!-- Matte black cap - tall, sharp edges -->
-    <rect x="164" y="22" width="72" height="82" rx="2" fill="url(#capGrad)" stroke="#0a0a0a" stroke-width="0.8"/>
-    <!-- Gold cap band -->
-    <rect x="164" y="92" width="72" height="4" rx="1" fill="url(#bandGrad)" opacity="0.9"/>
-    <!-- Cap top highlight -->
-    <rect x="164" y="22" width="72" height="3" rx="1" fill="#404040"/>
-    <!-- Cap subtle highlight -->
-    <rect x="168" y="26" width="4" height="62" rx="2" fill="#ffffff" opacity="0.08"/>
+  <g filter="url(#os-sh)">
+    <!-- Same Hira bottle shape as dive-club but near-black liquid -->
+    <rect x="152" y="158" width="96" height="270" rx="3" fill="url(#os-glass)" stroke="#606060" stroke-width="0.8"/>
+    <clipPath id="os-cl"><rect x="155" y="161" width="90" height="264" rx="2"/></clipPath>
+    <rect x="155" y="171" width="90" height="254" fill="url(#os-liquid)" clip-path="url(#os-cl)" opacity="0.90"/>
+    <rect x="154" y="161" width="18" height="264" fill="url(#os-hl)" opacity="0.45"/>
+    <rect x="157" y="185" width="4" height="110" rx="2" fill="#c0a080" opacity="0.10"/>
+    <!-- Big white HIRA text -->
+    <text x="200" y="253" font-family="'Arial Black','Arial',sans-serif" font-size="22" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="4" opacity="0.75">HIRA</text>
+    <text x="200" y="274" font-family="Arial,sans-serif" font-size="8" fill="#d0c8b8" text-anchor="middle" letter-spacing="3" opacity="0.60">OAK &amp; SMOKE</text>
+    <line x1="166" y1="283" x2="234" y2="283" stroke="#d0c8b8" stroke-width="0.5" opacity="0.35"/>
+    <rect x="150" y="424" width="100" height="4" rx="2" fill="#080400" opacity="0.5"/>
+    <rect x="176" y="140" width="48" height="20" rx="2" fill="url(#os-glass)" stroke="#606060" stroke-width="0.7"/>
+    <rect x="156" y="78" width="88" height="64" rx="2" fill="url(#os-cap)"/>
+    <rect x="156" y="78" width="88" height="6" rx="2" fill="#323232"/>
+    <rect x="156" y="136" width="88" height="6" rx="1" fill="#101010"/>
+    <rect x="159" y="84" width="8" height="52" rx="1" fill="#ffffff" opacity="0.04"/>
+    <ellipse cx="200" cy="434" rx="52" ry="4" fill="#080400" opacity="0.1"/>
   </g>
 </svg>

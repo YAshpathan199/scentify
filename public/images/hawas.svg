@@ -1,139 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
   <defs>
-    <!-- Bottle glass gradient -->
-    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#e8f4f8" stop-opacity="0.6"/>
-      <stop offset="40%" stop-color="#d0eaf5" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#b8dced" stop-opacity="0.5"/>
+    <linearGradient id="hw-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1e3c58" stop-opacity="0.95"/>
+      <stop offset="28%" stop-color="#2e5878" stop-opacity="0.80"/>
+      <stop offset="68%" stop-color="#203050" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#182840" stop-opacity="0.98"/>
     </linearGradient>
-    <!-- Ocean blue liquid gradient with wave feel -->
-    <linearGradient id="liquidGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#5a9fd4" stop-opacity="0.7"/>
-      <stop offset="30%" stop-color="#4682B4"/>
-      <stop offset="60%" stop-color="#3a6d99"/>
-      <stop offset="100%" stop-color="#2c5a80"/>
+    <linearGradient id="hw-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5888b8"/>
+      <stop offset="45%" stop-color="#3a6090"/>
+      <stop offset="100%" stop-color="#1e3858"/>
     </linearGradient>
-    <!-- Wave pattern inside liquid -->
-    <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#5bacde" stop-opacity="0.4"/>
-      <stop offset="50%" stop-color="#4682B4" stop-opacity="0.1"/>
-      <stop offset="100%" stop-color="#5bacde" stop-opacity="0.4"/>
+    <linearGradient id="hw-cap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2a2a"/>
+      <stop offset="100%" stop-color="#080808"/>
     </linearGradient>
-    <!-- Glass highlight -->
-    <linearGradient id="highlightGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    <linearGradient id="hw-ring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e0e8f0"/>
+      <stop offset="50%" stop-color="#b0bcc8"/>
+      <stop offset="100%" stop-color="#7888a0"/>
     </linearGradient>
-    <!-- Silver cap gradient -->
-    <linearGradient id="capGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#e8e8e8"/>
-      <stop offset="25%" stop-color="#c0c0c0"/>
-      <stop offset="50%" stop-color="#d8d8d8"/>
-      <stop offset="75%" stop-color="#a8a8a8"/>
-      <stop offset="100%" stop-color="#c0c0c0"/>
+    <pattern id="hw-scales" patternUnits="userSpaceOnUse" width="10" height="10">
+      <path d="M5,0 L10,5 L5,10 L0,5 Z" fill="none" stroke="#484848" stroke-width="0.7" opacity="0.55"/>
+    </pattern>
+    <linearGradient id="hw-hl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#90b8d8" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#90b8d8" stop-opacity="0"/>
     </linearGradient>
-    <!-- Drop shadow filter -->
-    <filter id="shadow" x="-10%" y="-5%" width="120%" height="115%">
-      <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur"/>
-      <feOffset in="blur" dx="0" dy="6" result="offsetBlur"/>
-      <feFlood flood-color="#000000" flood-opacity="0.15" result="color"/>
-      <feComposite in="color" in2="offsetBlur" operator="in" result="shadow"/>
-      <feMerge>
-        <feMergeNode in="shadow"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <!-- Subtle reflection on glass -->
-    <radialGradient id="reflectionGrad" cx="0.3" cy="0.3" r="0.5">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-    </radialGradient>
+    <filter id="hw-sh"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#0e1e30" flood-opacity="0.35"/></filter>
   </defs>
-
-  <!-- Shadow beneath bottle -->
-  <ellipse cx="200" cy="460" rx="80" ry="12" fill="#000" opacity="0.1"/>
-
-  <g filter="url(#shadow)">
-    <!-- Bottle body: tall, slightly curved rectangular with rounded shoulders -->
-    <path d="
-      M 140 160
-      Q 135 170 132 200
-      L 128 420
-      Q 128 445 145 445
-      L 255 445
-      Q 272 445 272 420
-      L 268 200
-      Q 265 170 260 160
-      Z
-    " fill="url(#glassGrad)" stroke="#c8dce8" stroke-width="1"/>
-
-    <!-- Liquid fill -->
-    <path d="
-      M 134 220
-      Q 150 215 200 225
-      Q 250 235 266 220
-      L 270 420
-      Q 270 443 255 443
-      L 145 443
-      Q 130 443 130 420
-      Z
-    " fill="url(#liquidGrad)"/>
-
-    <!-- Wave accent inside liquid -->
-    <path d="
-      M 134 280
-      Q 160 270 200 280
-      Q 240 290 266 280
-      L 266 300
-      Q 240 310 200 300
-      Q 160 290 134 300
-      Z
-    " fill="url(#waveGrad)"/>
-
-    <!-- Second wave -->
-    <path d="
-      M 134 340
-      Q 165 330 200 340
-      Q 235 350 266 340
-      L 266 355
-      Q 235 365 200 355
-      Q 165 345 134 355
-      Z
-    " fill="url(#waveGrad)"/>
-
-    <!-- Glass highlight reflection -->
-    <path d="
-      M 145 170
-      Q 143 200 142 300
-      L 155 300
-      Q 156 200 158 170
-      Z
-    " fill="url(#highlightGrad)"/>
-
-    <!-- Larger reflection -->
-    <ellipse cx="165" cy="300" rx="18" ry="80" fill="url(#reflectionGrad)" transform="rotate(-3 165 300)"/>
-
-    <!-- Bottle neck -->
-    <path d="
-      M 170 110
-      L 170 160
-      L 230 160
-      L 230 110
-      Q 228 105 225 105
-      L 175 105
-      Q 172 105 170 110
-      Z
-    " fill="url(#glassGrad)" stroke="#c8dce8" stroke-width="1"/>
-
-    <!-- Neck highlight -->
-    <rect x="175" y="110" width="6" height="48" rx="3" fill="#ffffff" opacity="0.25"/>
-
-    <!-- Silver rectangular cap -->
-    <rect x="162" y="68" width="76" height="40" rx="4" fill="url(#capGrad)" stroke="#b0b0b0" stroke-width="0.8"/>
-    <!-- Cap highlight line -->
-    <rect x="168" y="73" width="4" height="30" rx="2" fill="#ffffff" opacity="0.35"/>
-    <!-- Cap top edge -->
-    <rect x="162" y="68" width="76" height="3" rx="2" fill="#d8d8d8"/>
+  <g filter="url(#hw-sh)">
+    <!-- Body 100ml, 112×295 -->
+    <rect x="144" y="145" width="112" height="295" rx="3" fill="url(#hw-glass)" stroke="#2e5070" stroke-width="0.8"/>
+    <clipPath id="hw-cl"><rect x="147" y="148" width="106" height="289" rx="2"/></clipPath>
+    <rect x="147" y="162" width="106" height="275" fill="url(#hw-liquid)" clip-path="url(#hw-cl)" opacity="0.80"/>
+    <!-- Left edge highlight -->
+    <rect x="146" y="148" width="20" height="289" fill="url(#hw-hl)" opacity="0.55"/>
+    <rect x="149" y="175" width="4" height="115" rx="2" fill="#c0dcf0" opacity="0.18"/>
+    <!-- HAWAS text on glass -->
+    <text x="200" y="272" font-family="'Arial Narrow',Arial,sans-serif" font-size="15" font-weight="bold" fill="#8ab8d8" text-anchor="middle" letter-spacing="6" opacity="0.72">HAWAS</text>
+    <text x="200" y="291" font-family="Arial,sans-serif" font-size="7.5" fill="#6898b8" text-anchor="middle" letter-spacing="3" opacity="0.60">FOR HIM</text>
+    <line x1="166" y1="302" x2="234" y2="302" stroke="#6898b8" stroke-width="0.5" opacity="0.4"/>
+    <!-- Base -->
+    <rect x="142" y="436" width="116" height="5" rx="2" fill="#182838" opacity="0.5"/>
+    <!-- Neck -->
+    <rect x="167" y="124" width="66" height="23" rx="2" fill="url(#hw-glass)" stroke="#2e5070" stroke-width="0.7"/>
+    <!-- Silver ring at base of cap -->
+    <rect x="161" y="130" width="78" height="8" rx="1" fill="url(#hw-ring)"/>
+    <!-- Flat black cap with snake scale texture -->
+    <rect x="150" y="72" width="100" height="62" rx="2" fill="url(#hw-cap)"/>
+    <rect x="150" y="72" width="100" height="62" rx="2" fill="url(#hw-scales)" opacity="0.75"/>
+    <rect x="150" y="72" width="100" height="6" rx="2" fill="#323232"/>
+    <rect x="153" y="78" width="8" height="52" fill="#ffffff" opacity="0.04"/>
+    <rect x="150" y="128" width="100" height="4" rx="1" fill="#101010"/>
+    <ellipse cx="200" cy="447" rx="62" ry="5" fill="#0e1e30" opacity="0.1"/>
   </g>
 </svg>
