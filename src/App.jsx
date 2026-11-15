@@ -12,6 +12,7 @@ import Learn from './pages/Learn';
 import Families from './pages/Families';
 import BuyAssist from './pages/BuyAssist';
 import Storage from './pages/Storage';
+import LayeringLab from './pages/LayeringLab';
 import Admin from './pages/Admin';
 
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
                   <Route path="/families" element={<Families />} />
                   <Route path="/scout" element={<BuyAssist />} />
                   <Route path="/storage" element={<Storage />} />
+                  <Route path="/layering" element={<LayeringLab />} />
                 </Routes>
               </main>
               <Footer />

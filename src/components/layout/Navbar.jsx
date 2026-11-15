@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { to: '/scout', label: 'Scout' },
   { to: '/guide', label: 'Guide' },
   { to: '/learn', label: 'Learn' },
+  { to: '/layering', label: 'Layering' },
 ];
 
 const MOBILE_LINKS = [
@@ -19,6 +20,7 @@ const MOBILE_LINKS = [
   { to: '/scout', label: 'Scent Scout' },
   { to: '/guide', label: 'How to Wear' },
   { to: '/learn', label: 'Learn' },
+  { to: '/layering', label: 'Layering Lab' },
 ];
 
 export default function Navbar() {
