@@ -271,11 +271,12 @@ export default function Explore() {
         </div>
 
         {/* Concentration Tabs */}
-        <div className="flex gap-2 mb-4 justify-center">
+        <div className="flex gap-2 mb-4 justify-center flex-wrap">
           {[
             { id: 'all', label: 'All' },
             { id: 'EDP', label: 'EDP' },
             { id: 'EDT', label: 'EDT' },
+            { id: 'Extrait de Parfum', label: 'Extrait' },
           ].map(c => (
             <button
               key={c.id}

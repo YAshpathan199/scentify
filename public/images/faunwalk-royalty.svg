@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" width="400" height="500">
+  <defs>
+    <linearGradient id="roy-glass" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2a1040" stop-opacity="0.5"/>
+      <stop offset="40%" stop-color="#3a1850" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#180828" stop-opacity="0.55"/>
+    </linearGradient>
+    <linearGradient id="roy-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8a3080"/>
+      <stop offset="30%" stop-color="#601858"/>
+      <stop offset="65%" stop-color="#400838"/>
+      <stop offset="100%" stop-color="#200018"/>
+    </linearGradient>
+    <linearGradient id="roy-cap" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a1040"/>
+      <stop offset="50%" stop-color="#180828"/>
+      <stop offset="100%" stop-color="#080010"/>
+    </linearGradient>
+    <linearGradient id="roy-gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e8d090"/>
+      <stop offset="50%" stop-color="#c8a850"/>
+      <stop offset="100%" stop-color="#907020"/>
+    </linearGradient>
+    <linearGradient id="roy-hl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="roy-shadow">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#600858" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <g filter="url(#roy-shadow)">
+    <rect x="168" y="160" width="64" height="260" rx="6" fill="url(#roy-glass)" stroke="#6a2070" stroke-width="0.8"/>
+    <clipPath id="roy-clip"><rect x="171" y="163" width="58" height="254" rx="5"/></clipPath>
+    <rect x="171" y="178" width="58" height="239" fill="url(#roy-liquid)" clip-path="url(#roy-clip)" opacity="0.92"/>
+    <ellipse cx="192" cy="220" rx="11" ry="22" fill="#c060a8" fill-opacity="0.12" clip-path="url(#roy-clip)"/>
+    <line x1="178" y1="200" x2="180" y2="410" stroke="#e8d090" stroke-width="0.5" opacity="0.1"/>
+    <line x1="208" y1="210" x2="210" y2="400" stroke="#c8a850" stroke-width="0.4" opacity="0.08"/>
+    <rect x="170" y="163" width="12" height="254" fill="url(#roy-hl)" opacity="0.4"/>
+    <rect x="173" y="188" width="3" height="55" rx="1.5" fill="#ffffff" opacity="0.15"/>
+    <rect x="168" y="398" width="64" height="2.5" fill="url(#roy-gold)" opacity="0.85"/>
+    <rect x="168" y="163" width="64" height="2.5" fill="url(#roy-gold)" opacity="0.65"/>
+    <rect x="168" y="295" width="64" height="1.5" fill="url(#roy-gold)" opacity="0.3"/>
+    <rect x="180" y="140" width="40" height="22" rx="3" fill="url(#roy-glass)" stroke="#6a2070" stroke-width="0.7"/>
+    <rect x="178" y="150" width="44" height="2.5" fill="url(#roy-gold)" opacity="0.9"/>
+    <rect x="195" y="128" width="10" height="14" rx="2" fill="#401060"/>
+    <rect x="197" y="122" width="6" height="8" rx="1" fill="#380858"/>
+    <rect x="162" y="52" width="76" height="90" rx="8" fill="url(#roy-cap)" stroke="#401060" stroke-width="0.8"/>
+    <rect x="162" y="52" width="76" height="14" rx="8" fill="#381050"/>
+    <rect x="165" y="58" width="10" height="78" fill="#ffffff" opacity="0.07"/>
+    <rect x="168" y="62" width="3" height="50" rx="1.5" fill="#ffffff" opacity="0.1"/>
+    <!-- Crown motif -->
+    <text x="200" y="85" font-size="14" text-anchor="middle" fill="#c8a850" opacity="0.6">♛</text>
+    <text x="200" y="104" font-family="Georgia, serif" font-size="6" font-weight="bold" fill="#c8a850" text-anchor="middle" letter-spacing="1.2">FAUNWALK</text>
+    <rect x="162" y="138" width="76" height="4" rx="2" fill="url(#roy-gold)"/>
+    <rect x="166" y="418" width="68" height="4" rx="2" fill="#401060" opacity="0.4"/>
+    <ellipse cx="200" cy="428" rx="40" ry="4" fill="#600858" opacity="0.14"/>
+  </g>
+</svg>
