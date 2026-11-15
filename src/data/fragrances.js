@@ -404,7 +404,7 @@ export const SAMPLE_FRAGRANCES = [
   {
     id: 'daily-rizz',
     name: 'Daily Rizz',
-    brand: 'Hira',
+    brand: 'Sniiff Culture',
     gender: 'men',
     concentration: 'EDP',
     family: 'citrus',
@@ -432,7 +432,7 @@ export const SAMPLE_FRAGRANCES = [
   {
     id: 'arabian-desire',
     name: 'Arabian Desire',
-    brand: 'Hira',
+    brand: 'Sniiff Culture',
     gender: 'unisex',
     concentration: 'EDP',
     family: 'floral',
