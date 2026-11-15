@@ -92,13 +92,21 @@ export const SEASONS = [
 ];
 
 export const FRAGRANCE_FAMILIES = [
-  { id: 'woody', label: 'Woody', color: '#8B4513', description: 'Warm, earthy, and grounding', icon: '🌳' },
-  { id: 'floral', label: 'Floral', color: '#DB7093', description: 'Romantic, elegant, and soft', icon: '🌹' },
-  { id: 'oriental', label: 'Oriental', color: '#B8860B', description: 'Rich, warm, and exotic', icon: '✨' },
-  { id: 'citrus', label: 'Citrus', color: '#FFA500', description: 'Bright, zesty, and uplifting', icon: '🍊' },
-  { id: 'gourmand', label: 'Gourmand', color: '#D2691E', description: 'Sweet, edible, and comforting', icon: '🍫' },
-  { id: 'aromatic', label: 'Aromatic', color: '#6B8E23', description: 'Herbal, fresh, and sophisticated', icon: '🌿' },
-  { id: 'aquatic', label: 'Aquatic', color: '#4682B4', description: 'Oceanic, breezy, and refreshing', icon: '🌊' },
+  { id: 'floral',    label: 'Floral',    color: '#DB7093', description: 'Romantic, elegant, and soft',          icon: '🌹' },
+  { id: 'oriental',  label: 'Oriental',  color: '#B8860B', description: 'Rich, warm, and exotic',               icon: '✨' },
+  { id: 'woody',     label: 'Woody',     color: '#8B4513', description: 'Warm, earthy, and grounding',          icon: '🌳' },
+  { id: 'fresh',     label: 'Fresh',     color: '#20B2AA', description: 'Clean, crisp, and invigorating',       icon: '💧' },
+  { id: 'citrus',    label: 'Citrus',    color: '#FFA500', description: 'Bright, zesty, and uplifting',         icon: '🍊' },
+  { id: 'aquatic',   label: 'Aquatic',   color: '#4682B4', description: 'Oceanic, breezy, and refreshing',      icon: '🌊' },
+  { id: 'aromatic',  label: 'Aromatic',  color: '#6B8E23', description: 'Herbal, green, and sophisticated',     icon: '🌿' },
+  { id: 'fougere',   label: 'Fougère',   color: '#7B9E5A', description: 'Lavender, oakmoss, and coumarin',      icon: '🍃' },
+  { id: 'chypre',    label: 'Chypre',    color: '#7A6A3A', description: 'Mossy, oakmoss, and bergamot',         icon: '🪨' },
+  { id: 'spicy',     label: 'Spicy',     color: '#C04020', description: 'Warm, peppery, and bold',              icon: '🌶️' },
+  { id: 'gourmand',  label: 'Gourmand',  color: '#D2691E', description: 'Sweet, edible, and comforting',        icon: '🍫' },
+  { id: 'green',     label: 'Green',     color: '#3A9A5A', description: 'Crisp, grassy, and natural',           icon: '🌱' },
+  { id: 'leather',   label: 'Leather',   color: '#7A4020', description: 'Bold, smoky, and animalic',            icon: '🤎' },
+  { id: 'powdery',   label: 'Powdery',   color: '#C8A0B8', description: 'Soft, iris, and talc-like',            icon: '🪷' },
+  { id: 'musk',      label: 'Musk',      color: '#B09880', description: 'Skin-close, warm, and sensual',        icon: '🕊️' },
 ];
 
 export const MOODS = [
