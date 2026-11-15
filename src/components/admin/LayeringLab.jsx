@@ -38,8 +38,9 @@ function getPairingScore(a, b, rules) {
   return { score: Math.min(score, 100), reasons };
 }
 
-export default function LayeringLab() {
-  const { fragrances } = useFragrances();
+export default function LayeringLab({ fragrances: fragProp } = {}) {
+  const { fragrances: ctxFragrances } = useFragrances();
+  const fragrances = fragProp ?? ctxFragrances;
   const [fragA, setFragA] = useState('');
   const [fragB, setFragB] = useState('');
 

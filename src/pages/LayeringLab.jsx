@@ -1,5 +1,6 @@
 import { Layers } from 'lucide-react';
 import LayeringLabPanel from '../components/admin/LayeringLab';
+import { SAMPLE_FRAGRANCES } from '../data/fragrances';
 import styles from './LayeringLab.module.css';
 
 export default function LayeringLab() {
@@ -13,7 +14,7 @@ export default function LayeringLab() {
         </p>
       </div>
       <div className={styles.content}>
-        <LayeringLabPanel />
+        <LayeringLabPanel fragrances={SAMPLE_FRAGRANCES} />
       </div>
     </div>
   );
