@@ -322,6 +322,7 @@ export default function FragranceManager() {
           <tbody>
             {filtered.map((f, i) => {
               const family = FRAGRANCE_FAMILIES.find(fam => fam.id === f.family);
+              const conc = CONCENTRATIONS.find(c => c.id === f.concentration);
               return (
                 <tr key={f.id}>
                   <td className={styles.rowNum}>{i + 1}</td>
@@ -343,7 +344,7 @@ export default function FragranceManager() {
                       {family?.label}
                     </span>
                   </td>
-                  <td className={styles.cellMuted}>{f.concentration}</td>
+                  <td className={styles.cellMuted} title={conc?.label}>{conc?.shortLabel || f.concentration}</td>
                   <td>
                     <div className={styles.miniStars} title="Click to change rating">
                       {[1, 2, 3, 4, 5].map(n => (
@@ -384,6 +385,7 @@ export default function FragranceManager() {
       <div className={styles.mobileCards}>
         {filtered.map((f, i) => {
           const family = FRAGRANCE_FAMILIES.find(fam => fam.id === f.family);
+          const conc = CONCENTRATIONS.find(c => c.id === f.concentration);
           return (
             <div className={styles.mobileCard} key={f.id}>
               <div className={styles.mobileCardTop}>
@@ -407,7 +409,7 @@ export default function FragranceManager() {
                 </div>
               </div>
               <div className={styles.mobileCardStats}>
-                <span>{f.concentration}</span>
+                <span title={conc?.label}>{conc?.shortLabel || f.concentration}</span>
                 <span>⭐ {f.rating}</span>
                 <span>{f.longevity}h</span>
                 <span>{f.projection}</span>

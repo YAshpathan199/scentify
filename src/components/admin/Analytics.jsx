@@ -7,7 +7,7 @@ import { formatPrice, getProjectionPercent } from '../../utils/helpers';
 import styles from './Analytics.module.css';
 
 const BRAND_COLORS = ['#B8956A', '#6B8F71', '#7B96AA', '#C25B56', '#8B6914', '#B85070', '#5A7A1A', '#D08A10'];
-const CONC_COLORS = { Cologne: '#7B96AA', EDT: '#B8956A', EDP: '#6B8F71', Parfum: '#C25B56' };
+const CONC_COLORS = { EDC: '#7B96AA', EDT: '#B8956A', EDP: '#6B8F71', Parfum: '#C25B56' };
 
 export default function Analytics() {
   const { fragrances } = useFragrances();
@@ -171,7 +171,10 @@ export default function Analytics() {
               {concDist.map(c => (
                 <div className={styles.legendItem} key={c.id}>
                   <span className={styles.legendDot} style={{ background: CONC_COLORS[c.id] }} />
-                  <span className={styles.legendLabel}>{c.label}</span>
+                  <span className={styles.legendLabel}>
+                    <strong>{c.shortLabel}</strong>
+                    <span className={styles.legendSub}>{c.longevityRange[0]}–{c.longevityRange[1]}h</span>
+                  </span>
                   <span className={styles.legendCount}>{c.count}</span>
                 </div>
               ))}

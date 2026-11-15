@@ -171,6 +171,14 @@
 .legendLabel {
   flex: 1;
   color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.legendSub {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
 }
 
 .legendCount {

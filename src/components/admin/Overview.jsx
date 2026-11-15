@@ -264,7 +264,7 @@ export default function Overview() {
               </div>
               <div className={styles.gapList}>
                 {CONCENTRATIONS.map(c => (
-                  <span key={c.id} className={styles.gapChip}>{c.label}: {gaps.concCounts[c.id] || 0}</span>
+                  <span key={c.id} className={styles.gapChip}>{c.shortLabel}: {gaps.concCounts[c.id] || 0}</span>
                 ))}
               </div>
             </div>
