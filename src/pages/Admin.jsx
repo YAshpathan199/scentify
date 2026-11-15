@@ -2,10 +2,10 @@ import { useState, useCallback } from 'react';
 import { Routes, Route, NavLink, Navigate, Link, useLocation } from 'react-router-dom';
 import {
   Sparkles, LayoutDashboard, FlaskConical, BarChart3,
-  Calendar, Layers, Database, ExternalLink, Menu, X,
+  Layers, Database, ExternalLink, Menu, X,
   Lock, Eye, EyeOff, LogOut,
 } from 'lucide-react';
-import { Overview, FragranceManager, Analytics, WearHistory, LayeringLab, DataTools } from '../components/admin';
+import { Overview, FragranceManager, Analytics, LayeringLab, DataTools } from '../components/admin';
 import { getGreeting } from '../utils/helpers';
 import styles from './Admin.module.css';
 
@@ -101,7 +101,6 @@ const NAV_ITEMS = [
   { to: '/admin', label: 'Overview', icon: LayoutDashboard, end: true },
   { to: '/admin/fragrances', label: 'Fragrances', icon: FlaskConical },
   { to: '/admin/analytics', label: 'Analytics', icon: BarChart3 },
-  { to: '/admin/history', label: 'Wear History', icon: Calendar },
   { to: '/admin/layering', label: 'Layering Lab', icon: Layers },
   { to: '/admin/data', label: 'Data Tools', icon: Database },
 ];
@@ -110,7 +109,6 @@ const TITLES = {
   '/admin': 'Overview',
   '/admin/fragrances': 'Fragrances',
   '/admin/analytics': 'Analytics',
-  '/admin/history': 'Wear History',
   '/admin/layering': 'Layering Lab',
   '/admin/data': 'Data Tools',
 };
@@ -195,7 +193,6 @@ export default function Admin() {
             <Route index element={<Overview />} />
             <Route path="fragrances" element={<FragranceManager />} />
             <Route path="analytics" element={<Analytics />} />
-            <Route path="history" element={<WearHistory />} />
             <Route path="layering" element={<LayeringLab />} />
             <Route path="data" element={<DataTools />} />
             <Route path="*" element={<Navigate to="/admin" replace />} />

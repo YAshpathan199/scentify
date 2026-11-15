@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  FlaskConical, IndianRupee, Calendar, Star,
-  Building2, Palette, Plus, History, Download,
+  FlaskConical, IndianRupee, Star,
+  Building2, Palette, Plus, Download,
   ExternalLink, BarChart3, TrendingUp, AlertTriangle, Info,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -12,7 +12,7 @@ import { formatPrice } from '../../utils/helpers';
 import styles from './Overview.module.css';
 
 export default function Overview() {
-  const { fragrances, history, exportData } = useFragrances();
+  const { fragrances, exportData } = useFragrances();
 
   const stats = useMemo(() => {
     const totalValue = fragrances.reduce((s, f) => s + (f.price || 0), 0);
@@ -45,10 +45,6 @@ export default function Overview() {
     return [...fragrances].sort((a, b) => b.rating - a.rating).slice(0, 5);
   }, [fragrances]);
 
-  const recentActivity = useMemo(() => {
-    return [...history].sort((a, b) => b.timestamp - a.timestamp).slice(0, 10);
-  }, [history]);
-
   const gaps = useMemo(() => {
     const ownedFamilies = new Set(fragrances.map(f => f.family));
     const missing = FRAGRANCE_FAMILIES.filter(f => !ownedFamilies.has(f.id));
@@ -77,7 +73,6 @@ export default function Overview() {
         {[
           { label: 'Total Fragrances', value: fragrances.length, icon: FlaskConical, cls: styles.statIconAccent },
           { label: 'Collection Value', value: formatPrice(stats.totalValue), icon: IndianRupee, cls: styles.statIconSuccess },
-          { label: 'Total Wears', value: history.length, icon: Calendar, cls: styles.statIconInfo },
           { label: 'Avg Rating', value: stats.avgRating, icon: Star, cls: styles.statIconAccent },
           { label: 'Brands', value: stats.brandCount, icon: Building2, cls: styles.statIconSecondary },
           { label: 'Families Covered', value: `${stats.familyCount}/${FRAGRANCE_FAMILIES.length}`, icon: Palette, cls: styles.statIconSecondary },
@@ -102,9 +97,6 @@ export default function Overview() {
           <Link to="/admin/fragrances?action=add" className={`${styles.actionBtn} ${styles.actionPrimary}`}>
             <Plus size={16} /> Add Fragrance
           </Link>
-          <Link to="/admin/history?action=log" className={`${styles.actionBtn} ${styles.actionSecondary}`}>
-            <History size={16} /> Log Wear
-          </Link>
           <button onClick={handleExport} className={`${styles.actionBtn} ${styles.actionOutline}`}>
             <Download size={16} /> Export Data
           </button>
@@ -114,50 +106,25 @@ export default function Overview() {
         </div>
       </div>
 
-      {/* Family Distribution + Recent Activity */}
-      <div className={styles.twoCol}>
-        <div className={styles.section}>
-          <div className={styles.sectionHeader}>
-            <BarChart3 size={20} className={styles.sectionIcon} />
-            <h3 className={styles.sectionTitle}>Family Distribution</h3>
-          </div>
-          <div className={styles.barChartList}>
-            {familyDist.map(fam => (
-              <div className={styles.barRow} key={fam.id}>
-                <span className={styles.barLabel}>{fam.icon} {fam.label}</span>
-                <div className={styles.barTrack}>
-                  <div
-                    className={styles.barFill}
-                    style={{ width: `${(fam.count / maxFamilyCount) * 100}%`, background: fam.color }}
-                  />
-                </div>
-                <span className={styles.barCount}>{fam.count}</span>
-              </div>
-            ))}
-          </div>
+      {/* Family Distribution */}
+      <div className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <BarChart3 size={20} className={styles.sectionIcon} />
+          <h3 className={styles.sectionTitle}>Family Distribution</h3>
         </div>
-
-        <div className={styles.section}>
-          <div className={styles.sectionHeader}>
-            <History size={20} className={styles.sectionIcon} />
-            <h3 className={styles.sectionTitle}>Recent Activity</h3>
-          </div>
-          {recentActivity.length === 0 ? (
-            <p className={styles.emptyMessage}>No wear history yet. Start logging!</p>
-          ) : (
-            <div className={styles.activityList}>
-              {recentActivity.map((entry, i) => {
-                const frag = fragrances.find(f => f.id === entry.fragranceId);
-                return (
-                  <div className={`${styles.activityRow} ${i % 2 ? styles.activityRowAlt : ''}`} key={entry.timestamp}>
-                    <span className={styles.activityDate}>{entry.date}</span>
-                    <span className={styles.activityName}>{frag?.name || 'Unknown'}</span>
-                    {entry.occasion && <span className={styles.activityOccasion}>{entry.occasion}</span>}
-                  </div>
-                );
-              })}
+        <div className={styles.barChartList}>
+          {familyDist.map(fam => (
+            <div className={styles.barRow} key={fam.id}>
+              <span className={styles.barLabel}>{fam.icon} {fam.label}</span>
+              <div className={styles.barTrack}>
+                <div
+                  className={styles.barFill}
+                  style={{ width: `${(fam.count / maxFamilyCount) * 100}%`, background: fam.color }}
+                />
+              </div>
+              <span className={styles.barCount}>{fam.count}</span>
             </div>
-          )}
+          ))}
         </div>
       </div>
 
