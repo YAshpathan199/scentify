@@ -1,6 +1,6 @@
 import { useState, useEffect, useId, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Search, Heart } from 'lucide-react';
+import { Menu, X, Search, Heart, LogIn } from 'lucide-react';
 import { useFragrances } from '../../context/FragranceContext';
 import ScentifyMark from '../ui/ScentifyMark';
 import styles from './Navbar.module.css';
@@ -121,6 +121,9 @@ export default function Navbar() {
                 <Heart size={18} fill={favorites.length > 0 ? 'var(--accent)' : 'none'} />
                 {favorites.length > 0 && <span className={styles.badge}>{favorites.length}</span>}
               </Link>
+              <Link to="/admin" className={styles.iconBtn} aria-label="Admin login">
+                <LogIn size={18} />
+              </Link>
             </div>
 
             <Link to="/discover" className={styles.cta}>
@@ -165,12 +168,19 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <div className="mt-4">
+          <div className="mt-4 flex flex-col gap-2">
             <Link
               to="/discover"
               className="btn btn-primary btn-block rounded-full"
             >
               Find Your Scent
+            </Link>
+            <Link
+              to="/admin"
+              className="btn btn-ghost btn-block rounded-full flex items-center gap-2 text-base-content/60 text-sm"
+            >
+              <LogIn size={15} />
+              Admin Login
             </Link>
           </div>
         </div>
