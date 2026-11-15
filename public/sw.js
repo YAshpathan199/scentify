@@ -1,4 +1,4 @@
-const CACHE = 'scentify-v1';
+const CACHE = 'scentify-v2';
 
 self.addEventListener('install', e => {
   e.waitUntil(
