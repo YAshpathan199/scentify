@@ -519,7 +519,7 @@ export const SAMPLE_FRAGRANCES = [
     brand: 'Faunwalk',
     gender: 'unisex',
     concentration: 'Extrait de Parfum',
-    family: 'fougere',
+    family: 'fresh',
     image: '/images/atlas-faunwalk.svg',
     notes: {
       top: ['Mint', 'Green Apple', 'Lemon'],
