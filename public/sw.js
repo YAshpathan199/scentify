@@ -1,8 +1,15 @@
 const CACHE = 'scentify-v2';
 
+// Only cache truly static assets (icons, manifest) — never JS/CSS bundles.
+// Vite hashes JS/CSS filenames on every build, so stale cache entries for old
+// hashes would never be hit anyway, but caching them wastes space and can
+// cause hard-to-debug blank screens when a cached index.html references a
+// hash that is not in the cache yet.
+const STATIC_ASSETS = ['/', '/manifest.json', '/favicon.svg', '/pwa-icon.svg'];
+
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(['/', '/manifest.json', '/favicon.svg', '/pwa-icon.svg']))
+    caches.open(CACHE).then(c => c.addAll(STATIC_ASSETS))
   );
   self.skipWaiting();
 });
@@ -18,15 +25,24 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
 
+  const url = new URL(e.request.url);
+
   if (e.request.mode === 'navigate') {
-    // SPA: always serve index.html for navigation, fall back to cache if offline
+    // SPA: always serve fresh index.html, fall back to cache offline
     e.respondWith(
       fetch(e.request).catch(() => caches.match('/'))
     );
     return;
   }
 
-  // Cache-first for static assets, then network
+  // JS/CSS bundles have hashed filenames — always fetch from network so a
+  // new deploy is never blocked by a stale cache entry.
+  if (url.pathname.startsWith('/assets/')) {
+    e.respondWith(fetch(e.request));
+    return;
+  }
+
+  // Cache-first for icons, manifest, images, etc.
   e.respondWith(
     caches.match(e.request).then(cached => {
       if (cached) return cached;
