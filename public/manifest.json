@@ -4,7 +4,7 @@
   "description": "Discover the perfect fragrance for every occasion, season, and mood.",
   "theme_color": "#FDFBF7",
   "background_color": "#FDFBF7",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "portrait-primary",
   "start_url": "/",
   "scope": "/",
