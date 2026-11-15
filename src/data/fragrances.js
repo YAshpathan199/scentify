@@ -35,7 +35,7 @@ export const SAMPLE_FRAGRANCES = [
     brand: 'Cologne House',
     gender: 'men',
     concentration: 'EDP',
-    family: 'woody',
+    family: 'chypre',
     image: '/images/aventus-legacy.svg',
     notes: {
       top: ['Pineapple', 'Bergamot', 'Apple', 'Black Currant'],
@@ -63,7 +63,7 @@ export const SAMPLE_FRAGRANCES = [
     brand: 'Cologne House',
     gender: 'men',
     concentration: 'EDT',
-    family: 'aquatic',
+    family: 'aromatic',
     image: '/images/cool-rush.svg',
     notes: {
       top: ['Lemon', 'Apple', 'Mint'],
@@ -207,7 +207,7 @@ export const SAMPLE_FRAGRANCES = [
     brand: 'Ajmal',
     gender: 'unisex',
     concentration: 'EDP',
-    family: 'oriental',
+    family: 'gourmand',
     image: '/images/oud-on-the-rocks.svg',
     notes: {
       top: ['Coffee', 'Bergamot', 'Lavender'],
@@ -295,7 +295,7 @@ export const SAMPLE_FRAGRANCES = [
     brand: 'ArtiScents',
     gender: 'men',
     concentration: 'EDP',
-    family: 'aromatic',
+    family: 'fougere',
     image: '/images/modern-code.svg',
     notes: {
       top: ['Mint', 'Lavender', 'Apple'],
@@ -351,7 +351,7 @@ export const SAMPLE_FRAGRANCES = [
     brand: 'Hira',
     gender: 'men',
     concentration: 'EDP',
-    family: 'aromatic',
+    family: 'aquatic',
     image: '/images/dive-club.svg',
     notes: {
       top: ['Bergamot', 'Sichuan Pepper'],
@@ -463,7 +463,7 @@ export const SAMPLE_FRAGRANCES = [
     brand: 'Ibrahim Al Qurashi',
     gender: 'men',
     concentration: 'EDP',
-    family: 'oriental',
+    family: 'spicy',
     image: '/images/tobacco-mabkhar.svg',
     notes: {
       top: ['Tobacco', 'Spices', 'Violet Flower', 'Juniper'],
@@ -491,7 +491,7 @@ export const SAMPLE_FRAGRANCES = [
     brand: 'ArtiScents',
     gender: 'unisex',
     concentration: 'EDP',
-    family: 'oriental',
+    family: 'citrus',
     image: '/images/effortless-charm.svg',
     notes: {
       top: ['Citron', 'Calabrian Bergamot', 'Sicilian Orange'],
@@ -519,7 +519,7 @@ export const SAMPLE_FRAGRANCES = [
     brand: 'Faunwalk',
     gender: 'unisex',
     concentration: 'Extrait de Parfum',
-    family: 'aromatic',
+    family: 'fougere',
     image: '/images/atlas-faunwalk.svg',
     notes: {
       top: ['Mint', 'Green Apple', 'Lemon'],
