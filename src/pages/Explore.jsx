@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Search, SearchX, ShoppingBag, TrendingUp, Package, IndianRupee, Award, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../components/ui';
@@ -63,9 +64,17 @@ function ScentDNA({ fragrances, activeFamily, onFamilyClick }) {
 }
 
 export default function Explore() {
-  const { fragrances } = useFragrances();
-  const [searchQuery, setSearchQuery] = useState('');
+  const { fragrances, favorites } = useFragrances();
+  const [searchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
+  const [showFavorites, setShowFavorites] = useState(searchParams.get('tab') === 'favorites');
   const [activeGender, setActiveGender] = useState('all');
+
+  useEffect(() => {
+    const q = searchParams.get('q');
+    if (q) setSearchQuery(q);
+    if (searchParams.get('tab') === 'favorites') setShowFavorites(true);
+  }, [searchParams]);
   const [activeConcentration, setActiveConcentration] = useState('all');
   const [activeFamily, setActiveFamily] = useState('all');
   const [sortBy, setSortBy] = useState('name');
@@ -74,6 +83,11 @@ export default function Explore() {
 
   const filteredFragrances = useMemo(() => {
     let result = [...fragrances];
+
+    if (showFavorites) {
+      const favSet = new Set(favorites);
+      result = result.filter(f => favSet.has(f.id));
+    }
 
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
@@ -116,7 +130,7 @@ export default function Explore() {
     }
 
     return result;
-  }, [fragrances, searchQuery, activeGender, activeConcentration, activeFamily, sortBy]);
+  }, [fragrances, favorites, showFavorites, searchQuery, activeGender, activeConcentration, activeFamily, sortBy]);
 
   const clearFilters = () => {
     setSearchQuery('');
@@ -292,8 +306,16 @@ export default function Explore() {
           </label>
         </div>
 
-        {/* Gender + Concentration Filters */}
+        {/* Favorites Toggle + Gender + Concentration Filters */}
         <div className="flex flex-wrap gap-2 mb-6 items-center">
+          <button
+            className={`btn btn-sm rounded-full gap-1 ${showFavorites ? 'btn-accent' : 'btn-outline border-base-300 text-base-content/70'}`}
+            onClick={() => setShowFavorites(!showFavorites)}
+          >
+            <span className="text-sm leading-none">{"❤️"}</span>
+            Favorites{favorites.length > 0 ? ` (${favorites.length})` : ''}
+          </button>
+          <div className="w-px h-6 bg-base-300 mx-1" />
           {[
             { id: 'all', label: 'All', icon: '✨' },
             { id: 'men', label: 'Him', icon: '👔' },

@@ -89,10 +89,10 @@ export default function SprayGuidePanel({ guide, compact = false }) {
             <Shirt size={15} className={styles.rowIcon} />
             <span>
               {guide.skinOrClothes === 'skin'
-                ? 'Skin only'
+                ? 'Pulse points — skin only (warmth carries the scent)'
                 : guide.skinOrClothes === 'clothes'
-                ? 'Clothes only'
-                : 'Skin & clothes'}
+                ? 'On fabric — absorbs and holds longer'
+                : 'Skin & fabric — layer for staying power'}
             </span>
           </div>
 

@@ -70,6 +70,39 @@
   opacity: 0.6;
 }
 
+.favBtn {
+  position: absolute;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  color: var(--text-muted);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+  z-index: 2;
+}
+
+.card:hover .favBtn,
+.favBtn.favBtnActive {
+  opacity: 1;
+}
+
+.favBtn:hover {
+  transform: scale(1.15);
+}
+
+.favBtnActive {
+  color: #e74c6f;
+}
+
 .matchBadge {
   position: absolute;
   top: var(--space-sm);

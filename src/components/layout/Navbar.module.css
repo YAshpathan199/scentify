@@ -117,6 +117,118 @@
   transform: translateY(-1px);
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.iconBtn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: color var(--transition-fast), background var(--transition-fast);
+  text-decoration: none;
+}
+
+.iconBtn:hover {
+  color: var(--accent);
+  background: var(--bg-muted, rgba(0,0,0,0.04));
+}
+
+.transparent .iconBtn {
+  color: rgba(245, 240, 232, 0.7);
+}
+
+.transparent .iconBtn:hover {
+  color: var(--accent-light);
+  background: rgba(255,255,255,0.1);
+}
+
+.badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  min-width: 16px;
+  height: 16px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 16px;
+  text-align: center;
+  background: var(--accent);
+  color: white;
+  border-radius: var(--radius-full);
+  pointer-events: none;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background: var(--bg-muted, rgba(0,0,0,0.04));
+  border-radius: var(--radius-full);
+  padding: 4px 8px 4px 12px;
+  border: 1px solid var(--border);
+  transition: border-color var(--transition-fast);
+}
+
+.searchForm:focus-within {
+  border-color: var(--accent);
+}
+
+.transparent .searchForm {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+}
+
+.searchIcon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: var(--text-small);
+  color: var(--text-primary);
+  width: 160px;
+}
+
+.transparent .searchInput {
+  color: var(--dark-text);
+}
+
+.searchInput::placeholder {
+  color: var(--text-muted);
+}
+
+.searchClose {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.searchClose:hover {
+  color: var(--text-primary);
+  background: var(--border);
+}
+
 @media (min-width: 768px) {
   .container {
     padding: 0 var(--space-lg);

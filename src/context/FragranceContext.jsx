@@ -97,6 +97,7 @@ function reducer(state, action) {
         fragrances: action.payload.fragrances || state.fragrances,
         history: action.payload.history || state.history,
         settings: action.payload.settings || state.settings,
+        favorites: action.payload.favorites || state.favorites,
       };
     }
     case 'RESET_DATA': {

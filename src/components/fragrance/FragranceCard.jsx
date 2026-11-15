@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
-import { Star, Clock, Wind } from 'lucide-react';
+import { Star, Clock, Wind, Heart } from 'lucide-react';
 import { Badge } from '../ui';
 import { FRAGRANCE_FAMILIES } from '../../data/constants';
+import { useFragrances } from '../../context/FragranceContext';
 import { use3DTilt } from '../../hooks/use3DTilt';
 import styles from './FragranceCard.module.css';
 
 export default function FragranceCard({ fragrance, matchPercent }) {
   const family = FRAGRANCE_FAMILIES.find(f => f.id === fragrance.family);
+  const { isFavorite, toggleFavorite } = useFragrances();
+  const fav = isFavorite(fragrance.id);
   const { ref, style: tiltStyle, glareStyle, handlers } = use3DTilt({
     max: 12, scale: 1.03, speed: 400, glare: true,
   });
@@ -32,6 +35,13 @@ export default function FragranceCard({ fragrance, matchPercent }) {
           {matchPercent !== undefined && (
             <div className={styles.matchBadge}>{matchPercent}% match</div>
           )}
+          <button
+            className={`${styles.favBtn} ${fav ? styles.favBtnActive : ''}`}
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); toggleFavorite(fragrance.id); }}
+            aria-label={fav ? 'Remove from favorites' : 'Add to favorites'}
+          >
+            <Heart size={16} fill={fav ? 'currentColor' : 'none'} />
+          </button>
           <div className={styles.glare} style={glareStyle} />
         </div>
 

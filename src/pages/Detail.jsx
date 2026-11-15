@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, ShoppingCart, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ShoppingCart, ExternalLink, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button, Badge, StarRating, ProgressBar } from '../components/ui';
 import { FragranceCard, NotesPyramid, SprayGuidePanel } from '../components/fragrance';
@@ -79,7 +79,7 @@ function BottleViewer({ fragrance, family }) {
 export default function Detail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { fragrances } = useFragrances();
+  const { fragrances, isFavorite, toggleFavorite } = useFragrances();
 
   const fragrance = fragrances.find((f) => f.id === id);
 
@@ -182,6 +182,14 @@ export default function Detail() {
 
             <div className={styles.ratingRow}>
               <StarRating rating={fragrance.rating} size="md" showValue />
+              <button
+                className={styles.favBtn}
+                onClick={() => toggleFavorite(fragrance.id)}
+                aria-label={isFavorite(fragrance.id) ? 'Remove from favorites' : 'Add to favorites'}
+              >
+                <Heart size={20} fill={isFavorite(fragrance.id) ? 'currentColor' : 'none'} />
+                {isFavorite(fragrance.id) ? 'Favorited' : 'Favorite'}
+              </button>
             </div>
 
             {(fragrance.price > 0 || fragrance.shopLink) && (

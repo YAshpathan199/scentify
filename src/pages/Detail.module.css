@@ -152,7 +152,31 @@
 }
 
 .ratingRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
   margin-bottom: var(--space-sm);
+}
+
+.favBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--text-small);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.favBtn:hover {
+  border-color: #e74c6f;
+  color: #e74c6f;
+  background: rgba(231, 76, 111, 0.06);
 }
 
 /* ---- Shop Card ---- */

@@ -298,10 +298,10 @@ export default function Guide() {
                     <Shirt size={16} />
                     <span>
                       {sprayGuide.skinOrClothes === 'skin'
-                        ? 'Apply on skin'
+                        ? 'Pulse points — skin only (warmth carries the scent)'
                         : sprayGuide.skinOrClothes === 'clothes'
-                        ? 'Apply on clothes'
-                        : 'Apply on both skin & clothes'}
+                        ? 'On fabric — absorbs and holds longer'
+                        : 'Skin & fabric — layer for staying power'}
                     </span>
                   </div>
 

@@ -469,18 +469,24 @@ export function dynamicSprayGuide(frag, seasonId, occasionId, concentration) {
   const isDate = archetype === 'date';
 
   let where, skinOrClothes;
-  if (isOffice || (isHot && h > 0)) {
-    where = ['chest', 'stomach'];
+  if (isOffice) {
+    where = ['chest', 'inner-elbows', 'wrists'];
+    skinOrClothes = 'skin';
+  } else if (isHot && h > 0) {
+    where = ['chest', 'wrists'];
     skinOrClothes = 'skin';
   } else if (isDate) {
-    where = ['neck', 'chest', 'wrists'];
+    where = ['neck', 'chest', 'behind-ears', 'wrists'];
     skinOrClothes = 'skin';
   } else if (isCold) {
-    where = ['neck', 'chest', 'collar or scarf', 'wrists'];
+    where = ['neck', 'chest', 'scarf', 'wrists'];
     skinOrClothes = 'both';
   } else if (archetype === 'nightout') {
-    where = ['neck', 'chest', 'back of neck', 'wrists'];
+    where = ['neck', 'chest', 'behind-ears', 'wrists'];
     skinOrClothes = 'both';
+  } else if (archetype === 'formal') {
+    where = ['neck', 'collar', 'chest', 'wrists'];
+    skinOrClothes = 'skin';
   } else {
     where = ['neck', 'chest', 'wrists'];
     skinOrClothes = 'skin';

@@ -16,6 +16,7 @@ import styles from './FragranceManager.module.css';
 const EMPTY_FORM = {
   name: '', brand: '', concentration: 'EDP', family: 'woody', gender: 'unisex', size: '',
   price: '', rating: 0, longevity: 6, projection: 'moderate', image: '',
+  description: '', wearer: '', shopLink: '',
   notes: { top: '', heart: '', base: '' },
   occasions: [], seasons: [], timeOfDay: [], mood: [], dressCodes: [],
 };
@@ -193,6 +194,27 @@ export default function FragranceManager() {
                 <input className={styles.input} type="number" placeholder="0"
                   value={form.price} onChange={e => setForm({ ...form, price: e.target.value })} />
               </div>
+            </div>
+            <div className={styles.field}>
+              <label className={styles.fieldLabel}>Image URL</label>
+              <input className={styles.input} placeholder="https://..."
+                value={form.image} onChange={e => setForm({ ...form, image: e.target.value })} />
+            </div>
+            <div className={styles.field}>
+              <label className={styles.fieldLabel}>Shop Link</label>
+              <input className={styles.input} placeholder="https://..."
+                value={form.shopLink} onChange={e => setForm({ ...form, shopLink: e.target.value })} />
+            </div>
+            <div className={styles.field}>
+              <label className={styles.fieldLabel}>Description</label>
+              <textarea className={styles.input} rows={3} placeholder="Describe this fragrance..."
+                value={form.description} onChange={e => setForm({ ...form, description: e.target.value })}
+                style={{ resize: 'vertical', minHeight: '72px' }} />
+            </div>
+            <div className={styles.field}>
+              <label className={styles.fieldLabel}>Wearer</label>
+              <input className={styles.input} placeholder="Who wears this fragrance?"
+                value={form.wearer} onChange={e => setForm({ ...form, wearer: e.target.value })} />
             </div>
           </div>
 
