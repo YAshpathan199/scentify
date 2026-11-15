@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  FlaskConical, IndianRupee, Star,
+  FlaskConical, IndianRupee, Calendar, Star,
   Building2, Palette, Plus, Download,
   ExternalLink, BarChart3, TrendingUp, AlertTriangle, Info,
 } from 'lucide-react';
