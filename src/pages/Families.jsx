@@ -8,53 +8,95 @@ import { SAMPLE_FRAGRANCES } from '../data/fragrances';
 import styles from './Families.module.css';
 
 const FAMILY_DETAILS = {
-  woody: {
-    description:
-      'Woody fragrances feature notes like sandalwood, cedarwood, vetiver, and oud. They evoke forests, warmth, and masculinity. In India, sandalwood (chandan) has deep cultural significance in religious ceremonies and daily life.',
-    keyNotes: ['Sandalwood', 'Cedarwood', 'Vetiver', 'Oud', 'Patchouli'],
-    bestSeasons: ['autumn', 'winter'],
-  },
   floral: {
     description:
-      'Floral scents capture the essence of flowers — rose, jasmine, tuberose, and lily. Rose and jasmine are iconic in Indian perfumery, from ittar traditions to modern fragrances. Perfect for weddings and festive occasions.',
-    keyNotes: ['Rose', 'Jasmine', 'Tuberose', 'Lily', 'Iris'],
+      'Floral scents capture the essence of flowers — rose, jasmine, tuberose, and peony. Rose and jasmine are iconic in Indian perfumery, woven into ittar traditions, weddings, and temple offerings for centuries. The most universal family, moving from soft and powdery to rich and heady.',
+    keyNotes: ['Rose', 'Jasmine', 'Tuberose', 'Peony', 'Orange Blossom'],
     bestSeasons: ['spring', 'autumn'],
   },
   oriental: {
     description:
-      'Oriental fragrances blend warm spices, resins, and amber. Think vanilla, cinnamon, incense, and oud. They mirror the richness of Indian spice markets and are perfect for cool winter evenings and grand celebrations.',
-    keyNotes: ['Vanilla', 'Cinnamon', 'Incense', 'Amber', 'Oud'],
-    bestSeasons: ['winter'],
+      'Oriental fragrances blend warm spices, resins, amber, and oud into something rich and enveloping. They mirror the depth of Indian spice markets — saffron, incense, labdanum — and feel most at home on cool winter evenings and grand festive occasions. Heavy-handed projection is their natural state.',
+    keyNotes: ['Vanilla', 'Saffron', 'Incense', 'Amber', 'Oud'],
+    bestSeasons: ['winter', 'autumn'],
+  },
+  woody: {
+    description:
+      'Woody fragrances are built on sandalwood, cedarwood, vetiver, and patchouli — earthy, warm, and grounding. In India, sandalwood (chandan) carries centuries of cultural weight, used in religious ceremonies and ittars long before modern perfumery. Smoky woods and oakmoss push this family toward darker, more dramatic territory.',
+    keyNotes: ['Sandalwood', 'Cedarwood', 'Vetiver', 'Patchouli', 'Oakmoss'],
+    bestSeasons: ['autumn', 'winter'],
   },
   fresh: {
     description:
-      "Fresh fragrances feature clean, green, and airy notes — vetiver grass, cucumber, green tea, and mint. They feel like a morning breeze. Ideal for India's hot summers and humid monsoon season.",
-    keyNotes: ['Green Tea', 'Cucumber', 'Mint', 'Vetiver Grass', 'Bamboo'],
-    bestSeasons: ['summer', 'monsoon'],
+      "Fresh fragrances open with mint, green apple, lemon, or clean herbal notes that feel like a burst of cool air. They are energetic and linear — what you smell at the top is largely what stays. Mint and citrus-led freshness cuts through Indian summer heat better than heavier families, making this a natural pick for warm afternoons and evenings outdoors.",
+    keyNotes: ['Mint', 'Green Apple', 'Green Tea', 'Vetiver Grass', 'Ozonic Notes'],
+    bestSeasons: ['summer', 'spring'],
   },
   citrus: {
     description:
-      "Citrus fragrances burst with lemon, bergamot, orange, and grapefruit. They're energizing and uplifting — the perfect morning fragrance. Great for office wear and casual outings in Indian heat.",
+      "Citrus fragrances burst with bergamot, lemon, orange, and grapefruit — energising, uplifting, and gone within hours if worn light-handed. The natural choice for mornings, office wear, and anything outdoors in Indian heat. They rarely last the full day, so a small decant in your bag solves that.",
     keyNotes: ['Bergamot', 'Lemon', 'Orange', 'Grapefruit', 'Lime'],
     bestSeasons: ['summer', 'spring'],
   },
-  gourmand: {
+  aquatic: {
     description:
-      'Gourmand fragrances are sweet and edible — vanilla, chocolate, coffee, caramel, and honey. They wrap you in comfort like your favourite dessert. Best for winter evenings and date nights.',
-    keyNotes: ['Vanilla', 'Chocolate', 'Coffee', 'Caramel', 'Honey'],
-    bestSeasons: ['winter', 'autumn'],
+      "Aquatic fragrances bottle ocean breeze, sea salt, and driftwood into something wearable. They feel cool and effortless — the olfactory equivalent of a breeze off the sea. Perfect for India's scorching summers, coastal cities like Mumbai and Chennai, and any occasion where the heat calls for something that won't weigh you down.",
+    keyNotes: ['Sea Salt', 'Ambroxan', 'Driftwood', 'Water Lily', 'Marine Accord'],
+    bestSeasons: ['summer', 'monsoon'],
   },
   aromatic: {
     description:
-      'Aromatic fragrances feature herbs like lavender, rosemary, thyme, and sage. They feel sophisticated and clean. A versatile choice for Indian professionals — subtle enough for office, refined enough for dinner.',
-    keyNotes: ['Lavender', 'Rosemary', 'Thyme', 'Sage', 'Basil'],
+      'Aromatic fragrances are built around lavender, geranium, rosemary, and mint — clean, herbal, and sophisticated without demanding attention. They are the workhorse of the professional wardrobe: inoffensive in a meeting room, polished at dinner, and comfortable enough for a long day. Cool Rush sits here — close to the skin, never loud.',
+    keyNotes: ['Lavender', 'Geranium', 'Rosemary', 'Mint', 'Sage'],
     bestSeasons: ['spring', 'autumn'],
   },
-  aquatic: {
+  fougere: {
     description:
-      "Aquatic fragrances capture ocean breeze, sea salt, and water notes. They feel cool and refreshing. Perfect for India's scorching summers and coastal city vibes.",
-    keyNotes: ['Sea Salt', 'Ocean Breeze', 'Water Lily', 'Algae', 'Driftwood'],
-    bestSeasons: ['summer', 'monsoon'],
+      "Fougère (French for \"fern\") is the backbone of classic masculine perfumery — lavender, coumarin, oakmoss, and tonka bean in a structure that feels simultaneously herbal, warm, and clean. It's the DNA of Brut, Cool Water, and Versace Eros. Modern fougères swap the coumarin for ambroxan and tonka, keeping the approachable, all-occasion character. Modern Code and Atlas both carry this structure.",
+    keyNotes: ['Lavender', 'Coumarin', 'Oakmoss', 'Tonka Bean', 'Geranium'],
+    bestSeasons: ['spring', 'autumn'],
+  },
+  chypre: {
+    description:
+      'Chypre (named after Cyprus) is built on a classic three-note accord: bergamot on top, oakmoss in the base, and labdanum holding them together. The result is mossy, slightly woody, and sophisticated in a way that few other families match. Creed Aventus — and its many inspirations including Aventus Legacy — carry this structure. Best worn in cool weather when the mossy drydown has space to develop.',
+    keyNotes: ['Oakmoss', 'Bergamot', 'Labdanum', 'Cistus', 'Vetiver'],
+    bestSeasons: ['autumn', 'winter'],
+  },
+  spicy: {
+    description:
+      "Spicy fragrances lead with pepper, cinnamon, clove, cardamom, and tobacco — the notes India's spice trade made famous. They feel bold, warm, and unapologetically present. Tobacco Mabkhar from Ibrahim Al Qurashi sits here, with its tobacco-and-spice opening and long leather-oakmoss trail. These are evening fragrances that suit ethnic wear and occasions where subtlety is not the goal.",
+    keyNotes: ['Black Pepper', 'Cardamom', 'Cinnamon', 'Clove', 'Tobacco'],
+    bestSeasons: ['winter', 'autumn'],
+  },
+  gourmand: {
+    description:
+      'Gourmand fragrances smell edible — coffee, cherry, vanilla, caramel, and praline. They wrap you in warmth like a dessert rather than a garden. Wet Cherry (cherry praline), Faunwalk Mocha (coffee rose), and Oud on the Rocks (coffee liquor) all live here. They project best in cool weather and suit evening wear, when the sweetness reads as indulgent rather than cloying.',
+    keyNotes: ['Vanilla', 'Coffee', 'Cherry', 'Praline', 'Caramel'],
+    bestSeasons: ['winter', 'autumn'],
+  },
+  green: {
+    description:
+      'Green fragrances capture the smell of a garden after rain — cut grass, galbanum, cucumber, violet leaf, and herbs. They are understated and natural, the opposite of loud oriental statements. No bottles in this collection sit here yet, but a good green fragrance is the ideal companion for spring mornings, parks, and any occasion that calls for something that smells genuinely outdoorsy rather than perfume-like.',
+    keyNotes: ['Galbanum', 'Green Tea', 'Violet Leaf', 'Cucumber', 'Tomato Leaf'],
+    bestSeasons: ['spring', 'summer'],
+  },
+  leather: {
+    description:
+      'Leather fragrances are built on birch tar, suede, and smoky woods — bold, slightly animalic, and deeply mature. They share DNA with chypre and spicy families, but leather is the defining note rather than a supporting one. No bottle in this collection sits here yet. When you are ready for one, look toward niche houses — leather fragrances tend to be better built at higher price points.',
+    keyNotes: ['Birch Tar', 'Suede', 'Smoky Woods', 'Labdanum', 'Styrax'],
+    bestSeasons: ['autumn', 'winter'],
+  },
+  powdery: {
+    description:
+      'Powdery fragrances are soft, skin-close, and intimate — iris, violet, heliotrope, and white musk create a gentle talc-like warmth that feels refined rather than perfumey. They wear close to the skin and project quietly, making them ideal for formal occasions and daytime wear where subtlety matters. White Oud sits close to this territory with its musky-powdery dry-down.',
+    keyNotes: ['Iris', 'Violet', 'Heliotrope', 'Orris Root', 'White Musk'],
+    bestSeasons: ['spring', 'autumn'],
+  },
+  musk: {
+    description:
+      'Musk fragrances smell like warm, clean skin rather than a traditional perfume. White musks, ambroxan, and ambrette create an invisible halo that draws people closer without announcing itself. The most wearable family — almost every fragrance uses musk as a base note, but in a musk-led fragrance it is the entire point. Ideal for minimal days and layering under heavier scents to extend their longevity.',
+    keyNotes: ['White Musk', 'Ambroxan', 'Ambrette', 'Cashmeran', 'Skin Musk'],
+    bestSeasons: ['summer', 'spring'],
   },
 };
 

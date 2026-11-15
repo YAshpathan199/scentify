@@ -183,9 +183,9 @@ export default function Detail() {
               <StarRating rating={fragrance.rating} size="md" showValue />
             </div>
 
-            {(fragrance.price > 0 || fragrance.buyingLink) && (
-              <div className={styles.buyCard}>
-                <div className={styles.buyCardTop}>
+            {(fragrance.price > 0 || fragrance.shopLink) && (
+              <div className={styles.shopCard}>
+                <div className={styles.shopCardTop}>
                   {fragrance.price > 0 && (
                     <span className={styles.price}>{formatPrice(fragrance.price)}</span>
                   )}
@@ -193,15 +193,15 @@ export default function Detail() {
                     <span className={styles.sizeBadge}>{fragrance.size}</span>
                   )}
                 </div>
-                {fragrance.buyingLink && (
+                {fragrance.shopLink && (
                   <a
-                    href={fragrance.buyingLink}
+                    href={fragrance.shopLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={styles.buyButton}
+                    className={styles.shopButton}
                   >
                     <ShoppingCart size={16} />
-                    Buy Now
+                    Shop Now
                     <ExternalLink size={13} />
                   </a>
                 )}

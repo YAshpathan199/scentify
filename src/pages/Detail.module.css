@@ -155,9 +155,9 @@
   margin-bottom: var(--space-sm);
 }
 
-/* ---- Buy Card ---- */
+/* ---- Shop Card ---- */
 
-.buyCard {
+.shopCard {
   background: var(--bg-surface);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-lg);
@@ -169,7 +169,7 @@
   margin-bottom: var(--space-md);
 }
 
-.buyCardTop {
+.shopCardTop {
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -192,7 +192,7 @@
   font-weight: 500;
 }
 
-.buyButton {
+.shopButton {
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -210,7 +210,7 @@
   flex-shrink: 0;
 }
 
-.buyButton:hover {
+.shopButton:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
   box-shadow: 0 6px 20px var(--accent-glow);

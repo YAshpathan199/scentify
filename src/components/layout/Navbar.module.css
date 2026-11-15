@@ -45,6 +45,9 @@
 
 .logoIcon {
   color: var(--accent);
+  height: 36px;
+  width: auto;
+  flex-shrink: 0;
 }
 
 .transparent .logoIcon {

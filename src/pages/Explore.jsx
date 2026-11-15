@@ -3,7 +3,7 @@ import { Search, SearchX, ShoppingBag, TrendingUp, Package, IndianRupee, Award, 
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../components/ui';
 import { FragranceCard } from '../components/fragrance';
-import { SAMPLE_FRAGRANCES, COLLECTION_GAPS } from '../data/fragrances';
+import { SAMPLE_FRAGRANCES } from '../data/fragrances';
 import { FRAGRANCE_FAMILIES } from '../data/constants';
 import { formatPrice } from '../utils/helpers';
 import styles from './Explore.module.css';
@@ -140,6 +140,49 @@ export default function Explore() {
     return { totalValue, avgValue, mostExpensive, pricedCount: priced.length, byBrand };
   }, []);
 
+  const collectionGaps = useMemo(() => {
+    const counts = {};
+    FRAGRANCE_FAMILIES.forEach(f => { counts[f.id] = 0; });
+    SAMPLE_FRAGRANCES.forEach(f => { if (counts[f.family] !== undefined) counts[f.family]++; });
+
+    const META = {
+      fresh:    { weight: 9, occasions: ['Summer mornings', 'Office', 'Gym'], insight: 'Only one fresh bottle for India\'s hottest months — the most-needed gap to fill first.' },
+      citrus:   { weight: 9, occasions: ['Office', 'Morning wear', 'Interviews'], insight: 'Single citrus is tight. A second pick means you always have a crisp morning option clean and ready.' },
+      spicy:    { weight: 8, occasions: ['Diwali', 'Eid', 'Winter festivals'], insight: 'Single spicy for India\'s entire festival and winter season is a real bottleneck.' },
+      aquatic:  { weight: 7, occasions: ['Casual outings', 'Travel', 'Monsoon'], insight: 'One aquatic for coastal trips and humid monsoon days. A backup makes the rotation breathable.' },
+      aromatic: { weight: 7, occasions: ['Office', 'Business meeting', 'Everyday'], insight: 'One aromatic across all professional contexts leaves zero rotation room.' },
+      fougere:  { weight: 7, occasions: ['Everyday', 'Office', 'Dinner'], insight: 'Fougère is the backbone of everyday masculine wear — one option is tight.' },
+      woody:    { weight: 7, occasions: ['Weddings', 'Evening events', 'Festivals'], insight: 'Woody coverage is thin — a clear gap across winter evenings and formal wear.' },
+      musk:     { weight: 6, occasions: ['Everyday base', 'Minimal days', 'Layering'], insight: 'No skin-scent musk. A good one extends every other fragrance\'s longevity when layered under.' },
+      chypre:   { weight: 6, occasions: ['Formal events', 'Weddings', 'Date nights'], insight: 'Chypre dresses up better than most — the gap shows in your formal rotation.' },
+      green:    { weight: 5, occasions: ['Park walks', 'Morning jogs', 'Spring days'], insight: 'No green fragrance at all — the most natural-smelling family is completely absent from the shelf.' },
+      leather:  { weight: 5, occasions: ['Formal dinners', 'Nights out', 'Autumn'], insight: 'Nothing in leather — a bold gap for confident evening and autumn-winter occasions.' },
+      floral:   { weight: 5, occasions: ['Weddings', 'Sangeet', 'Festive events'], insight: 'Floral coverage is decent but Indian weddings can always use more variety here.' },
+      gourmand: { weight: 4, occasions: ['House parties', 'Date nights', 'Winter'], insight: 'Gourmand is reasonably covered — Wet Cherry, Mocha and Oud on the Rocks fill most occasions.' },
+      powdery:  { weight: 4, occasions: ['Daytime formal', 'Office', 'Weddings'], insight: 'No powdery fragrance — the softest, most intimate family is completely missing from the shelf.' },
+      oriental: { weight: 3, occasions: ['Weddings', 'Diwali', 'Winter nights'], insight: 'Oriental coverage is strong. A lighter daytime oriental would round it out nicely.' },
+    };
+
+    return FRAGRANCE_FAMILIES
+      .map(f => ({ family: f, count: counts[f.id] || 0, meta: META[f.id] }))
+      .filter(g => g.meta && g.count < 2)
+      .sort((a, b) => a.count !== b.count ? a.count - b.count : b.meta.weight - a.meta.weight)
+      .slice(0, 6)
+      .map(g => ({
+        id: `gap-${g.family.id}`,
+        family: g.family.id,
+        icon: g.family.icon,
+        title: g.count === 0
+          ? `${g.family.label} — Completely Missing`
+          : `${g.family.label} — Thin Coverage`,
+        description: g.meta.insight,
+        occasions: g.meta.occasions,
+        priority: g.count === 0
+          ? (g.meta.weight >= 7 ? 'High' : 'Medium')
+          : (g.meta.weight >= 8 ? 'High' : g.meta.weight >= 6 ? 'Medium' : 'Low'),
+      }));
+  }, []);
+
   return (
     <div className={styles.page}>
       {/* Ambient family aura — morphs to active family colour */}
@@ -234,16 +277,13 @@ export default function Explore() {
           </div>
         </motion.div>
 
-        {/* Scent DNA Chart */}
-        <ScentDNA activeFamily={activeFamily} onFamilyClick={setActiveFamily} />
-
-        {/* Search Bar — daisyUI input with icon */}
-        <div className="max-w-[500px] mx-auto mb-6">
-          <label className="input input-bordered flex items-center gap-2 rounded-full shadow-sm bg-base-100 border-base-300 focus-within:border-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary/15">
-            <Search size={18} className="text-base-content/40" />
+        {/* Search Bar */}
+        <div className="w-full mb-4">
+          <label className="input input-bordered flex items-center gap-2 rounded-full shadow-sm bg-base-100 border-base-300 focus-within:border-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-primary/15 w-full">
+            <Search size={18} className="text-base-content/40 shrink-0" />
             <input
               type="text"
-              className="grow bg-transparent border-none outline-none text-base-content placeholder:text-base-content/40"
+              className="grow bg-transparent border-none outline-none text-base-content placeholder:text-base-content/40 min-w-0"
               placeholder="Search by name or brand..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -251,8 +291,8 @@ export default function Explore() {
           </label>
         </div>
 
-        {/* Gender Tabs */}
-        <div className="flex gap-2 mb-3 justify-center">
+        {/* Gender + Concentration Filters */}
+        <div className="flex flex-wrap gap-2 mb-6 items-center">
           {[
             { id: 'all', label: 'All', icon: '✨' },
             { id: 'men', label: 'Him', icon: '👔' },
@@ -268,10 +308,7 @@ export default function Explore() {
               {g.label}
             </button>
           ))}
-        </div>
-
-        {/* Concentration Tabs */}
-        <div className="flex gap-2 mb-4 justify-center flex-wrap">
+          <div className="w-px h-6 bg-base-300 mx-1" />
           {[
             { id: 'all', label: 'All' },
             { id: 'EDP', label: 'EDP' },
@@ -287,6 +324,9 @@ export default function Explore() {
             </button>
           ))}
         </div>
+
+        {/* Scent DNA Chart */}
+        <ScentDNA activeFamily={activeFamily} onFamilyClick={setActiveFamily} />
 
         {/* Filter Chips + Sort Row */}
         <div className={styles.controlsRow}>
@@ -383,7 +423,7 @@ export default function Explore() {
           </div>
 
           <div className={styles.wishlistGrid}>
-            {COLLECTION_GAPS.map((gap, i) => {
+            {collectionGaps.map((gap, i) => {
               const fam = FRAGRANCE_FAMILIES.find(f => f.id === gap.family);
               const priorityColor = gap.priority === 'High' ? '#B34A45' : gap.priority === 'Medium' ? '#B8956A' : '#6A859A';
               return (

@@ -1,11 +1,13 @@
 import { useState, useEffect, useId } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sparkles, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import ScentifyMark from '../ui/ScentifyMark';
 import styles from './Navbar.module.css';
 
 const NAV_LINKS = [
   { to: '/discover', label: 'Discover' },
   { to: '/explore', label: 'Explore' },
+  { to: '/scout', label: 'Scout' },
   { to: '/guide', label: 'Guide' },
   { to: '/learn', label: 'Learn' },
 ];
@@ -13,6 +15,7 @@ const NAV_LINKS = [
 const MOBILE_LINKS = [
   { to: '/discover', label: 'Discover Your Fragrance' },
   { to: '/explore', label: 'Explore Collection' },
+  { to: '/scout', label: 'Scent Scout' },
   { to: '/guide', label: 'How to Wear' },
   { to: '/learn', label: 'Learn' },
 ];
@@ -55,7 +58,7 @@ export default function Navbar() {
         <nav className={navClass} role="navigation" aria-label="Main navigation">
           <div className={styles.container}>
             <Link to="/" className={styles.logo} aria-label="Scentify home">
-              <Sparkles size={24} className={styles.logoIcon} />
+              <ScentifyMark className={styles.logoIcon} />
               <span className={styles.logoText}>Scentify</span>
             </Link>
 

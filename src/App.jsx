@@ -10,6 +10,7 @@ import Detail from './pages/Detail';
 import Guide from './pages/Guide';
 import Learn from './pages/Learn';
 import Families from './pages/Families';
+import BuyAssist from './pages/BuyAssist';
 import Storage from './pages/Storage';
 import Admin from './pages/Admin';
 
@@ -33,6 +34,7 @@ export default function App() {
                   <Route path="/guide" element={<Guide />} />
                   <Route path="/learn" element={<Learn />} />
                   <Route path="/families" element={<Families />} />
+                  <Route path="/scout" element={<BuyAssist />} />
                   <Route path="/storage" element={<Storage />} />
                 </Routes>
               </main>
