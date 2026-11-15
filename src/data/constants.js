@@ -95,7 +95,6 @@ export const FRAGRANCE_FAMILIES = [
   { id: 'woody', label: 'Woody', color: '#8B4513', description: 'Warm, earthy, and grounding', icon: '🌳' },
   { id: 'floral', label: 'Floral', color: '#DB7093', description: 'Romantic, elegant, and soft', icon: '🌹' },
   { id: 'oriental', label: 'Oriental', color: '#B8860B', description: 'Rich, warm, and exotic', icon: '✨' },
-  { id: 'fresh', label: 'Fresh', color: '#20B2AA', description: 'Clean, crisp, and invigorating', icon: '🌿' },
   { id: 'citrus', label: 'Citrus', color: '#FFA500', description: 'Bright, zesty, and uplifting', icon: '🍊' },
   { id: 'gourmand', label: 'Gourmand', color: '#D2691E', description: 'Sweet, edible, and comforting', icon: '🍫' },
   { id: 'aromatic', label: 'Aromatic', color: '#6B8E23', description: 'Herbal, fresh, and sophisticated', icon: '🌿' },
