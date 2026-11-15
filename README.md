@@ -32,11 +32,9 @@ Everything runs in the browser. There is no backend — all data lives in `local
 
 ## Live Demo
 
-Deployed on **Cloudflare Pages** via Wrangler:
+**https://scent.baqtl.com/**
 
-```
-https://scentify.pages.dev
-```
+Deployed on Cloudflare Pages via Wrangler.
 
 Installable as a **Progressive Web App** (PWA) — add to home screen on mobile for a fullscreen, app-like experience.
 
