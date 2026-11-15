@@ -84,7 +84,7 @@
 }
 
 .transparent .links a {
-  color: rgba(245, 240, 232, 0.7);
+  color: rgba(245, 240, 232, 0.9);
 }
 
 .links a:hover,
@@ -145,7 +145,7 @@
 }
 
 .transparent .iconBtn {
-  color: rgba(245, 240, 232, 0.7);
+  color: rgba(245, 240, 232, 0.9);
 }
 
 .transparent .iconBtn:hover {
