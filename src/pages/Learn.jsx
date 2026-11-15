@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Droplets, Flower2, Archive, ArrowRight, FlaskConical } from 'lucide-react';
-import { CONCENTRATIONS } from '../data/constants';
+import { CONCENTRATIONS, FRAGRANCE_FAMILIES, SEASONS, OCCASIONS } from '../data/constants';
 import styles from './Learn.module.css';
 
 const CONC_COLORS = ['#6A859A', '#3A8FA8', '#B8956A', '#8B6914'];
@@ -23,7 +23,7 @@ const CARDS = [
   {
     icon: Flower2,
     title: 'Fragrance Families',
-    desc: 'Explore the 8 scent families that define every perfume. Understand their character, best seasons, and how to pair them.',
+    desc: `Explore all ${FRAGRANCE_FAMILIES.length} scent families that define every perfume. Understand their character, best seasons, and how to pair them.`,
     topics: [
       'Woody, Floral, Oriental & more',
       'Key notes and ingredients',
@@ -47,10 +47,10 @@ const CARDS = [
 ];
 
 const STATS = [
-  { number: '8', label: 'Fragrance Families' },
-  { number: '5', label: 'Indian Seasons' },
-  { number: '31', label: 'Occasions' },
-  { number: '4', label: 'Concentration Types' },
+  { number: String(FRAGRANCE_FAMILIES.length), label: 'Fragrance Families' },
+  { number: String(SEASONS.length), label: 'Indian Seasons' },
+  { number: String(OCCASIONS.length), label: 'Occasions' },
+  { number: String(CONCENTRATIONS.length), label: 'Concentration Types' },
 ];
 
 const cardVariants = {

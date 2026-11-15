@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Section } from '../ui';
 import { FragranceCard } from '../fragrance';
-import { SAMPLE_FRAGRANCES } from '../../data/fragrances';
+import { useFragrances } from '../../context/FragranceContext';
 import styles from './FeaturedCollection.module.css';
 
 const fadeUp = {
@@ -20,19 +20,20 @@ const noMotion = {
 export default function FeaturedCollection() {
   const prefersReduced = useReducedMotion();
   const variants = prefersReduced ? noMotion : fadeUp;
+  const { fragrances } = useFragrances();
 
   const topFragrances = useMemo(
     () =>
-      [...SAMPLE_FRAGRANCES]
+      [...fragrances]
         .sort((a, b) => b.rating - a.rating)
         .slice(0, 6),
-    []
+    [fragrances]
   );
 
   return (
     <Section
       title="Featured Collection"
-      subtitle={`${SAMPLE_FRAGRANCES.length} carefully curated fragrances`}
+      subtitle={`${fragrances.length} carefully curated fragrances`}
       id="featured"
     >
       <motion.div

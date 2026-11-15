@@ -13,7 +13,7 @@ import {
   Home,
 } from 'lucide-react';
 import { Badge } from '../components/ui';
-import { SAMPLE_FRAGRANCES } from '../data/fragrances';
+import { useFragrances } from '../context/FragranceContext';
 import { SEASONS, CONCENTRATIONS, HOME_ROOMS, HOME_SPRAY_GUIDE, FRAGRANCE_FAMILIES } from '../data/constants';
 import { getSprayGuideByIntensity } from '../utils/sprayGuide';
 import { getCurrentSeason } from '../utils/helpers';
@@ -183,10 +183,11 @@ export default function Guide() {
   const [selectedRoom, setSelectedRoom] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
 
+  const { fragrances } = useFragrances();
   const currentSeasonId = getCurrentSeason();
   const currentSeason = SEASONS.find((s) => s.id === currentSeasonId);
 
-  const fragrance = SAMPLE_FRAGRANCES.find((f) => f.id === selectedFragrance);
+  const fragrance = fragrances.find((f) => f.id === selectedFragrance);
 
   const sprayGuide = useMemo(() => {
     if (!fragrance || !selectedIntensity) return null;
@@ -235,7 +236,7 @@ export default function Guide() {
               }}
             >
               <option value="">Select a fragrance...</option>
-              {SAMPLE_FRAGRANCES.map((f) => (
+              {fragrances.map((f) => (
                 <option key={f.id} value={f.id}>
                   {f.name} — {f.brand}
                 </option>

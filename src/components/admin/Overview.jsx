@@ -80,7 +80,7 @@ export default function Overview() {
           { label: 'Total Wears', value: history.length, icon: Calendar, cls: styles.statIconInfo },
           { label: 'Avg Rating', value: stats.avgRating, icon: Star, cls: styles.statIconAccent },
           { label: 'Brands', value: stats.brandCount, icon: Building2, cls: styles.statIconSecondary },
-          { label: 'Families Covered', value: `${stats.familyCount}/8`, icon: Palette, cls: styles.statIconSecondary },
+          { label: 'Families Covered', value: `${stats.familyCount}/${FRAGRANCE_FAMILIES.length}`, icon: Palette, cls: styles.statIconSecondary },
         ].map((s, i) => (
           <div className={styles.statTile} key={i}>
             <div className={`${styles.statIcon} ${s.cls}`}><s.icon size={22} /></div>

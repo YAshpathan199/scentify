@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from '../components/ui';
 import { FRAGRANCE_FAMILIES, PAIRING_RULES, SEASONS } from '../data/constants';
-import { SAMPLE_FRAGRANCES } from '../data/fragrances';
+import { useFragrances } from '../context/FragranceContext';
 import styles from './Families.module.css';
 
 const FAMILY_DETAILS = {
@@ -106,14 +106,15 @@ function scrollToFamily(id) {
 
 export default function Families() {
   const navigate = useNavigate();
+  const { fragrances } = useFragrances();
 
   const familyFragrances = useMemo(() => {
     const map = {};
     FRAGRANCE_FAMILIES.forEach((f) => {
-      map[f.id] = SAMPLE_FRAGRANCES.filter((s) => s.family === f.id);
+      map[f.id] = fragrances.filter((s) => s.family === f.id);
     });
     return map;
-  }, []);
+  }, [fragrances]);
 
   const familyPairings = useMemo(() => {
     const map = {};

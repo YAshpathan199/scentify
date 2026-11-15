@@ -14,7 +14,7 @@ import { formatPrice } from '../../utils/helpers';
 import styles from './FragranceManager.module.css';
 
 const EMPTY_FORM = {
-  name: '', brand: '', concentration: 'EDP', family: 'woody', size: '',
+  name: '', brand: '', concentration: 'EDP', family: 'woody', gender: 'unisex', size: '',
   price: '', rating: 0, longevity: 6, projection: 'moderate', image: '',
   notes: { top: '', heart: '', base: '' },
   occasions: [], seasons: [], timeOfDay: [], mood: [], dressCodes: [],
@@ -168,6 +168,17 @@ export default function FragranceManager() {
                 <select className={styles.select} value={form.family}
                   onChange={e => setForm({ ...form, family: e.target.value })}>
                   {FRAGRANCE_FAMILIES.map(f => <option key={f.id} value={f.id}>{f.icon} {f.label}</option>)}
+                </select>
+              </div>
+            </div>
+            <div className={styles.fieldRow}>
+              <div className={styles.field}>
+                <label className={styles.fieldLabel}>Gender</label>
+                <select className={styles.select} value={form.gender || 'unisex'}
+                  onChange={e => setForm({ ...form, gender: e.target.value })}>
+                  <option value="men">Men</option>
+                  <option value="women">Women</option>
+                  <option value="unisex">Unisex</option>
                 </select>
               </div>
             </div>

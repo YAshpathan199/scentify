@@ -4,7 +4,7 @@ import { Check, RotateCcw, Compass, Droplets, Lightbulb, ChevronDown, ChevronUp 
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button, Badge } from '../components/ui';
 import { NotesPyramid, SprayGuidePanel } from '../components/fragrance';
-import { SAMPLE_FRAGRANCES } from '../data/fragrances';
+import { useFragrances } from '../context/FragranceContext';
 import { OCCASIONS, SEASONS, FRAGRANCE_FAMILIES, HOME_ROOMS, HOME_SPRAY_GUIDE } from '../data/constants';
 import { calculateQuizScores } from '../utils/scoring';
 import { getSprayGuideForFragrance } from '../utils/sprayGuide';
@@ -20,11 +20,12 @@ function HomeResults({ homeAnswers }) {
   const room = HOME_ROOMS.find(r => r.id === homeAnswers.room);
   const guide = HOME_SPRAY_GUIDE[homeAnswers.room]?.[homeAnswers.time];
   const navigate = useNavigate();
+  const { fragrances } = useFragrances();
 
   const matchedFragrances = useMemo(() => {
     if (!guide) return [];
     const familySet = new Set(guide.families);
-    return SAMPLE_FRAGRANCES
+    return fragrances
       .filter(f => familySet.has(f.family))
       .map(f => {
         const familyIdx = guide.families.indexOf(f.family);
@@ -33,7 +34,7 @@ function HomeResults({ homeAnswers }) {
       })
       .sort((a, b) => a.priority - b.priority)
       .slice(0, 4);
-  }, [guide]);
+  }, [guide, fragrances]);
 
   if (!guide) return <Navigate to="/discover" replace />;
 
@@ -207,6 +208,7 @@ export default function Results() {
   const navigate = useNavigate();
   const state = location.state;
   const [openGuides, setOpenGuides] = useState(new Set());
+  const { fragrances } = useFragrances();
 
   if (state?.mode === 'home' && state?.homeAnswers) {
     return <HomeResults homeAnswers={state.homeAnswers} />;
@@ -216,8 +218,8 @@ export default function Results() {
 
   const results = useMemo(() => {
     if (!answers) return [];
-    return calculateQuizScores(SAMPLE_FRAGRANCES, answers).slice(0, 3);
-  }, [answers]);
+    return calculateQuizScores(fragrances, answers).slice(0, 3);
+  }, [answers, fragrances]);
 
   if (!answers) {
     return <Navigate to="/discover" replace />;

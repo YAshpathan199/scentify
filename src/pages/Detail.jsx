@@ -4,7 +4,7 @@ import { ArrowLeft, ShoppingCart, ExternalLink } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Button, Badge, StarRating, ProgressBar } from '../components/ui';
 import { FragranceCard, NotesPyramid, SprayGuidePanel } from '../components/fragrance';
-import { SAMPLE_FRAGRANCES } from '../data/fragrances';
+import { useFragrances } from '../context/FragranceContext';
 import {
   FRAGRANCE_FAMILIES,
   SEASONS,
@@ -79,8 +79,9 @@ function BottleViewer({ fragrance, family }) {
 export default function Detail() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { fragrances } = useFragrances();
 
-  const fragrance = SAMPLE_FRAGRANCES.find((f) => f.id === id);
+  const fragrance = fragrances.find((f) => f.id === id);
 
   const currentSeasonId = getCurrentSeason();
   const [selectedOccasion, setSelectedOccasion] = useState('');
@@ -102,11 +103,11 @@ export default function Detail() {
 
   const relatedFragrances = useMemo(() => {
     if (!fragrance) return [];
-    const sameFamily = SAMPLE_FRAGRANCES.filter(
+    const sameFamily = fragrances.filter(
       (f) => f.family === fragrance.family && f.id !== fragrance.id
     );
     if (sameFamily.length >= 3) return sameFamily.slice(0, 3);
-    const others = SAMPLE_FRAGRANCES.filter(
+    const others = fragrances.filter(
       (f) => f.id !== fragrance.id && f.family !== fragrance.family
     );
     const combined = [...sameFamily];
@@ -115,7 +116,7 @@ export default function Detail() {
       combined.push(o);
     }
     return combined;
-  }, [fragrance]);
+  }, [fragrance, fragrances]);
 
   if (!fragrance) {
     return (

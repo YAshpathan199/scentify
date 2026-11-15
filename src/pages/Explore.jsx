@@ -3,18 +3,18 @@ import { Search, SearchX, ShoppingBag, TrendingUp, Package, IndianRupee, Award, 
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../components/ui';
 import { FragranceCard } from '../components/fragrance';
-import { SAMPLE_FRAGRANCES } from '../data/fragrances';
 import { FRAGRANCE_FAMILIES } from '../data/constants';
+import { useFragrances } from '../context/FragranceContext';
 import { formatPrice } from '../utils/helpers';
 import styles from './Explore.module.css';
 
-function ScentDNA({ activeFamily, onFamilyClick }) {
+function ScentDNA({ fragrances, activeFamily, onFamilyClick }) {
   const familyCounts = useMemo(() => {
     return FRAGRANCE_FAMILIES.map(f => ({
       ...f,
-      count: SAMPLE_FRAGRANCES.filter(fr => fr.family === f.id).length,
+      count: fragrances.filter(fr => fr.family === f.id).length,
     })).sort((a, b) => b.count - a.count);
-  }, []);
+  }, [fragrances]);
 
   const max = Math.max(...familyCounts.map(c => c.count));
 
@@ -63,6 +63,7 @@ function ScentDNA({ activeFamily, onFamilyClick }) {
 }
 
 export default function Explore() {
+  const { fragrances } = useFragrances();
   const [searchQuery, setSearchQuery] = useState('');
   const [activeGender, setActiveGender] = useState('all');
   const [activeConcentration, setActiveConcentration] = useState('all');
@@ -72,7 +73,7 @@ export default function Explore() {
   const activeFamilyData = FRAGRANCE_FAMILIES.find(f => f.id === activeFamily);
 
   const filteredFragrances = useMemo(() => {
-    let result = [...SAMPLE_FRAGRANCES];
+    let result = [...fragrances];
 
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
@@ -115,7 +116,7 @@ export default function Explore() {
     }
 
     return result;
-  }, [searchQuery, activeGender, activeConcentration, activeFamily, sortBy]);
+  }, [fragrances, searchQuery, activeGender, activeConcentration, activeFamily, sortBy]);
 
   const clearFilters = () => {
     setSearchQuery('');
@@ -125,12 +126,12 @@ export default function Explore() {
   };
 
   const collectionStats = useMemo(() => {
-    const priced = SAMPLE_FRAGRANCES.filter(f => f.price > 0);
+    const priced = fragrances.filter(f => f.price > 0);
     const totalValue = priced.reduce((sum, f) => sum + f.price, 0);
     const avgValue = priced.length > 0 ? Math.round(totalValue / priced.length) : 0;
     const mostExpensive = priced.reduce((best, f) => (!best || f.price > best.price ? f : best), null);
 
-    const byBrand = SAMPLE_FRAGRANCES.reduce((acc, f) => {
+    const byBrand = fragrances.reduce((acc, f) => {
       if (!acc[f.brand]) acc[f.brand] = { total: 0, count: 0, priced: 0 };
       acc[f.brand].count++;
       if (f.price > 0) { acc[f.brand].total += f.price; acc[f.brand].priced++; }
@@ -138,12 +139,12 @@ export default function Explore() {
     }, {});
 
     return { totalValue, avgValue, mostExpensive, pricedCount: priced.length, byBrand };
-  }, []);
+  }, [fragrances]);
 
   const collectionGaps = useMemo(() => {
     const counts = {};
     FRAGRANCE_FAMILIES.forEach(f => { counts[f.id] = 0; });
-    SAMPLE_FRAGRANCES.forEach(f => { if (counts[f.family] !== undefined) counts[f.family]++; });
+    fragrances.forEach(f => { if (counts[f.family] !== undefined) counts[f.family]++; });
 
     const META = {
       fresh:    { weight: 9, occasions: ['Summer mornings', 'Office', 'Gym'], insight: 'Only one fresh bottle for India\'s hottest months — the most-needed gap to fill first.' },
@@ -181,7 +182,7 @@ export default function Explore() {
           ? (g.meta.weight >= 7 ? 'High' : 'Medium')
           : (g.meta.weight >= 8 ? 'High' : g.meta.weight >= 6 ? 'Medium' : 'Low'),
       }));
-  }, []);
+  }, [fragrances]);
 
   return (
     <div className={styles.page}>
@@ -201,7 +202,7 @@ export default function Explore() {
         <header className={styles.header}>
           <h1 className={styles.title}>Explore Collection</h1>
           <p className={styles.subtitle}>
-            Browse all {SAMPLE_FRAGRANCES.length} fragrances
+            Browse all {fragrances.length} fragrances
           </p>
         </header>
 
@@ -216,7 +217,7 @@ export default function Explore() {
             <TrendingUp size={18} className={styles.valueIcon} />
             <span className={styles.valueSectionTitle}>Collection Value</span>
             <span className={styles.valuePricedNote}>
-              {collectionStats.pricedCount} of {SAMPLE_FRAGRANCES.length} priced
+              {collectionStats.pricedCount} of {fragrances.length} priced
             </span>
           </div>
 
@@ -227,7 +228,7 @@ export default function Explore() {
               <span className={styles.valueTileNumber}>
                 {formatPrice(collectionStats.totalValue)}
               </span>
-              {collectionStats.pricedCount < SAMPLE_FRAGRANCES.length && (
+              {collectionStats.pricedCount < fragrances.length && (
                 <span className={styles.valueTileSub}>known prices</span>
               )}
             </div>
@@ -235,7 +236,7 @@ export default function Explore() {
             <div className={styles.valueTile}>
               <Package size={16} className={styles.valueTileIcon} />
               <span className={styles.valueTileLabel}>Bottles</span>
-              <span className={styles.valueTileNumber}>{SAMPLE_FRAGRANCES.length}</span>
+              <span className={styles.valueTileNumber}>{fragrances.length}</span>
               <span className={styles.valueTileSub}>
                 {Object.keys(collectionStats.byBrand).length} brands
               </span>
@@ -326,7 +327,7 @@ export default function Explore() {
         </div>
 
         {/* Scent DNA Chart */}
-        <ScentDNA activeFamily={activeFamily} onFamilyClick={setActiveFamily} />
+        <ScentDNA fragrances={fragrances} activeFamily={activeFamily} onFamilyClick={setActiveFamily} />
 
         {/* Filter Chips + Sort Row */}
         <div className={styles.controlsRow}>
@@ -373,7 +374,7 @@ export default function Explore() {
 
         {/* Results Count */}
         <p className="text-sm text-base-content/50 mb-6">
-          Showing {filteredFragrances.length} of {SAMPLE_FRAGRANCES.length}{' '}
+          Showing {filteredFragrances.length} of {fragrances.length}{' '}
           fragrances
         </p>
 

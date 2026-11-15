@@ -5,6 +5,7 @@ const STORAGE_KEYS = {
   fragrances: 'scentify_fragrances',
   history: 'scentify_history',
   settings: 'scentify_settings',
+  favorites: 'scentify_favorites',
 };
 
 function loadFromStorage(key, fallback) {
@@ -40,6 +41,7 @@ const initialState = {
   fragrances: mergeFragrances(loadFromStorage(STORAGE_KEYS.fragrances, null)),
   history: loadFromStorage(STORAGE_KEYS.history, []),
   settings: loadFromStorage(STORAGE_KEYS.settings, { onboarded: false }),
+  favorites: loadFromStorage(STORAGE_KEYS.favorites, []),
 };
 
 function reducer(state, action) {
@@ -66,12 +68,23 @@ function reducer(state, action) {
     }
     case 'LOG_WEAR': {
       const entry = {
-        date: new Date().toISOString().split('T')[0],
+        date: action.payload.date || new Date().toISOString().split('T')[0],
         fragranceId: action.payload.fragranceId,
         timestamp: Date.now(),
         occasion: action.payload.occasion || '',
+        notes: action.payload.notes || '',
       };
       return { ...state, history: [...state.history, entry] };
+    }
+    case 'TOGGLE_FAVORITE': {
+      const id = action.payload;
+      const exists = state.favorites.includes(id);
+      return {
+        ...state,
+        favorites: exists
+          ? state.favorites.filter(f => f !== id)
+          : [...state.favorites, id],
+      };
     }
     case 'DELETE_WEAR': {
       return {
@@ -91,6 +104,7 @@ function reducer(state, action) {
         fragrances: SAMPLE_FRAGRANCES,
         history: [],
         settings: { onboarded: false },
+        favorites: [],
       };
     }
     case 'UPDATE_SETTINGS': {
@@ -118,22 +132,30 @@ export function FragranceProvider({ children }) {
     saveToStorage(STORAGE_KEYS.settings, state.settings);
   }, [state.settings]);
 
+  useEffect(() => {
+    saveToStorage(STORAGE_KEYS.favorites, state.favorites);
+  }, [state.favorites]);
+
   const value = {
     fragrances: state.fragrances,
     history: state.history,
     settings: state.settings,
+    favorites: state.favorites,
     addFragrance: (data) => dispatch({ type: 'ADD_FRAGRANCE', payload: data }),
     updateFragrance: (data) => dispatch({ type: 'UPDATE_FRAGRANCE', payload: data }),
     deleteFragrance: (id) => dispatch({ type: 'DELETE_FRAGRANCE', payload: id }),
-    logWear: (fragranceId, occasion) => dispatch({ type: 'LOG_WEAR', payload: { fragranceId, occasion } }),
+    logWear: (payload) => dispatch({ type: 'LOG_WEAR', payload: typeof payload === 'string' ? { fragranceId: payload } : payload }),
+    toggleFavorite: (id) => dispatch({ type: 'TOGGLE_FAVORITE', payload: id }),
     deleteWear: (timestamp) => dispatch({ type: 'DELETE_WEAR', payload: timestamp }),
     importData: (data) => dispatch({ type: 'IMPORT_DATA', payload: data }),
     resetData: () => dispatch({ type: 'RESET_DATA' }),
     updateSettings: (data) => dispatch({ type: 'UPDATE_SETTINGS', payload: data }),
+    isFavorite: (id) => state.favorites.includes(id),
     exportData: () => JSON.stringify({
       fragrances: state.fragrances,
       history: state.history,
       settings: state.settings,
+      favorites: state.favorites,
       exportedAt: new Date().toISOString(),
     }, null, 2),
   };
