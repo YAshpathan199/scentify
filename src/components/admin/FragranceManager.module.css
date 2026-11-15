@@ -180,6 +180,22 @@
   gap: 1px;
 }
 
+.miniStarBtn {
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  opacity: 0.85;
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.miniStarBtn:hover {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
 .actions {
   display: flex;
   gap: var(--space-xs);

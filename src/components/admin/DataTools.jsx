@@ -2,6 +2,7 @@ import { useState, useRef, useCallback } from 'react';
 import { Download, Upload, RotateCcw, ShieldCheck, HardDrive, AlertTriangle, CheckCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useFragrances } from '../../context/FragranceContext';
+import { SAMPLE_FRAGRANCES } from '../../data/fragrances';
 import styles from './DataTools.module.css';
 
 export default function DataTools() {
@@ -165,7 +166,7 @@ export default function DataTools() {
           <div className={`${styles.cardIcon} ${styles.cardIconDanger}`}><RotateCcw size={28} /></div>
           <h3 className={styles.cardTitle}>Reset to Defaults</h3>
           <p className={styles.cardDesc}>
-            Remove all custom data and restore the original 12-fragrance collection. This cannot be undone.
+            Remove all custom data and restore the original {SAMPLE_FRAGRANCES.length}-fragrance collection. This cannot be undone.
           </p>
           <button className={styles.dangerBtn} onClick={() => setShowReset(true)}>
             <RotateCcw size={16} /> Reset All Data
@@ -224,7 +225,7 @@ export default function DataTools() {
               <div className={styles.modalIcon}><AlertTriangle size={40} /></div>
               <h3 className={styles.modalTitle}>Reset All Data?</h3>
               <p className={styles.modalText}>
-                This will permanently delete all custom fragrances, wear history, and settings. The collection will be restored to the default 12 fragrances.
+                This will permanently delete all custom fragrances, wear history, and settings. The collection will be restored to the default {SAMPLE_FRAGRANCES.length} fragrances.
               </p>
               <p className={styles.modalConfirmLabel}>Type <strong>RESET</strong> to confirm:</p>
               <input

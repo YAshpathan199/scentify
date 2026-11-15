@@ -102,7 +102,7 @@ export default function Overview() {
           <Link to="/admin/fragrances?action=add" className={`${styles.actionBtn} ${styles.actionPrimary}`}>
             <Plus size={16} /> Add Fragrance
           </Link>
-          <Link to="/admin/history" className={`${styles.actionBtn} ${styles.actionSecondary}`}>
+          <Link to="/admin/history?action=log" className={`${styles.actionBtn} ${styles.actionSecondary}`}>
             <History size={16} /> Log Wear
           </Link>
           <button onClick={handleExport} className={`${styles.actionBtn} ${styles.actionOutline}`}>

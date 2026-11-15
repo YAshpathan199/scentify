@@ -345,10 +345,18 @@ export default function FragranceManager() {
                   </td>
                   <td className={styles.cellMuted}>{f.concentration}</td>
                   <td>
-                    <div className={styles.miniStars}>
+                    <div className={styles.miniStars} title="Click to change rating">
                       {[1, 2, 3, 4, 5].map(n => (
-                        <Star key={n} size={11} fill={n <= f.rating ? 'var(--accent)' : 'none'}
-                          color={n <= f.rating ? 'var(--accent)' : 'var(--border)'} />
+                        <button
+                          key={n}
+                          type="button"
+                          className={styles.miniStarBtn}
+                          onClick={() => updateFragrance({ ...f, rating: n })}
+                          aria-label={`Rate ${n} star${n > 1 ? 's' : ''}`}
+                        >
+                          <Star size={11} fill={n <= f.rating ? 'var(--accent)' : 'none'}
+                            color={n <= f.rating ? 'var(--accent)' : 'var(--border)'} />
+                        </button>
                       ))}
                     </div>
                   </td>

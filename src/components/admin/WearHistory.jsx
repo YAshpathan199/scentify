@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Calendar, Plus, Trash2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useFragrances } from '../../context/FragranceContext';
@@ -18,11 +19,20 @@ function getFirstDayOfWeek(year, month) {
 
 export default function WearHistory() {
   const { fragrances, history, logWear, deleteWear } = useFragrances();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [year, setYear] = useState(new Date().getFullYear());
   const [month, setMonth] = useState(new Date().getMonth());
   const [selectedDay, setSelectedDay] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [wearForm, setWearForm] = useState({ fragranceId: '', occasion: '', notes: '' });
+
+  useEffect(() => {
+    if (searchParams.get('action') === 'log') {
+      setWearForm({ fragranceId: fragrances[0]?.id || '', occasion: '', notes: '' });
+      setShowModal(true);
+      setSearchParams({});
+    }
+  }, [searchParams, setSearchParams, fragrances]);
 
   const calendarDays = useMemo(() => {
     const daysInMonth = getDaysInMonth(year, month);
