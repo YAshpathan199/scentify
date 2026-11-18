@@ -16,7 +16,7 @@ const SPARKLES = Array.from({ length: 18 }, (_, i) => ({
 }));
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0.15, y: 30 },
   visible: (i) => ({
     opacity: 1,
     y: 0,

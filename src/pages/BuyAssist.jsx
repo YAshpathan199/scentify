@@ -24,7 +24,7 @@ const familyMap = Object.fromEntries(FRAGRANCE_FAMILIES.map(f => [f.id, f]));
 export default function BuyAssist() {
   const { fragrances } = useFragrances();
   const [mode, setMode] = useState('paste');
-  const [jsonText, setJsonText] = useState('');
+  const [jsonText, setJsonText] = useState(PLACEHOLDER);
   const [selectedId, setSelectedId] = useState(null);
   const [error, setError] = useState('');
   const [pasteResults, setPasteResults] = useState(null);

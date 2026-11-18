@@ -28,7 +28,7 @@ const STEPS = [
 ];
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 50, rotateX: 20, scale: 0.9 },
+  hidden: { opacity: 0.15, y: 50, rotateX: 20, scale: 0.9 },
   visible: (i) => ({
     opacity: 1,
     y: 0,

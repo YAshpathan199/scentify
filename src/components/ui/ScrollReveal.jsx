@@ -1,17 +1,22 @@
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 
 const PRESETS = {
-  'fade-up': { hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } },
-  'fade-down': { hidden: { opacity: 0, y: -40 }, visible: { opacity: 1, y: 0 } },
-  'fade-left': { hidden: { opacity: 0, x: -50 }, visible: { opacity: 1, x: 0 } },
-  'fade-right': { hidden: { opacity: 0, x: 50 }, visible: { opacity: 1, x: 0 } },
-  'zoom-in': { hidden: { opacity: 0, scale: 0.85 }, visible: { opacity: 1, scale: 1 } },
-  'flip-up': { hidden: { opacity: 0, rotateX: 30, y: 30 }, visible: { opacity: 1, rotateX: 0, y: 0 } },
+  'fade-up': { hidden: { opacity: 0.15, y: 40 }, visible: { opacity: 1, y: 0 } },
+  'fade-down': { hidden: { opacity: 0.15, y: -40 }, visible: { opacity: 1, y: 0 } },
+  'fade-left': { hidden: { opacity: 0.15, x: -50 }, visible: { opacity: 1, x: 0 } },
+  'fade-right': { hidden: { opacity: 0.15, x: 50 }, visible: { opacity: 1, x: 0 } },
+  'zoom-in': { hidden: { opacity: 0.15, scale: 0.85 }, visible: { opacity: 1, scale: 1 } },
+  'flip-up': { hidden: { opacity: 0.15, rotateX: 30, y: 30 }, visible: { opacity: 1, rotateX: 0, y: 0 } },
   'slide-up-3d': {
-    hidden: { opacity: 0, y: 60, rotateX: 15, scale: 0.95 },
+    hidden: { opacity: 0.15, y: 60, rotateX: 15, scale: 0.95 },
     visible: { opacity: 1, y: 0, rotateX: 0, scale: 1 },
   },
+};
+
+const NO_MOTION = {
+  hidden: { opacity: 1 },
+  visible: { opacity: 1 },
 };
 
 export default function ScrollReveal({
@@ -25,7 +30,8 @@ export default function ScrollReveal({
 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once, margin: '-60px' });
-  const preset = PRESETS[effect] || PRESETS['fade-up'];
+  const prefersReduced = useReducedMotion();
+  const preset = prefersReduced ? NO_MOTION : (PRESETS[effect] || PRESETS['fade-up']);
 
   return (
     <motion.div

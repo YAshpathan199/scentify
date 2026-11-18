@@ -29,7 +29,7 @@
 
 .imageArea {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
   border-bottom: 3px solid var(--border-strong);
   overflow: hidden;
   background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-secondary) 100%);
@@ -45,10 +45,12 @@
 }
 
 .bottleImg {
-  width: auto;
+  /* Stretch to fill the container box; object-fit: contain keeps aspect ratio
+     so tall, narrow SVG bottles never render as hairline slivers. */
+  width: 100%;
   height: 100%;
-  max-width: 80%;
   object-fit: contain;
+  object-position: center bottom;
   filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
   transition: transform var(--transition-base);
 }
@@ -183,11 +185,23 @@
   }
 }
 
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-sm);
+  margin-top: var(--space-xs);
+}
+
 .price {
   font-size: var(--text-small);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--accent);
-  margin-top: var(--space-xs);
+}
+
+.size {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+  font-weight: 500;
 }
 
 .shopButton {

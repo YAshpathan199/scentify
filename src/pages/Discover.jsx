@@ -7,7 +7,7 @@ import {
   SEASONS, TIME_OF_DAY, DRESS_CODES,
   OCCASION_CATEGORIES, OCCASIONS,
 } from '../data/constants';
-import { discoverScore } from '../utils/engine';
+import { discoverScore, rank } from '../utils/engine';
 import { getSprayGuideForFragrance } from '../utils/sprayGuide';
 import { getCurrentSeason } from '../utils/helpers';
 import styles from './Discover.module.css';
@@ -147,8 +147,7 @@ export default function Discover() {
   }, [fragrances, genderFilter]);
 
   const results = useMemo(() => {
-    const hasAny = activeFilterCount > 0;
-    if (!hasAny) return genderFiltered.map(f => ({ fragrance: f, score: 0, total: 0, matchPercent: 100 }));
+    if (activeFilterCount === 0) return [];
 
     const occIds = filters.occasionCategory.flatMap(cat => OCCASION_BY_CATEGORY[cat] || []);
     const engineFilters = {
@@ -158,13 +157,35 @@ export default function Discover() {
       occasionIds: occIds,
     };
 
-    const scored = genderFiltered.map(f => {
-      const { score, matchPercent, relevance } = discoverScore(f, engineFilters);
-      return { fragrance: f, score, total: Object.values(filters).filter(a => a.length).length, matchPercent, relevance };
-    });
-    scored.sort((a, b) => b.score !== a.score ? b.score - a.score : b.relevance - a.relevance);
-    return scored.filter(s => s.score > 0);
+    // Tag-match gate: only show fragrances with at least one matching tag
+    const tagMatchSet = new Set();
+    for (const f of genderFiltered) {
+      if (discoverScore(f, engineFilters).score > 0) tagMatchSet.add(f.id);
+    }
+    if (tagMatchSet.size === 0) return [];
+
+    // Weighted ranking determines display score and order (R1)
+    const weightedAnswers = {
+      season: filters.season[0],
+      occasion: occIds[0],
+      timeOfDay: filters.timeOfDay[0],
+      dressCode: filters.dressCode[0],
+    };
+    const ranked = rank(genderFiltered, weightedAnswers);
+
+    return ranked
+      .filter(r => tagMatchSet.has(r.fragrance.id))
+      .map(r => ({
+        fragrance: r.fragrance,
+        score: r.score,
+        matchPercent: Math.round(r.score * 100),
+        tier: r.tier,
+      }));
   }, [genderFiltered, filters, activeFilterCount]);
+
+  // R2: split into best matches (S/A tier) and secondary (B/C tier)
+  const topMatches = useMemo(() => results.filter(r => r.tier === 'S' || r.tier === 'A'), [results]);
+  const secondary = useMemo(() => results.filter(r => r.tier !== 'S' && r.tier !== 'A'), [results]);
 
   return (
     <div className={styles.page}>
@@ -266,7 +287,8 @@ export default function Discover() {
               <span className={styles.doneEmoji}>&#10024;</span>
               <div>
                 <h2 className={styles.doneTitle}>
-                  {results.length} fragrance{results.length !== 1 ? 's' : ''} matched
+                  {topMatches.length} match{topMatches.length !== 1 ? 'es' : ''}
+                  {secondary.length > 0 ? ` · ${secondary.length} more` : ''}
                 </h2>
                 <p className={styles.doneSubtitle}>
                   Based on {activeFilterCount} preference{activeFilterCount !== 1 ? 's' : ''}
@@ -337,67 +359,96 @@ export default function Discover() {
                   </button>
                 ))}
                 <span className={styles.genderToggleCount}>
-                  {results.length} {results.length === 1 ? 'match' : 'matches'}
+                  {topMatches.length} {topMatches.length === 1 ? 'match' : 'matches'}
+                  {secondary.length > 0 ? ` · ${secondary.length} more` : ''}
                 </span>
               </div>
               {results.length > 0 ? (
-                <div className={styles.grid}>
-                  <AnimatePresence mode="popLayout">
-                    {results.map(({ fragrance, matchPercent }, i) => {
-                      const guideOpen = openGuides.has(fragrance.id);
-                      const catId = filters.occasionCategory[0];
-                      const occ = catId ? OCCASIONS.find(o => o.category === catId) : null;
-                      const seasonId = filters.season[0] || getCurrentSeason();
-                      const sprayGuide = occ
-                        ? getSprayGuideForFragrance(fragrance, seasonId, occ.id)
-                        : null;
-                      return (
-                        <motion.div
-                          key={fragrance.id}
-                          layout
-                          initial={{ opacity: 0, y: 24, scale: 0.96 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, scale: 0.94 }}
-                          transition={{ duration: 0.26, delay: i * 0.03 }}
-                        >
-                          <FragranceCard fragrance={fragrance} matchPercent={matchPercent} />
-                          {sprayGuide && (
-                            <div className={styles.howToWearSection}>
-                              <button
-                                className={styles.howToWearToggle}
-                                onClick={() => toggleGuide(fragrance.id)}
-                                aria-expanded={guideOpen}
-                              >
-                                <Droplets size={14} />
-                                How to Wear
-                                {guideOpen
-                                  ? <ChevronUp size={14} className={styles.chevron} />
-                                  : <ChevronDown size={14} className={styles.chevron} />
-                                }
-                              </button>
-                              <AnimatePresence initial={false}>
-                                {guideOpen && (
-                                  <motion.div
-                                    key="guide"
-                                    initial={{ opacity: 0, height: 0 }}
-                                    animate={{ opacity: 1, height: 'auto' }}
-                                    exit={{ opacity: 0, height: 0 }}
-                                    transition={{ duration: 0.25 }}
-                                    style={{ overflow: 'hidden' }}
-                                  >
-                                    <div className={styles.howToWearInner}>
-                                      <SprayGuidePanel guide={sprayGuide} compact />
-                                    </div>
-                                  </motion.div>
-                                )}
-                              </AnimatePresence>
-                            </div>
-                          )}
-                        </motion.div>
-                      );
-                    })}
-                  </AnimatePresence>
-                </div>
+                <>
+                  {/* Best matches — S/A tier from weighted engine */}
+                  <div className={styles.grid}>
+                    <AnimatePresence mode="popLayout">
+                      {topMatches.map(({ fragrance, matchPercent }, i) => {
+                        const guideOpen = openGuides.has(fragrance.id);
+                        const catId = filters.occasionCategory[0];
+                        const occ = catId ? OCCASIONS.find(o => o.category === catId) : null;
+                        const seasonId = filters.season[0] || getCurrentSeason();
+                        const sprayGuide = occ
+                          ? getSprayGuideForFragrance(fragrance, seasonId, occ.id)
+                          : null;
+                        return (
+                          <motion.div
+                            key={fragrance.id}
+                            layout
+                            initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.94 }}
+                            transition={{ duration: 0.26, delay: i * 0.03 }}
+                          >
+                            <FragranceCard fragrance={fragrance} matchPercent={matchPercent} />
+                            {sprayGuide && (
+                              <div className={styles.howToWearSection}>
+                                <button
+                                  className={styles.howToWearToggle}
+                                  onClick={() => toggleGuide(fragrance.id)}
+                                  aria-expanded={guideOpen}
+                                >
+                                  <Droplets size={14} />
+                                  How to Wear
+                                  {guideOpen
+                                    ? <ChevronUp size={14} className={styles.chevron} />
+                                    : <ChevronDown size={14} className={styles.chevron} />
+                                  }
+                                </button>
+                                <AnimatePresence initial={false}>
+                                  {guideOpen && (
+                                    <motion.div
+                                      key="guide"
+                                      initial={{ opacity: 0, height: 0 }}
+                                      animate={{ opacity: 1, height: 'auto' }}
+                                      exit={{ opacity: 0, height: 0 }}
+                                      transition={{ duration: 0.25 }}
+                                      style={{ overflow: 'hidden' }}
+                                    >
+                                      <div className={styles.howToWearInner}>
+                                        <SprayGuidePanel guide={sprayGuide} compact />
+                                      </div>
+                                    </motion.div>
+                                  )}
+                                </AnimatePresence>
+                              </div>
+                            )}
+                          </motion.div>
+                        );
+                      })}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Also in collection — B/C tier, tag-matched but lower weighted score */}
+                  {secondary.length > 0 && (
+                    <>
+                      <div className={styles.sectionDivider}>
+                        <span className={styles.sectionDividerLabel}>Also in your collection</span>
+                      </div>
+                      <div className={`${styles.grid} ${styles.gridDimmed}`}>
+                        <AnimatePresence mode="popLayout">
+                          {secondary.map(({ fragrance, matchPercent }, i) => (
+                            <motion.div
+                              key={fragrance.id}
+                              layout
+                              initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                              animate={{ opacity: 1, y: 0, scale: 1 }}
+                              exit={{ opacity: 0, scale: 0.94 }}
+                              transition={{ duration: 0.26, delay: i * 0.03 }}
+                            >
+                              <FragranceCard fragrance={fragrance} matchPercent={matchPercent} />
+                            </motion.div>
+                          ))}
+                        </AnimatePresence>
+                      </div>
+                    </>
+                  )}
+                </>
               ) : (
                 <div className={styles.resultsHint}>
                   <span className={styles.resultsHintIcon}>&#128270;</span>

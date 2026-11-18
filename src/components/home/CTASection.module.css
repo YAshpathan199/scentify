@@ -9,6 +9,19 @@
   border-top: 1px solid rgba(166, 124, 78, 0.2);
 }
 
+.cta :global(.btn-primary) {
+  background-color: #F8FFFE;
+  color: var(--dark-bg);
+  border-color: #F8FFFE;
+  box-shadow: 0 2px 12px rgba(248, 255, 254, 0.2);
+}
+
+.cta :global(.btn-primary):hover {
+  background-color: #DDF2F8;
+  border-color: #DDF2F8;
+  color: var(--dark-bg);
+}
+
 .inner {
   text-align: center;
   max-width: var(--container-sm);

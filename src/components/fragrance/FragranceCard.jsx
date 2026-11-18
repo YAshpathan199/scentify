@@ -4,6 +4,7 @@ import { Badge } from '../ui';
 import { FRAGRANCE_FAMILIES } from '../../data/constants';
 import { useFragrances } from '../../context/FragranceContext';
 import { use3DTilt } from '../../hooks/use3DTilt';
+import { formatPrice } from '../../utils/helpers';
 import styles from './FragranceCard.module.css';
 
 export default function FragranceCard({ fragrance, matchPercent }) {
@@ -70,6 +71,13 @@ export default function FragranceCard({ fragrance, matchPercent }) {
               <span>{fragrance.projection}</span>
             </div>
           </div>
+
+          {fragrance.price > 0 && (
+            <div className={styles.priceRow}>
+              <span className={styles.price}>{formatPrice(fragrance.price)}</span>
+              {fragrance.size && <span className={styles.size}>{fragrance.size}</span>}
+            </div>
+          )}
 
         </div>
       </div>

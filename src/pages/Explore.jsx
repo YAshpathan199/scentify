@@ -309,7 +309,7 @@ export default function Explore() {
         {/* Favorites Toggle + Gender + Concentration Filters */}
         <div className="flex flex-wrap gap-2 mb-6 items-center">
           <button
-            className={`btn btn-sm rounded-full gap-1 ${showFavorites ? 'btn-accent' : 'btn-outline border-base-300 text-base-content/70'}`}
+            className={`btn btn-sm rounded-full gap-1 ${showFavorites ? 'btn-primary' : 'btn-outline border-base-300 text-base-content/70'}`}
             onClick={() => setShowFavorites(!showFavorites)}
           >
             <span className="text-sm leading-none">{"❤️"}</span>
