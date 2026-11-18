@@ -58,6 +58,17 @@ export default function LayeringLab({ fragrances: fragProp } = {}) {
     return pairs.sort((a, b) => b.score - a.score).slice(0, 8);
   }, [fragrances]);
 
+  const suggestions = useMemo(() => {
+    if (!fragA) return [];
+    const a = fragrances.find(f => f.id === fragA);
+    if (!a) return [];
+    return fragrances
+      .filter(f => f.id !== fragA)
+      .map(f => ({ frag: f, ...getPairingScore(a, f, PAIRING_RULES) }))
+      .sort((x, y) => y.score - x.score)
+      .slice(0, 4);
+  }, [fragA, fragrances]);
+
   const manualComparison = useMemo(() => {
     if (!fragA || !fragB || fragA === fragB) return null;
     const a = fragrances.find(f => f.id === fragA);
@@ -157,6 +168,40 @@ export default function LayeringLab({ fragrances: fragProp } = {}) {
             {fragrances.map(f => <option key={f.id} value={f.id}>{f.name}</option>)}
           </select>
         </div>
+
+        {fragA && !fragB && suggestions.length > 0 && (
+          <div className={styles.suggestions}>
+            <p className={styles.suggestLabel}>
+              Best matches for <strong>{fragrances.find(f => f.id === fragA)?.name}</strong>
+            </p>
+            <div className={styles.suggestGrid}>
+              {suggestions.map((s, i) => {
+                const fam = FRAGRANCE_FAMILIES.find(f => f.id === s.frag.family);
+                return (
+                  <motion.button
+                    key={s.frag.id}
+                    className={styles.suggestCard}
+                    onClick={() => setFragB(s.frag.id)}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.06 }}
+                    type="button"
+                  >
+                    <div className={styles.suggestTop}>
+                      <span className={styles.suggestDot} style={{ background: fam?.color }} />
+                      <span className={styles.suggestName}>{s.frag.name}</span>
+                      <span className={styles.suggestPct}>{s.score}%</span>
+                    </div>
+                    <div className={styles.suggestBar}>
+                      <div className={styles.suggestFill} style={{ width: `${s.score}%` }} />
+                    </div>
+                    <span className={styles.suggestFamily}>{fam?.icon} {fam?.label}</span>
+                  </motion.button>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {fragA && fragB && fragA === fragB && (
           <p className={styles.sameNote}>Select two different fragrances to compare.</p>

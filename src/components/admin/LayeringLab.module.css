@@ -206,6 +206,95 @@
   text-align: center;
 }
 
+/* Suggestions */
+.suggestions {
+  margin-bottom: var(--space-lg);
+}
+
+.suggestLabel {
+  font-size: var(--text-small);
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-md);
+}
+
+.suggestLabel strong {
+  color: var(--text-primary);
+}
+
+.suggestGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
+.suggestCard {
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+  width: 100%;
+}
+
+.suggestCard:hover {
+  border-color: var(--accent);
+  background: rgba(184, 149, 106, 0.04);
+  transform: translateY(-1px);
+}
+
+.suggestTop {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.suggestDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.suggestName {
+  flex: 1;
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.suggestPct {
+  font-size: var(--text-caption);
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.suggestBar {
+  height: 4px;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.suggestFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-light), var(--accent));
+  border-radius: var(--radius-full);
+  transition: width 0.5s ease;
+}
+
+.suggestFamily {
+  font-size: var(--text-caption);
+  color: var(--text-muted);
+}
+
 /* Comparison Result */
 .compResult {
   background: var(--bg-secondary);
