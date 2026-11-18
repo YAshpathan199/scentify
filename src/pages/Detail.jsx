@@ -133,10 +133,10 @@ export default function Detail() {
           <p className={styles.notFoundText}>
             The fragrance you are looking for does not exist in our collection.
           </p>
-          <Link to="/explore" className={styles.backLink}>
+          <button onClick={() => navigate(-1)} className={styles.backLink}>
             <ArrowLeft size={16} />
-            Back to Collection
-          </Link>
+            Back
+          </button>
         </div>
       </div>
     );
@@ -161,10 +161,10 @@ export default function Detail() {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        <Link to="/explore" className={styles.backLink}>
+        <button onClick={() => navigate(-1)} className={styles.backLink}>
           <ArrowLeft size={16} />
-          Back to Collection
-        </Link>
+          Back
+        </button>
 
         <div className={styles.layout}>
           {/* LEFT COLUMN */}
