@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { ArrowLeft, ArrowRight, RotateCcw, Check, Droplets, ChevronDown, ChevronUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FragranceCard, SprayGuidePanel } from '../components/fragrance';
@@ -63,14 +63,28 @@ function defaultFilters() {
   return { season: [getCurrentSeason()], occasionCategory: [], timeOfDay: [], dressCode: [] };
 }
 
+const SESSION_KEY = 'scentify_discover_state';
+
+function loadSaved() {
+  try {
+    const s = sessionStorage.getItem(SESSION_KEY);
+    return s ? JSON.parse(s) : null;
+  } catch { return null; }
+}
+
 export default function Discover() {
   const { fragrances } = useFragrances();
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(() => loadSaved()?.currentStep ?? 0);
   const [direction, setDirection] = useState(1);
-  const [filters, setFilters] = useState(defaultFilters);
-  const [done, setDone] = useState(false);
+  const [filters, setFilters] = useState(() => loadSaved()?.filters ?? defaultFilters());
+  const [done, setDone] = useState(() => loadSaved()?.done ?? false);
   const [openGuides, setOpenGuides] = useState(new Set());
-  const [genderFilter, setGenderFilter] = useState('all');
+  const [genderFilter, setGenderFilter] = useState(() => loadSaved()?.genderFilter ?? 'all');
+
+  // Persist quiz state whenever it changes
+  useEffect(() => {
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify({ filters, currentStep, done, genderFilter }));
+  }, [filters, currentStep, done, genderFilter]);
 
   function toggleGuide(id) {
     setOpenGuides(prev => {
@@ -119,6 +133,7 @@ export default function Discover() {
 
   function restart() {
     scrollTop();
+    sessionStorage.removeItem(SESSION_KEY);
     setFilters(defaultFilters());
     setCurrentStep(0);
     setDone(false);
