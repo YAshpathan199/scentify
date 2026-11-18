@@ -404,8 +404,10 @@
 
 /* Responsive */
 @media (max-width: 767px) {
+  .cardTitle { font-size: var(--text-body); }
   .compareSelects { flex-direction: column; }
   .select { width: 100%; }
+  .suggestGrid { grid-template-columns: 1fr; }
   .compHeader { grid-template-columns: 1fr; text-align: center; }
   .compFrag { text-align: center !important; }
   .notesComp { grid-template-columns: 1fr; }
