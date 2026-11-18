@@ -12,9 +12,11 @@ import {
   CONCENTRATIONS,
   TIME_OF_DAY,
   MOODS,
+  PAIRING_RULES,
 } from '../data/constants';
 import { getSprayGuideForFragrance } from '../utils/sprayGuide';
 import { getCurrentSeason, formatPrice, getProjectionPercent } from '../utils/helpers';
+import { getTopPairings } from '../utils/pairing';
 import styles from './Detail.module.css';
 
 const PROJECTION_COLORS = {
@@ -116,6 +118,11 @@ export default function Detail() {
       combined.push(o);
     }
     return combined;
+  }, [fragrance, fragrances]);
+
+  const layeringSuggestions = useMemo(() => {
+    if (!fragrance) return [];
+    return getTopPairings(fragrance, fragrances, PAIRING_RULES, 4);
   }, [fragrance, fragrances]);
 
   if (!fragrance) {
@@ -353,6 +360,44 @@ export default function Detail() {
                 </motion.div>
               )}
             </div>
+
+            {/* Layering Suggestions */}
+            {layeringSuggestions.length > 0 && (
+              <div className={styles.section}>
+                <h3 className={styles.sectionTitle}>Layer With</h3>
+                <p className={styles.layeringIntro}>
+                  These fragrances pair well with {fragrance.name} — apply the lighter one first.
+                </p>
+                <div className={styles.layeringGrid}>
+                  {layeringSuggestions.map((s, i) => {
+                    const fam = FRAGRANCE_FAMILIES.find(f => f.id === s.frag.family);
+                    return (
+                      <motion.div
+                        key={s.frag.id}
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: i * 0.06 }}
+                      >
+                        <Link to={`/fragrance/${s.frag.id}`} className={styles.layeringCard}>
+                          <div className={styles.layeringTop}>
+                            <span className={styles.layeringDot} style={{ background: fam?.color }} />
+                            <span className={styles.layeringName}>{s.frag.name}</span>
+                            <span className={styles.layeringPct}>{s.score}%</span>
+                          </div>
+                          <div className={styles.layeringBar}>
+                            <div className={styles.layeringFill} style={{ width: `${s.score}%` }} />
+                          </div>
+                          <span className={styles.layeringFamily}>{fam?.icon} {fam?.label}</span>
+                          {s.reasons[0] && (
+                            <p className={styles.layeringReason}>{s.reasons[0]}</p>
+                          )}
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             {/* Related Fragrances */}
             {relatedFragrances.length > 0 && (

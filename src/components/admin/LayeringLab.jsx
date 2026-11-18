@@ -3,40 +3,8 @@ import { Layers, Sparkles, ArrowRight, Info } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useFragrances } from '../../context/FragranceContext';
 import { PAIRING_RULES, FRAGRANCE_FAMILIES } from '../../data/constants';
+import { getSharedNotes, getPairingScore } from '../../utils/pairing';
 import styles from './LayeringLab.module.css';
-
-function getSharedNotes(a, b) {
-  const allA = [...(a.notes?.top || []), ...(a.notes?.heart || []), ...(a.notes?.base || [])].map(n => n.toLowerCase());
-  const allB = [...(b.notes?.top || []), ...(b.notes?.heart || []), ...(b.notes?.base || [])].map(n => n.toLowerCase());
-  return allA.filter(n => allB.includes(n));
-}
-
-function getPairingScore(a, b, rules) {
-  let score = 0;
-  let reasons = [];
-  const shared = getSharedNotes(a, b);
-  if (shared.length > 0) {
-    score += shared.length * 10;
-    reasons.push(`Shared notes: ${shared.join(', ')}`);
-  }
-
-  rules.forEach(rule => {
-    const ruleFamilies = [rule.a, rule.b];
-    const aMatches = ruleFamilies.includes(a.family);
-    const bMatches = ruleFamilies.includes(b.family);
-    if (aMatches && bMatches) {
-      score += 15;
-      reasons.push(`${rule.description} — ${rule.howToLayer}`);
-    }
-  });
-
-  if (a.family !== b.family) {
-    score += 5;
-    reasons.push('Cross-family contrast adds depth');
-  }
-
-  return { score: Math.min(score, 100), reasons };
-}
 
 export default function LayeringLab({ fragrances: fragProp } = {}) {
   const { fragrances: ctxFragrances } = useFragrances();
